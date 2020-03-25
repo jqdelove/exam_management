@@ -3,4 +3,4 @@
 
 # 项目预览地址
 
-129.204.207.233:8080/exam_management
+http://129.204.207.233:8080/exam_management
