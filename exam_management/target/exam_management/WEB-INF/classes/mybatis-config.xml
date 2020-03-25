@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <settings>
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="aggressiveLazyLoading" value="false"/>
+        <!-- 设置命名法转化，即下划线分开的单词，改成骆驼命名法,单词至少有两个字母   -->
+        <setting name="mapUnderscoreToCamelCase" value="true" />
+    </settings>
+    <!--  处理别名  -->
+    <typeAliases>
+        <!--	此处的配置默认就是类名，不需要在写包名	-->
+        <package name="com.jinqi.exam.entity"/>
+        <package name="com.jinqi.exam.vo"/>
+    </typeAliases>
+    <!-- 后面的类的别名的创建，Mapper注册，数据库的连接，都交给spring处理 -->
+
+</configuration>

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jinqi.exam.dao.TestPaperMapper" >
+  <resultMap id="BaseResultMap" type="com.jinqi.exam.entity.TestPaper" >
+    <id column="TEST_PAPER_ID" property="testPaperId" jdbcType="INTEGER" />
+    <result column="EXAMINATION_SYLLABUS_ID" property="examinationSyllabusId" jdbcType="INTEGER" />
+    <result column="EXAMINATION_SYLLABUS_BEGIN_TIME" property="examinationSyllabusBeginTime" jdbcType="DATE" />
+    <result column="EXAMINATION_SYLLABUS_END_TIME" property="examinationSyllabusEndTime" jdbcType="DATE" />
+    <result column="EXAMINATION_SYLLABUS_TITLE" property="examinationSyllabusTitle" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    TEST_PAPER_ID, EXAMINATION_SYLLABUS_ID, EXAMINATION_SYLLABUS_BEGIN_TIME, EXAMINATION_SYLLABUS_END_TIME, 
+    EXAMINATION_SYLLABUS_TITLE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jinqi.exam.entity.TestPaperExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_TEST_PAPER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_TEST_PAPER
+    where TEST_PAPER_ID = #{testPaperId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from T_TEST_PAPER
+    where TEST_PAPER_ID = #{testPaperId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jinqi.exam.entity.TestPaperExample" >
+    delete from T_TEST_PAPER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jinqi.exam.entity.TestPaper" >
+    insert into T_TEST_PAPER (TEST_PAPER_ID, EXAMINATION_SYLLABUS_ID, 
+      EXAMINATION_SYLLABUS_BEGIN_TIME, EXAMINATION_SYLLABUS_END_TIME, 
+      EXAMINATION_SYLLABUS_TITLE)
+    values (#{testPaperId,jdbcType=INTEGER}, #{examinationSyllabusId,jdbcType=INTEGER}, 
+      #{examinationSyllabusBeginTime,jdbcType=DATE}, #{examinationSyllabusEndTime,jdbcType=DATE}, 
+      #{examinationSyllabusTitle,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jinqi.exam.entity.TestPaper" >
+    insert into T_TEST_PAPER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="testPaperId != null" >
+        TEST_PAPER_ID,
+      </if>
+      <if test="examinationSyllabusId != null" >
+        EXAMINATION_SYLLABUS_ID,
+      </if>
+      <if test="examinationSyllabusBeginTime != null" >
+        EXAMINATION_SYLLABUS_BEGIN_TIME,
+      </if>
+      <if test="examinationSyllabusEndTime != null" >
+        EXAMINATION_SYLLABUS_END_TIME,
+      </if>
+      <if test="examinationSyllabusTitle != null" >
+        EXAMINATION_SYLLABUS_TITLE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="testPaperId != null" >
+        #{testPaperId,jdbcType=INTEGER},
+      </if>
+      <if test="examinationSyllabusId != null" >
+        #{examinationSyllabusId,jdbcType=INTEGER},
+      </if>
+      <if test="examinationSyllabusBeginTime != null" >
+        #{examinationSyllabusBeginTime,jdbcType=DATE},
+      </if>
+      <if test="examinationSyllabusEndTime != null" >
+        #{examinationSyllabusEndTime,jdbcType=DATE},
+      </if>
+      <if test="examinationSyllabusTitle != null" >
+        #{examinationSyllabusTitle,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jinqi.exam.entity.TestPaperExample" resultType="java.lang.Integer" >
+    select count(*) from T_TEST_PAPER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update T_TEST_PAPER
+    <set >
+      <if test="record.testPaperId != null" >
+        TEST_PAPER_ID = #{record.testPaperId,jdbcType=INTEGER},
+      </if>
+      <if test="record.examinationSyllabusId != null" >
+        EXAMINATION_SYLLABUS_ID = #{record.examinationSyllabusId,jdbcType=INTEGER},
+      </if>
+      <if test="record.examinationSyllabusBeginTime != null" >
+        EXAMINATION_SYLLABUS_BEGIN_TIME = #{record.examinationSyllabusBeginTime,jdbcType=DATE},
+      </if>
+      <if test="record.examinationSyllabusEndTime != null" >
+        EXAMINATION_SYLLABUS_END_TIME = #{record.examinationSyllabusEndTime,jdbcType=DATE},
+      </if>
+      <if test="record.examinationSyllabusTitle != null" >
+        EXAMINATION_SYLLABUS_TITLE = #{record.examinationSyllabusTitle,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update T_TEST_PAPER
+    set TEST_PAPER_ID = #{record.testPaperId,jdbcType=INTEGER},
+      EXAMINATION_SYLLABUS_ID = #{record.examinationSyllabusId,jdbcType=INTEGER},
+      EXAMINATION_SYLLABUS_BEGIN_TIME = #{record.examinationSyllabusBeginTime,jdbcType=DATE},
+      EXAMINATION_SYLLABUS_END_TIME = #{record.examinationSyllabusEndTime,jdbcType=DATE},
+      EXAMINATION_SYLLABUS_TITLE = #{record.examinationSyllabusTitle,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jinqi.exam.entity.TestPaper" >
+    update T_TEST_PAPER
+    <set >
+      <if test="examinationSyllabusId != null" >
+        EXAMINATION_SYLLABUS_ID = #{examinationSyllabusId,jdbcType=INTEGER},
+      </if>
+      <if test="examinationSyllabusBeginTime != null" >
+        EXAMINATION_SYLLABUS_BEGIN_TIME = #{examinationSyllabusBeginTime,jdbcType=DATE},
+      </if>
+      <if test="examinationSyllabusEndTime != null" >
+        EXAMINATION_SYLLABUS_END_TIME = #{examinationSyllabusEndTime,jdbcType=DATE},
+      </if>
+      <if test="examinationSyllabusTitle != null" >
+        EXAMINATION_SYLLABUS_TITLE = #{examinationSyllabusTitle,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where TEST_PAPER_ID = #{testPaperId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jinqi.exam.entity.TestPaper" >
+    update T_TEST_PAPER
+    set EXAMINATION_SYLLABUS_ID = #{examinationSyllabusId,jdbcType=INTEGER},
+      EXAMINATION_SYLLABUS_BEGIN_TIME = #{examinationSyllabusBeginTime,jdbcType=DATE},
+      EXAMINATION_SYLLABUS_END_TIME = #{examinationSyllabusEndTime,jdbcType=DATE},
+      EXAMINATION_SYLLABUS_TITLE = #{examinationSyllabusTitle,jdbcType=VARCHAR}
+    where TEST_PAPER_ID = #{testPaperId,jdbcType=INTEGER}
+  </update>
+  <select resultMap="BaseResultMap" parameterType="com.jinqi.exam.entity.TestPaperExample" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_TEST_PAPER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

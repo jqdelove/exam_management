@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jinqi.exam.dao.CourseMapper" >
+  <resultMap id="BaseResultMap" type="com.jinqi.exam.entity.Course" >
+    <id column="COURSE_ID" property="courseId" jdbcType="INTEGER" />
+    <result column="COURSE_NAME" property="courseName" jdbcType="VARCHAR" />
+    <result column="COURSE_AMOUNT" property="courseAmount" jdbcType="INTEGER" />
+    <result column="COURSE_BEGIN_TIME" property="courseBeginTime" jdbcType="DATE" />
+    <result column="COURSE_END_TIME" property="courseEndTime" jdbcType="DATE" />
+    <result column="COURSE_MAJOR" property="courseMajor" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    COURSE_ID, COURSE_NAME, COURSE_AMOUNT, COURSE_BEGIN_TIME, COURSE_END_TIME, COURSE_MAJOR
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jinqi.exam.entity.CourseExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_COURSE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_COURSE
+    where COURSE_ID = #{courseId,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from T_COURSE
+    where COURSE_ID = #{courseId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jinqi.exam.entity.CourseExample" >
+    delete from T_COURSE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jinqi.exam.entity.Course" >
+    insert into T_COURSE (COURSE_ID, COURSE_NAME, COURSE_AMOUNT, 
+      COURSE_BEGIN_TIME, COURSE_END_TIME, COURSE_MAJOR
+      )
+    values (#{courseId,jdbcType=INTEGER}, #{courseName,jdbcType=VARCHAR}, #{courseAmount,jdbcType=INTEGER}, 
+      #{courseBeginTime,jdbcType=DATE}, #{courseEndTime,jdbcType=DATE}, #{courseMajor,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jinqi.exam.entity.Course" >
+    insert into T_COURSE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="courseId != null" >
+        COURSE_ID,
+      </if>
+      <if test="courseName != null" >
+        COURSE_NAME,
+      </if>
+      <if test="courseAmount != null" >
+        COURSE_AMOUNT,
+      </if>
+      <if test="courseBeginTime != null" >
+        COURSE_BEGIN_TIME,
+      </if>
+      <if test="courseEndTime != null" >
+        COURSE_END_TIME,
+      </if>
+      <if test="courseMajor != null" >
+        COURSE_MAJOR,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="courseId != null" >
+        #{courseId,jdbcType=INTEGER},
+      </if>
+      <if test="courseName != null" >
+        #{courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="courseAmount != null" >
+        #{courseAmount,jdbcType=INTEGER},
+      </if>
+      <if test="courseBeginTime != null" >
+        #{courseBeginTime,jdbcType=DATE},
+      </if>
+      <if test="courseEndTime != null" >
+        #{courseEndTime,jdbcType=DATE},
+      </if>
+      <if test="courseMajor != null" >
+        #{courseMajor,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jinqi.exam.entity.CourseExample" resultType="java.lang.Integer" >
+    select count(*) from T_COURSE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update T_COURSE
+    <set >
+      <if test="record.courseId != null" >
+        COURSE_ID = #{record.courseId,jdbcType=INTEGER},
+      </if>
+      <if test="record.courseName != null" >
+        COURSE_NAME = #{record.courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.courseAmount != null" >
+        COURSE_AMOUNT = #{record.courseAmount,jdbcType=INTEGER},
+      </if>
+      <if test="record.courseBeginTime != null" >
+        COURSE_BEGIN_TIME = #{record.courseBeginTime,jdbcType=DATE},
+      </if>
+      <if test="record.courseEndTime != null" >
+        COURSE_END_TIME = #{record.courseEndTime,jdbcType=DATE},
+      </if>
+      <if test="record.courseMajor != null" >
+        COURSE_MAJOR = #{record.courseMajor,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update T_COURSE
+    set COURSE_ID = #{record.courseId,jdbcType=INTEGER},
+      COURSE_NAME = #{record.courseName,jdbcType=VARCHAR},
+      COURSE_AMOUNT = #{record.courseAmount,jdbcType=INTEGER},
+      COURSE_BEGIN_TIME = #{record.courseBeginTime,jdbcType=DATE},
+      COURSE_END_TIME = #{record.courseEndTime,jdbcType=DATE},
+      COURSE_MAJOR = #{record.courseMajor,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jinqi.exam.entity.Course" >
+    update T_COURSE
+    <set >
+      <if test="courseName != null" >
+        COURSE_NAME = #{courseName,jdbcType=VARCHAR},
+      </if>
+      <if test="courseAmount != null" >
+        COURSE_AMOUNT = #{courseAmount,jdbcType=INTEGER},
+      </if>
+      <if test="courseBeginTime != null" >
+        COURSE_BEGIN_TIME = #{courseBeginTime,jdbcType=DATE},
+      </if>
+      <if test="courseEndTime != null" >
+        COURSE_END_TIME = #{courseEndTime,jdbcType=DATE},
+      </if>
+      <if test="courseMajor != null" >
+        COURSE_MAJOR = #{courseMajor,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where COURSE_ID = #{courseId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jinqi.exam.entity.Course" >
+    update T_COURSE
+    set COURSE_NAME = #{courseName,jdbcType=VARCHAR},
+      COURSE_AMOUNT = #{courseAmount,jdbcType=INTEGER},
+      COURSE_BEGIN_TIME = #{courseBeginTime,jdbcType=DATE},
+      COURSE_END_TIME = #{courseEndTime,jdbcType=DATE},
+      COURSE_MAJOR = #{courseMajor,jdbcType=VARCHAR}
+    where COURSE_ID = #{courseId,jdbcType=INTEGER}
+  </update>
+  <select resultMap="BaseResultMap" parameterType="com.jinqi.exam.entity.CourseExample" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_COURSE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

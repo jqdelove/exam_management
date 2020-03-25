@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jinqi.exam.dao.KnowledgePointsMapper" >
+  <resultMap id="BaseResultMap" type="com.jinqi.exam.entity.KnowledgePoints" >
+    <id column="KNOWLEDGE_POINTS_ID" property="knowledgePointsId" jdbcType="INTEGER" />
+    <result column="COURSE_ID" property="courseId" jdbcType="INTEGER" />
+    <result column="EXAMINATION_SYLLABUS_ID" property="examinationSyllabusId" jdbcType="INTEGER" />
+    <result column="KNOWLEDGE_POINTS_CONTENT" property="knowledgePointsContent" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    KNOWLEDGE_POINTS_ID, COURSE_ID, EXAMINATION_SYLLABUS_ID, KNOWLEDGE_POINTS_CONTENT
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jinqi.exam.entity.KnowledgePointsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_KNOWLEDGE_POINTS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_KNOWLEDGE_POINTS
+    where KNOWLEDGE_POINTS_ID = #{knowledgePointsId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from T_KNOWLEDGE_POINTS
+    where KNOWLEDGE_POINTS_ID = #{knowledgePointsId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jinqi.exam.entity.KnowledgePointsExample" >
+    delete from T_KNOWLEDGE_POINTS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jinqi.exam.entity.KnowledgePoints" >
+    insert into T_KNOWLEDGE_POINTS (KNOWLEDGE_POINTS_ID, COURSE_ID, EXAMINATION_SYLLABUS_ID, 
+      KNOWLEDGE_POINTS_CONTENT)
+    values (#{knowledgePointsId,jdbcType=INTEGER}, #{courseId,jdbcType=INTEGER}, #{examinationSyllabusId,jdbcType=INTEGER}, 
+      #{knowledgePointsContent,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jinqi.exam.entity.KnowledgePoints" >
+    insert into T_KNOWLEDGE_POINTS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="knowledgePointsId != null" >
+        KNOWLEDGE_POINTS_ID,
+      </if>
+      <if test="courseId != null" >
+        COURSE_ID,
+      </if>
+      <if test="examinationSyllabusId != null" >
+        EXAMINATION_SYLLABUS_ID,
+      </if>
+      <if test="knowledgePointsContent != null" >
+        KNOWLEDGE_POINTS_CONTENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="knowledgePointsId != null" >
+        #{knowledgePointsId,jdbcType=INTEGER},
+      </if>
+      <if test="courseId != null" >
+        #{courseId,jdbcType=INTEGER},
+      </if>
+      <if test="examinationSyllabusId != null" >
+        #{examinationSyllabusId,jdbcType=INTEGER},
+      </if>
+      <if test="knowledgePointsContent != null" >
+        #{knowledgePointsContent,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jinqi.exam.entity.KnowledgePointsExample" resultType="java.lang.Integer" >
+    select count(*) from T_KNOWLEDGE_POINTS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update T_KNOWLEDGE_POINTS
+    <set >
+      <if test="record.knowledgePointsId != null" >
+        KNOWLEDGE_POINTS_ID = #{record.knowledgePointsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.courseId != null" >
+        COURSE_ID = #{record.courseId,jdbcType=INTEGER},
+      </if>
+      <if test="record.examinationSyllabusId != null" >
+        EXAMINATION_SYLLABUS_ID = #{record.examinationSyllabusId,jdbcType=INTEGER},
+      </if>
+      <if test="record.knowledgePointsContent != null" >
+        KNOWLEDGE_POINTS_CONTENT = #{record.knowledgePointsContent,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update T_KNOWLEDGE_POINTS
+    set KNOWLEDGE_POINTS_ID = #{record.knowledgePointsId,jdbcType=INTEGER},
+      COURSE_ID = #{record.courseId,jdbcType=INTEGER},
+      EXAMINATION_SYLLABUS_ID = #{record.examinationSyllabusId,jdbcType=INTEGER},
+      KNOWLEDGE_POINTS_CONTENT = #{record.knowledgePointsContent,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jinqi.exam.entity.KnowledgePoints" >
+    update T_KNOWLEDGE_POINTS
+    <set >
+      <if test="courseId != null" >
+        COURSE_ID = #{courseId,jdbcType=INTEGER},
+      </if>
+      <if test="examinationSyllabusId != null" >
+        EXAMINATION_SYLLABUS_ID = #{examinationSyllabusId,jdbcType=INTEGER},
+      </if>
+      <if test="knowledgePointsContent != null" >
+        KNOWLEDGE_POINTS_CONTENT = #{knowledgePointsContent,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where KNOWLEDGE_POINTS_ID = #{knowledgePointsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jinqi.exam.entity.KnowledgePoints" >
+    update T_KNOWLEDGE_POINTS
+    set COURSE_ID = #{courseId,jdbcType=INTEGER},
+      EXAMINATION_SYLLABUS_ID = #{examinationSyllabusId,jdbcType=INTEGER},
+      KNOWLEDGE_POINTS_CONTENT = #{knowledgePointsContent,jdbcType=VARCHAR}
+    where KNOWLEDGE_POINTS_ID = #{knowledgePointsId,jdbcType=INTEGER}
+  </update>
+  <select resultMap="BaseResultMap" parameterType="com.jinqi.exam.entity.KnowledgePointsExample" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_KNOWLEDGE_POINTS
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

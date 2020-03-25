@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jinqi.exam.dao.AdminMapper" >
+    <resultMap id="BaseResultMap" type="com.jinqi.exam.entity.Admin" >
+        <id column="admin_id" property="adminId" jdbcType="INTEGER" />
+        <result column="admin_name" property="adminName" jdbcType="VARCHAR" />
+        <result column="admin_pwd" property="adminPwd" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+        admin_id, admin_name, admin_pwd
+    </sql>
+
+    <select id="login" resultMap="BaseResultMap" parameterType="com.jinqi.exam.vo.AdminVo">
+        select * from t_admin where admin_name = #{name} and admin_pwd = #{pwd}
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from t_admin
+        where admin_id = #{adminId,jdbcType=INTEGER}
+    </select>
+</mapper>

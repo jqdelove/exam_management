@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jinqi.exam.dao.ClazzTeacherMapper" >
+  <resultMap id="BaseResultMap" type="com.jinqi.exam.entity.ClazzTeacher" >
+    <id column="CLASS_TEACHER_ID" property="classTeacherId" jdbcType="INTEGER" />
+    <result column="CLASS_ID" property="classId" jdbcType="INTEGER" />
+    <result column="TEACHER_ID" property="teacherId" jdbcType="INTEGER" />
+    <association property="teacher" column="TEACHER_ID" select="com.jinqi.exam.dao.TeacherMapper.selectByPrimaryKey"/>
+    <association property="clazz" column="CLASS_ID" select="com.jinqi.exam.dao.ClazzMapper.selectByPrimaryKey"/>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    CLASS_TEACHER_ID, CLASS_ID, TEACHER_ID
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jinqi.exam.entity.ClazzTeacherExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_CLASS_TEACHER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_CLASS_TEACHER
+    where CLASS_TEACHER_ID = #{classTeacherId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByTeacherId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+      S.CLASS_TEACHER_ID, S.CLASS_ID, S.TEACHER_ID
+    from T_CLASS_TEACHER S
+           left join T_CLASS TC on S.CLASS_ID = TC.CLASS_ID
+           left join T_TEACHER TS on S.TEACHER_ID = TS.TEACHER_ID
+    where S.TEACHER_ID = #{teacherId}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from T_CLASS_TEACHER
+    where CLASS_TEACHER_ID = #{classTeacherId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jinqi.exam.entity.ClazzTeacherExample" >
+    delete from T_CLASS_TEACHER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jinqi.exam.entity.ClazzTeacher" >
+    insert into T_CLASS_TEACHER (CLASS_TEACHER_ID, CLASS_ID, TEACHER_ID
+      )
+    values (#{classTeacherId,jdbcType=INTEGER}, #{classId,jdbcType=INTEGER}, #{teacherId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.jinqi.exam.entity.ClazzTeacher" >
+    insert into T_CLASS_TEACHER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="classTeacherId != null" >
+        CLASS_TEACHER_ID,
+      </if>
+      <if test="classId != null" >
+        CLASS_ID,
+      </if>
+      <if test="teacherId != null" >
+        TEACHER_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="classTeacherId != null" >
+        #{classTeacherId,jdbcType=INTEGER},
+      </if>
+      <if test="classId != null" >
+        #{classId,jdbcType=INTEGER},
+      </if>
+      <if test="teacherId != null" >
+        #{teacherId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jinqi.exam.entity.ClazzTeacherExample" resultType="java.lang.Integer" >
+    select count(*) from T_CLASS_TEACHER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update T_CLASS_TEACHER
+    <set >
+      <if test="record.classTeacherId != null" >
+        CLASS_TEACHER_ID = #{record.classTeacherId,jdbcType=INTEGER},
+      </if>
+      <if test="record.classId != null" >
+        CLASS_ID = #{record.classId,jdbcType=INTEGER},
+      </if>
+      <if test="record.teacherId != null" >
+        TEACHER_ID = #{record.teacherId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update T_CLASS_TEACHER
+    set CLASS_TEACHER_ID = #{record.classTeacherId,jdbcType=INTEGER},
+      CLASS_ID = #{record.classId,jdbcType=INTEGER},
+      TEACHER_ID = #{record.teacherId,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jinqi.exam.entity.ClazzTeacher" >
+    update T_CLASS_TEACHER
+    <set >
+      <if test="classId != null" >
+        CLASS_ID = #{classId,jdbcType=INTEGER},
+      </if>
+      <if test="teacherId != null" >
+        TEACHER_ID = #{teacherId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where CLASS_TEACHER_ID = #{classTeacherId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jinqi.exam.entity.ClazzTeacher" >
+    update T_CLASS_TEACHER
+    set CLASS_ID = #{classId,jdbcType=INTEGER},
+      TEACHER_ID = #{teacherId,jdbcType=INTEGER}
+    where CLASS_TEACHER_ID = #{classTeacherId,jdbcType=INTEGER}
+  </update>
+  <select resultMap="BaseResultMap" parameterType="com.jinqi.exam.entity.ClazzTeacherExample" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_CLASS_TEACHER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

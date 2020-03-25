@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jinqi.exam.dao.TeacherMapper" >
+  <resultMap id="BaseResultMap" type="com.jinqi.exam.entity.Teacher" >
+    <id column="TEACHER_ID" property="teacherId" jdbcType="INTEGER" />
+    <result column="TEACHER_NAME" property="teacherName" jdbcType="VARCHAR" />
+    <result column="TEACHER_BIRTH" property="teacherBirth" jdbcType="DATE" />
+    <result column="TEACHER_SEX" property="teacherSex" jdbcType="VARCHAR" />
+    <result column="TEACHER_EMAIL" property="teacherEmail" jdbcType="VARCHAR" />
+    <result column="TEACHER_PHONE" property="teacherPhone" jdbcType="VARCHAR" />
+    <result column="TEACHER_ADDRESS" property="teacherAddress" jdbcType="VARCHAR" />
+    <result column="TEACHER_COLLAGE" property="teacherCollage" jdbcType="VARCHAR" />
+    <result column="TEACHER_PWD" property="teacherPwd" jdbcType="VARCHAR" />
+    <result column="TEACHER_STATUS" property="teacherStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    TEACHER_ID, TEACHER_NAME, TEACHER_BIRTH, TEACHER_SEX, TEACHER_EMAIL, TEACHER_PHONE, 
+    TEACHER_ADDRESS, TEACHER_COLLAGE, TEACHER_PWD, TEACHER_STATUS
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jinqi.exam.entity.TeacherExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_TEACHER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from T_TEACHER
+    where TEACHER_ID = #{teacherId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByEmail" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" />
+    from T_TEACHER
+    where TEACHER_EMAIL = #{teacherEmail}
+  </select>
+
+  <select id="selectByEmailAndPwd" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" />
+    from T_TEACHER
+    where TEACHER_EMAIL = #{teacherEmail}
+    and TEACHER_PWD = #{teacherPwd}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from T_TEACHER
+    where TEACHER_ID = #{teacherId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jinqi.exam.entity.TeacherExample" >
+    delete from T_TEACHER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jinqi.exam.entity.Teacher" >
+    insert into T_TEACHER (TEACHER_ID, TEACHER_NAME, TEACHER_BIRTH,
+                           TEACHER_SEX, TEACHER_EMAIL, TEACHER_PHONE,
+                           TEACHER_ADDRESS, TEACHER_COLLAGE, TEACHER_PWD,
+                           TEACHER_STATUS)
+    values (#{teacherId,jdbcType=INTEGER}, #{teacherName,jdbcType=VARCHAR}, #{teacherBirth,jdbcType=DATE},
+            #{teacherSex,jdbcType=VARCHAR}, #{teacherEmail,jdbcType=VARCHAR}, #{teacherPhone,jdbcType=VARCHAR},
+            #{teacherAddress,jdbcType=VARCHAR}, #{teacherCollage,jdbcType=VARCHAR}, #{teacherPwd,jdbcType=VARCHAR},
+            #{teacherStatus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jinqi.exam.entity.Teacher" >
+    insert into T_TEACHER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="teacherId != null" >
+        TEACHER_ID,
+      </if>
+      <if test="teacherName != null" >
+        TEACHER_NAME,
+      </if>
+      <if test="teacherBirth != null" >
+        TEACHER_BIRTH,
+      </if>
+      <if test="teacherSex != null" >
+        TEACHER_SEX,
+      </if>
+      <if test="teacherEmail != null" >
+        TEACHER_EMAIL,
+      </if>
+      <if test="teacherPhone != null" >
+        TEACHER_PHONE,
+      </if>
+      <if test="teacherAddress != null" >
+        TEACHER_ADDRESS,
+      </if>
+      <if test="teacherCollage != null" >
+        TEACHER_COLLAGE,
+      </if>
+      <if test="teacherPwd != null" >
+        TEACHER_PWD,
+      </if>
+      <if test="teacherStatus != null" >
+        TEACHER_STATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="teacherId != null" >
+        #{teacherId,jdbcType=INTEGER},
+      </if>
+      <if test="teacherName != null" >
+        #{teacherName,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherBirth != null" >
+        #{teacherBirth,jdbcType=DATE},
+      </if>
+      <if test="teacherSex != null" >
+        #{teacherSex,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherEmail != null" >
+        #{teacherEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherPhone != null" >
+        #{teacherPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherAddress != null" >
+        #{teacherAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherCollage != null" >
+        #{teacherCollage,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherPwd != null" >
+        #{teacherPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherStatus != null" >
+        #{teacherStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jinqi.exam.entity.TeacherExample" resultType="java.lang.Integer" >
+    select count(*) from T_TEACHER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update T_TEACHER
+    <set >
+      <if test="record.teacherId != null" >
+        TEACHER_ID = #{record.teacherId,jdbcType=INTEGER},
+      </if>
+      <if test="record.teacherName != null" >
+        TEACHER_NAME = #{record.teacherName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teacherBirth != null" >
+        TEACHER_BIRTH = #{record.teacherBirth,jdbcType=DATE},
+      </if>
+      <if test="record.teacherSex != null" >
+        TEACHER_SEX = #{record.teacherSex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teacherEmail != null" >
+        TEACHER_EMAIL = #{record.teacherEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teacherPhone != null" >
+        TEACHER_PHONE = #{record.teacherPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teacherAddress != null" >
+        TEACHER_ADDRESS = #{record.teacherAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teacherCollage != null" >
+        TEACHER_COLLAGE = #{record.teacherCollage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teacherPwd != null" >
+        TEACHER_PWD = #{record.teacherPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teacherStatus != null" >
+        TEACHER_STATUS = #{record.teacherStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update T_TEACHER
+    set TEACHER_ID = #{record.teacherId,jdbcType=INTEGER},
+    TEACHER_NAME = #{record.teacherName,jdbcType=VARCHAR},
+    TEACHER_BIRTH = #{record.teacherBirth,jdbcType=DATE},
+    TEACHER_SEX = #{record.teacherSex,jdbcType=VARCHAR},
+    TEACHER_EMAIL = #{record.teacherEmail,jdbcType=VARCHAR},
+    TEACHER_PHONE = #{record.teacherPhone,jdbcType=VARCHAR},
+    TEACHER_ADDRESS = #{record.teacherAddress,jdbcType=VARCHAR},
+    TEACHER_COLLAGE = #{record.teacherCollage,jdbcType=VARCHAR},
+    TEACHER_PWD = #{record.teacherPwd,jdbcType=VARCHAR},
+    TEACHER_STATUS = #{record.teacherStatus,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jinqi.exam.entity.Teacher" >
+    update T_TEACHER
+    <set >
+      <if test="teacherName != null" >
+        TEACHER_NAME = #{teacherName,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherBirth != null" >
+        TEACHER_BIRTH = #{teacherBirth,jdbcType=DATE},
+      </if>
+      <if test="teacherSex != null" >
+        TEACHER_SEX = #{teacherSex,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherEmail != null" >
+        TEACHER_EMAIL = #{teacherEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherPhone != null" >
+        TEACHER_PHONE = #{teacherPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherAddress != null" >
+        TEACHER_ADDRESS = #{teacherAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherCollage != null" >
+        TEACHER_COLLAGE = #{teacherCollage,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherPwd != null" >
+        TEACHER_PWD = #{teacherPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="teacherStatus != null" >
+        TEACHER_STATUS = #{teacherStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where TEACHER_ID = #{teacherId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jinqi.exam.entity.Teacher" >
+    update T_TEACHER
+    set TEACHER_NAME = #{teacherName,jdbcType=VARCHAR},
+        TEACHER_BIRTH = #{teacherBirth,jdbcType=DATE},
+        TEACHER_SEX = #{teacherSex,jdbcType=VARCHAR},
+        TEACHER_EMAIL = #{teacherEmail,jdbcType=VARCHAR},
+        TEACHER_PHONE = #{teacherPhone,jdbcType=VARCHAR},
+        TEACHER_ADDRESS = #{teacherAddress,jdbcType=VARCHAR},
+        TEACHER_COLLAGE = #{teacherCollage,jdbcType=VARCHAR},
+        TEACHER_PWD = #{teacherPwd,jdbcType=VARCHAR},
+        TEACHER_STATUS = #{teacherStatus,jdbcType=INTEGER}
+    where TEACHER_ID = #{teacherId,jdbcType=INTEGER}
+  </update>
+  <select resultMap="BaseResultMap" parameterType="com.jinqi.exam.entity.TeacherExample" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_TEACHER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

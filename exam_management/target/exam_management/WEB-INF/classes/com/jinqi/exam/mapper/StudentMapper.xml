@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jinqi.exam.dao.StudentMapper" >
+  <resultMap id="BaseResultMap" type="com.jinqi.exam.entity.Student" >
+    <id column="STUDENT_ID" property="studentId" jdbcType="INTEGER" />
+    <result column="STUDENT_NAME" property="studentName" jdbcType="VARCHAR" />
+    <result column="STUDENT_BIRTH" property="studentBirth" jdbcType="DATE" />
+    <result column="STUDENT_SEX" property="studentSex" jdbcType="VARCHAR" />
+    <result column="STUDENT_ADDRESS" property="studentAddress" jdbcType="VARCHAR" />
+    <result column="STUDENT_EMAIL" property="studentEmail" jdbcType="VARCHAR" />
+    <result column="STUDENT_PHONE" property="studentPhone" jdbcType="VARCHAR" />
+    <result column="STUDENT_MAJOR" property="studentMajor" jdbcType="VARCHAR" />
+    <result column="STUDENT_COLLAGE" property="studentCollage" jdbcType="VARCHAR" />
+    <result column="STUDENT_PWD" property="studentPwd" jdbcType="VARCHAR" />
+    <result column="STUDENT_STATUS" property="studentStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    STUDENT_ID, STUDENT_NAME, STUDENT_BIRTH, STUDENT_SEX, STUDENT_ADDRESS, STUDENT_EMAIL, 
+    STUDENT_PHONE, STUDENT_MAJOR, STUDENT_COLLAGE, STUDENT_PWD, STUDENT_STATUS
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jinqi.exam.entity.StudentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_STUDENT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_STUDENT
+    where STUDENT_ID = #{studentId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByEmail" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" />
+    from T_STUDENT
+    where STUDENT_EMAIL = #{studentEmail}
+  </select>
+
+  <select id="selectByEmailAndPwd" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select <include refid="Base_Column_List" />
+    from T_STUDENT
+    where STUDENT_EMAIL = #{studentEmail}
+        and STUDENT_PWD = #{studentPwd}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from T_STUDENT
+    where STUDENT_ID = #{studentId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jinqi.exam.entity.StudentExample" >
+    delete from T_STUDENT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jinqi.exam.entity.Student" >
+    insert into T_STUDENT (STUDENT_ID, STUDENT_NAME, STUDENT_BIRTH, 
+      STUDENT_SEX, STUDENT_ADDRESS, STUDENT_EMAIL, 
+      STUDENT_PHONE, STUDENT_MAJOR, STUDENT_COLLAGE, 
+      STUDENT_PWD, STUDENT_STATUS)
+    values (#{studentId,jdbcType=INTEGER}, #{studentName,jdbcType=VARCHAR}, #{studentBirth,jdbcType=DATE}, 
+      #{studentSex,jdbcType=VARCHAR}, #{studentAddress,jdbcType=VARCHAR}, #{studentEmail,jdbcType=VARCHAR}, 
+      #{studentPhone,jdbcType=VARCHAR}, #{studentMajor,jdbcType=VARCHAR}, #{studentCollage,jdbcType=VARCHAR}, 
+      #{studentPwd,jdbcType=VARCHAR}, #{studentStatus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jinqi.exam.entity.Student" >
+    insert into T_STUDENT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="studentId != null" >
+        STUDENT_ID,
+      </if>
+      <if test="studentName != null" >
+        STUDENT_NAME,
+      </if>
+      <if test="studentBirth != null" >
+        STUDENT_BIRTH,
+      </if>
+      <if test="studentSex != null" >
+        STUDENT_SEX,
+      </if>
+      <if test="studentAddress != null" >
+        STUDENT_ADDRESS,
+      </if>
+      <if test="studentEmail != null" >
+        STUDENT_EMAIL,
+      </if>
+      <if test="studentPhone != null" >
+        STUDENT_PHONE,
+      </if>
+      <if test="studentMajor != null" >
+        STUDENT_MAJOR,
+      </if>
+      <if test="studentCollage != null" >
+        STUDENT_COLLAGE,
+      </if>
+      <if test="studentPwd != null" >
+        STUDENT_PWD,
+      </if>
+      <if test="studentStatus != null" >
+        STUDENT_STATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="studentId != null" >
+        #{studentId,jdbcType=INTEGER},
+      </if>
+      <if test="studentName != null" >
+        #{studentName,jdbcType=VARCHAR},
+      </if>
+      <if test="studentBirth != null" >
+        #{studentBirth,jdbcType=DATE},
+      </if>
+      <if test="studentSex != null" >
+        #{studentSex,jdbcType=VARCHAR},
+      </if>
+      <if test="studentAddress != null" >
+        #{studentAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="studentEmail != null" >
+        #{studentEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="studentPhone != null" >
+        #{studentPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="studentMajor != null" >
+        #{studentMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="studentCollage != null" >
+        #{studentCollage,jdbcType=VARCHAR},
+      </if>
+      <if test="studentPwd != null" >
+        #{studentPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="studentStatus != null" >
+        #{studentStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jinqi.exam.entity.StudentExample" resultType="java.lang.Integer" >
+    select count(*) from T_STUDENT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update T_STUDENT
+    <set >
+      <if test="record.studentId != null" >
+        STUDENT_ID = #{record.studentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.studentName != null" >
+        STUDENT_NAME = #{record.studentName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studentBirth != null" >
+        STUDENT_BIRTH = #{record.studentBirth,jdbcType=DATE},
+      </if>
+      <if test="record.studentSex != null" >
+        STUDENT_SEX = #{record.studentSex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studentAddress != null" >
+        STUDENT_ADDRESS = #{record.studentAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studentEmail != null" >
+        STUDENT_EMAIL = #{record.studentEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studentPhone != null" >
+        STUDENT_PHONE = #{record.studentPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studentMajor != null" >
+        STUDENT_MAJOR = #{record.studentMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studentCollage != null" >
+        STUDENT_COLLAGE = #{record.studentCollage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studentPwd != null" >
+        STUDENT_PWD = #{record.studentPwd,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update T_STUDENT
+    set STUDENT_ID = #{record.studentId,jdbcType=INTEGER},
+      STUDENT_NAME = #{record.studentName,jdbcType=VARCHAR},
+      STUDENT_BIRTH = #{record.studentBirth,jdbcType=DATE},
+      STUDENT_SEX = #{record.studentSex,jdbcType=VARCHAR},
+      STUDENT_ADDRESS = #{record.studentAddress,jdbcType=VARCHAR},
+      STUDENT_EMAIL = #{record.studentEmail,jdbcType=VARCHAR},
+      STUDENT_PHONE = #{record.studentPhone,jdbcType=VARCHAR},
+      STUDENT_MAJOR = #{record.studentMajor,jdbcType=VARCHAR},
+      STUDENT_COLLAGE = #{record.studentCollage,jdbcType=VARCHAR},
+      STUDENT_PWD = #{record.studentPwd,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jinqi.exam.entity.Student" >
+    update T_STUDENT
+    <set >
+      <if test="studentName != null" >
+        STUDENT_NAME = #{studentName,jdbcType=VARCHAR},
+      </if>
+      <if test="studentBirth != null" >
+        STUDENT_BIRTH = #{studentBirth,jdbcType=DATE},
+      </if>
+      <if test="studentSex != null" >
+        STUDENT_SEX = #{studentSex,jdbcType=VARCHAR},
+      </if>
+      <if test="studentAddress != null" >
+        STUDENT_ADDRESS = #{studentAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="studentEmail != null" >
+        STUDENT_EMAIL = #{studentEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="studentPhone != null" >
+        STUDENT_PHONE = #{studentPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="studentMajor != null" >
+        STUDENT_MAJOR = #{studentMajor,jdbcType=VARCHAR},
+      </if>
+      <if test="studentCollage != null" >
+        STUDENT_COLLAGE = #{studentCollage,jdbcType=VARCHAR},
+      </if>
+      <if test="studentPwd != null" >
+        STUDENT_PWD = #{studentPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="studentStatus != null" >
+        STUDENT_STATUS = #{studentStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where STUDENT_ID = #{studentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jinqi.exam.entity.Student" >
+    update T_STUDENT
+    set STUDENT_NAME = #{studentName,jdbcType=VARCHAR},
+      STUDENT_BIRTH = #{studentBirth,jdbcType=DATE},
+      STUDENT_SEX = #{studentSex,jdbcType=VARCHAR},
+      STUDENT_ADDRESS = #{studentAddress,jdbcType=VARCHAR},
+      STUDENT_EMAIL = #{studentEmail,jdbcType=VARCHAR},
+      STUDENT_PHONE = #{studentPhone,jdbcType=VARCHAR},
+      STUDENT_MAJOR = #{studentMajor,jdbcType=VARCHAR},
+      STUDENT_COLLAGE = #{studentCollage,jdbcType=VARCHAR},
+      STUDENT_PWD = #{studentPwd,jdbcType=VARCHAR},
+      STUDENT_STATUS = #{studentStatus,jdbcType=INTEGER}
+    where STUDENT_ID = #{studentId,jdbcType=INTEGER}
+  </update>
+  <select resultMap="BaseResultMap" parameterType="com.jinqi.exam.entity.StudentExample" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_STUDENT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

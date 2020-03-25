@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jinqi.exam.dao.ScoreMapper" >
+  <resultMap id="BaseResultMap" type="com.jinqi.exam.entity.Score" >
+    <id column="SCORE_ID" property="scoreId" jdbcType="INTEGER" />
+    <result column="STUDENT_ID" property="studentId" jdbcType="INTEGER" />
+    <result column="COURSE_ID" property="courseId" jdbcType="INTEGER" />
+    <result column="SCORE_NUMBER" property="scoreNumber" jdbcType="INTEGER" />
+    <result column="COURSE_NAME" property="courseName" jdbcType="VARCHAR" />
+    <!-- 引用课程中的查询，在查询Score的同时查出课程Course，column的值是后面select查询的where条件的参数，就是用什么值去查，用成绩中的COURSE_ID去查   -->
+    <association property="course" column="COURSE_ID" select="com.jinqi.exam.dao.CourseMapper.selectByPrimaryKey" />
+    <!-- association适用于一对一或多对一   -->
+    <association property="student" column="STUDENT_ID" select="com.jinqi.exam.dao.StudentMapper.selectByPrimaryKey" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    SCORE_ID, STUDENT_ID, COURSE_ID, SCORE_NUMBER, COURSE_NAME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jinqi.exam.entity.ScoreExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_SCORE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_SCORE
+    where SCORE_ID = #{scoreId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByStudentId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+      S.SCORE_ID, S.STUDENT_ID, S.COURSE_ID, S.SCORE_NUMBER, S.COURSE_NAME
+    from T_SCORE S
+        left join T_COURSE TC on S.COURSE_ID = TC.COURSE_ID
+        left join T_STUDENT TS on S.STUDENT_ID = TS.STUDENT_ID
+    where S.STUDENT_ID = #{studentId}
+  </select>
+
+  <select id="selectByStuId" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select
+      S.SCORE_ID, S.STUDENT_ID, S.COURSE_ID, S.SCORE_NUMBER, S.COURSE_NAME
+    from T_SCORE S
+           left join T_STUDENT TS on S.STUDENT_ID = TS.STUDENT_ID
+    where S.STUDENT_ID = #{studentId} and S.COURSE_ID = #{courseId}
+  </select>
+
+  <select id="selectByCourseId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select TS.SCORE_ID, TS.STUDENT_ID, TS.COURSE_ID, TS.SCORE_NUMBER, TS.COURSE_NAME
+    from T_SCORE TS
+        left join T_STUDENT T on TS.STUDENT_ID = T.STUDENT_ID
+        left join T_COURSE TC on TS.COURSE_ID = TC.COURSE_ID
+    where TS.COURSE_ID = #{courseId}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from T_SCORE
+    where SCORE_ID = #{scoreId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jinqi.exam.entity.ScoreExample" >
+    delete from T_SCORE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jinqi.exam.entity.Score" >
+    insert into T_SCORE (SCORE_ID, STUDENT_ID, COURSE_ID, 
+      SCORE_NUMBER, COURSE_NAME)
+    values (#{scoreId,jdbcType=INTEGER}, #{studentId,jdbcType=INTEGER}, #{courseId,jdbcType=INTEGER}, 
+      #{scoreNumber,jdbcType=INTEGER}, #{courseName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jinqi.exam.entity.Score" >
+    insert into T_SCORE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="scoreId != null" >
+        SCORE_ID,
+      </if>
+      <if test="studentId != null" >
+        STUDENT_ID,
+      </if>
+      <if test="courseId != null" >
+        COURSE_ID,
+      </if>
+      <if test="scoreNumber != null" >
+        SCORE_NUMBER,
+      </if>
+      <if test="courseName != null" >
+        COURSE_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="scoreId != null" >
+        #{scoreId,jdbcType=INTEGER},
+      </if>
+      <if test="studentId != null" >
+        #{studentId,jdbcType=INTEGER},
+      </if>
+      <if test="courseId != null" >
+        #{courseId,jdbcType=INTEGER},
+      </if>
+      <if test="scoreNumber != null" >
+        #{scoreNumber,jdbcType=INTEGER},
+      </if>
+      <if test="courseName != null" >
+        #{courseName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jinqi.exam.entity.ScoreExample" resultType="java.lang.Integer" >
+    select count(*) from T_SCORE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update T_SCORE
+    <set >
+      <if test="record.scoreId != null" >
+        SCORE_ID = #{record.scoreId,jdbcType=INTEGER},
+      </if>
+      <if test="record.studentId != null" >
+        STUDENT_ID = #{record.studentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.courseId != null" >
+        COURSE_ID = #{record.courseId,jdbcType=INTEGER},
+      </if>
+      <if test="record.scoreNumber != null" >
+        SCORE_NUMBER = #{record.scoreNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.courseName != null" >
+        COURSE_NAME = #{record.courseName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update T_SCORE
+    set SCORE_ID = #{record.scoreId,jdbcType=INTEGER},
+      STUDENT_ID = #{record.studentId,jdbcType=INTEGER},
+      COURSE_ID = #{record.courseId,jdbcType=INTEGER},
+      SCORE_NUMBER = #{record.scoreNumber,jdbcType=INTEGER},
+      COURSE_NAME = #{record.courseName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jinqi.exam.entity.Score" >
+    update T_SCORE
+    <set >
+      <if test="studentId != null" >
+        STUDENT_ID = #{studentId,jdbcType=INTEGER},
+      </if>
+      <if test="courseId != null" >
+        COURSE_ID = #{courseId,jdbcType=INTEGER},
+      </if>
+      <if test="scoreNumber != null" >
+        SCORE_NUMBER = #{scoreNumber,jdbcType=INTEGER},
+      </if>
+      <if test="courseName != null" >
+        COURSE_NAME = #{courseName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where SCORE_ID = #{scoreId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jinqi.exam.entity.Score" >
+    update T_SCORE
+    set STUDENT_ID = #{studentId,jdbcType=INTEGER},
+      COURSE_ID = #{courseId,jdbcType=INTEGER},
+      SCORE_NUMBER = #{scoreNumber,jdbcType=INTEGER},
+      COURSE_NAME = #{courseName,jdbcType=VARCHAR}
+    where SCORE_ID = #{scoreId,jdbcType=INTEGER}
+  </update>
+  <select resultMap="BaseResultMap" parameterType="com.jinqi.exam.entity.ScoreExample" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_SCORE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

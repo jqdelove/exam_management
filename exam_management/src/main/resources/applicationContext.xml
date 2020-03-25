@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!-- 开启注解扫描，管理service接口 -->
+    <context:component-scan base-package="com.jinqi.exam">
+    </context:component-scan>
+    <!-- aop注解的配置	-->
+    <aop:aspectj-autoproxy/>
+
+    <!-- 导入数据库连接信息文件	-->
+    <context:property-placeholder location="classpath:db.properties"/>
+
+    <!-- 配置数据库连接池，使用的是c3p0连接池	-->
+    <!-- 也是交给spring帮我们创建连接	-->
+    <bean id = "dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${db.driver}"/>
+        <property name="jdbcUrl" value="${db.url}"/>
+        <property name="user" value="${db.username}"/>
+        <property name="password" value="${db.password}"/>
+    </bean>
+
+    <!-- 配置mybatis的sqlSessionFactory，让spring创建sqlSessionFactory对象	-->
+    <bean id="sqlSessionFactory" name="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 指定mybatis主配置文件 -->
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <!-- 配置数据源	-->
+        <property name="dataSource" ref="dataSource"/>
+        <!-- 扫描mapper.xml文件	-->
+        <property name="mapperLocations">
+            <list>
+                <!--    不能缺少classpath        -->
+                <value>classpath*:com/jinqi/exam/mapper/*.xml</value>
+            </list>
+        </property>
+        <!-- 分页插件 -->
+        <property name="plugins">
+            <array>
+                <!-- com.github.pagehelper为PageHelper类所在包名 -->
+                <bean class="com.github.pagehelper.PageHelper">
+                    <property name="properties">
+                        <props>
+                            <!--   配置是什么类型的数据库-->
+                            <prop key="helperDialect">mysql</prop>
+                            <!--   到达第一页或者最后一页不能再往前或者往后查询   -->
+                            <prop key="reasonable">true</prop>
+                        </props>
+                    </property>
+                </bean>
+            </array>
+        </property>
+    </bean>
+
+    <!-- 扫描dao接口 -->
+    <bean id="mapperScanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- mapper接口的包名 -->
+        <property name="basePackage" value="com.jinqi.exam.dao"/>
+    </bean>
+
+    <!-- 配置Spring的声明式事务管理 -->
+    <!-- 配置事务管理器 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!-- 注解事务 -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+
+</beans>

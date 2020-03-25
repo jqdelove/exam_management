@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jinqi.exam.dao.ExaminationTestPaperMapper" >
+  <resultMap id="BaseResultMap" type="com.jinqi.exam.entity.ExaminationTestPaper" >
+    <id column="EXAMINATION_TEST_PAPER_ID" property="examinationTestPaperId" jdbcType="INTEGER" />
+    <result column="TEST_PAPER_ID" property="testPaperId" jdbcType="INTEGER" />
+    <result column="EXAMINATION_QUESTIONS_ID" property="examinationQuestionsId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    EXAMINATION_TEST_PAPER_ID, TEST_PAPER_ID, EXAMINATION_QUESTIONS_ID
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jinqi.exam.entity.ExaminationTestPaperExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_EXAMINATION_TEST_PAPER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_EXAMINATION_TEST_PAPER
+    where EXAMINATION_TEST_PAPER_ID = #{examinationTestPaperId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from T_EXAMINATION_TEST_PAPER
+    where EXAMINATION_TEST_PAPER_ID = #{examinationTestPaperId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jinqi.exam.entity.ExaminationTestPaperExample" >
+    delete from T_EXAMINATION_TEST_PAPER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jinqi.exam.entity.ExaminationTestPaper" >
+    insert into T_EXAMINATION_TEST_PAPER (EXAMINATION_TEST_PAPER_ID, TEST_PAPER_ID, 
+      EXAMINATION_QUESTIONS_ID)
+    values (#{examinationTestPaperId,jdbcType=INTEGER}, #{testPaperId,jdbcType=INTEGER}, 
+      #{examinationQuestionsId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jinqi.exam.entity.ExaminationTestPaper" >
+    insert into T_EXAMINATION_TEST_PAPER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="examinationTestPaperId != null" >
+        EXAMINATION_TEST_PAPER_ID,
+      </if>
+      <if test="testPaperId != null" >
+        TEST_PAPER_ID,
+      </if>
+      <if test="examinationQuestionsId != null" >
+        EXAMINATION_QUESTIONS_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="examinationTestPaperId != null" >
+        #{examinationTestPaperId,jdbcType=INTEGER},
+      </if>
+      <if test="testPaperId != null" >
+        #{testPaperId,jdbcType=INTEGER},
+      </if>
+      <if test="examinationQuestionsId != null" >
+        #{examinationQuestionsId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jinqi.exam.entity.ExaminationTestPaperExample" resultType="java.lang.Integer" >
+    select count(*) from T_EXAMINATION_TEST_PAPER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update T_EXAMINATION_TEST_PAPER
+    <set >
+      <if test="record.examinationTestPaperId != null" >
+        EXAMINATION_TEST_PAPER_ID = #{record.examinationTestPaperId,jdbcType=INTEGER},
+      </if>
+      <if test="record.testPaperId != null" >
+        TEST_PAPER_ID = #{record.testPaperId,jdbcType=INTEGER},
+      </if>
+      <if test="record.examinationQuestionsId != null" >
+        EXAMINATION_QUESTIONS_ID = #{record.examinationQuestionsId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update T_EXAMINATION_TEST_PAPER
+    set EXAMINATION_TEST_PAPER_ID = #{record.examinationTestPaperId,jdbcType=INTEGER},
+      TEST_PAPER_ID = #{record.testPaperId,jdbcType=INTEGER},
+      EXAMINATION_QUESTIONS_ID = #{record.examinationQuestionsId,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jinqi.exam.entity.ExaminationTestPaper" >
+    update T_EXAMINATION_TEST_PAPER
+    <set >
+      <if test="testPaperId != null" >
+        TEST_PAPER_ID = #{testPaperId,jdbcType=INTEGER},
+      </if>
+      <if test="examinationQuestionsId != null" >
+        EXAMINATION_QUESTIONS_ID = #{examinationQuestionsId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where EXAMINATION_TEST_PAPER_ID = #{examinationTestPaperId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jinqi.exam.entity.ExaminationTestPaper" >
+    update T_EXAMINATION_TEST_PAPER
+    set TEST_PAPER_ID = #{testPaperId,jdbcType=INTEGER},
+      EXAMINATION_QUESTIONS_ID = #{examinationQuestionsId,jdbcType=INTEGER}
+    where EXAMINATION_TEST_PAPER_ID = #{examinationTestPaperId,jdbcType=INTEGER}
+  </update>
+  <select resultMap="BaseResultMap" parameterType="com.jinqi.exam.entity.ExaminationTestPaperExample" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_EXAMINATION_TEST_PAPER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/mvc
+           http://www.springframework.org/schema/mvc/spring-mvc.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop.xsd
+       ">
+
+    <!-- 扫描controller的注解，别的不扫描 -->
+    <context:component-scan base-package="com.jinqi.exam.controller">
+    </context:component-scan>
+    <!-- spring注解，配置自动装配	-->
+    <mvc:annotation-driven/>
+
+    <!-- 配置视图解析器	，表示响应的jsp页面-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!--	响应的页面的路径，在WEB-INF下的jsp文件夹内	-->
+        <property name="prefix" value="/WEB-INF/"/>
+        <!--	响应以.jsp结尾的页面	-->
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!-- 设置静态资源映射 -->
+    <mvc:resources location="/css/" mapping="/css/**" />
+    <mvc:resources location="/img/" mapping="/img/**" />
+    <mvc:resources location="/plugins/" mapping="/plugins/**" />
+<!--    <mvc:resources location="/js/" mapping="/js/**" />-->
+    
+    <!-- 查看jsp页面效果，后面删除即可   -->
+    <mvc:view-controller path="/showTeacherCourse.do" view-name="teacher/course-edit"/>
+    <mvc:view-controller path="/showManagerMain.do" view-name="manager/main"/>
+    <mvc:view-controller path="/showManagerStu.do" view-name="manager/student"/>
+    <mvc:view-controller path="/showManagerTea.do" view-name="manager/teacher"/>
+    <mvc:view-controller path="/showManagerClass.do" view-name="manager/class"/>
+    <mvc:view-controller path="/showManagerClasse.do" view-name="manager/class-edit"/>
+    <mvc:view-controller path="/showManagerCou.do" view-name="manager/course"/>
+    <mvc:view-controller path="/showManagerCoue.do" view-name="manager/course-edit"/>
+    <mvc:view-controller path="/showManagerExam.do" view-name="manager/exam"/>
+    <mvc:view-controller path="/showManagerExame.do" view-name="manager/exam-edit"/>
+
+
+    <!--
+        支持AOP的注解支持，AOP底层使用代理技术
+        JDK动态代理，要求必须有接口
+        cglib代理，生成子类对象，proxy-target-class="true" 默认使用cglib的方式
+    -->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+
+</beans>
