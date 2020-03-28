@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
 <head>
     <!-- 页面meta -->
@@ -73,8 +75,8 @@
                 <small>教师列表</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="all-admin-index.html"><i class="fa fa-dashboard"></i> 首页</a></li>
-                <li><a href="all-travellog-review-list.html">教师管理</a></li>
+                <li><a href="${pageContext.request.contextPath}/manager/checked/showMain.do"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li><a href="${pageContext.request.contextPath}/manager/checked/showTeacher.do?page=1&size=6">教师管理</a></li>
                 <li class="active">教师列表</li>
             </ol>
         </section>
@@ -98,10 +100,9 @@
                         <div class="pull-left">
                             <div class="form-group form-inline">
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-default" title="新建" onclick='location.href="all-travellog-review-edit.html"'><i class="fa fa-file-o"></i> 新建</button>
                                     <button type="button" class="btn btn-default" title="删除" onclick='confirm("你确认要删除吗？")'><i class="fa fa-trash-o"></i> 删除</button>
-                                    <button type="button" class="btn btn-default" title="开启" onclick='confirm("你确认要开启吗？")'><i class="fa fa-check"></i> 开启</button>
-                                    <button type="button" class="btn btn-default" title="屏蔽" onclick='confirm("你确认要屏蔽吗？")'><i class="fa fa-ban"></i> 屏蔽</button>
+                                    <button type="button" class="btn btn-default" title="开启" onclick='confirm("你确认要启用吗？")'><i class="fa fa-check"></i> 启用</button>
+                                    <button type="button" class="btn btn-default" title="屏蔽" onclick='confirm("你确认要禁用吗？")'><i class="fa fa-ban"></i> 禁用</button>
                                     <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i class="fa fa-refresh"></i> 刷新</button>
                                 </div>
                             </div>
@@ -122,148 +123,36 @@
                                     <input id="selall" type="checkbox" class="icheckbox_square-blue">
                                 </th>
                                 <th class="sorting_asc">ID</th>
-                                <th class="sorting">游记名称</th>
-                                <th class="sorting">会员</th>
-                                <th class="sorting">日期</th>
-
-                                <th class="text-center sorting">屏蔽</th>
+                                <th class="sorting">教师姓名</th>
+                                <th class="sorting">邮箱</th>
+                                <th class="sorting">电话</th>
+                                <th class="text-center sorting">学院</th>
+                                <th class="sorting">是否启用账户</th>
                                 <th class="text-center">操作</th>
                             </tr>
                             </thead>
+
                             <tbody>
-
-
-
-                            <tr>
-                                <td><input name="ids" type="checkbox"></td>
-                                <td>
-                                    1
-                                </td>
-                                <td>北京一日游</td>
-                                <td>71837383</td>
-                                <td>2017-03-13 14:57:11</td>
-
-                                <td class="text-center">开启</td>
-                                <td class="text-center">
-                                    <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-travellog-review-edit.html"'>编辑</button>
-                                </td>
-                            </tr>
-
-
-                            <tr>
-                                <td><input name="ids" type="checkbox"></td>
-                                <td>
-                                    2
-                                </td>
-                                <td>北京一日游</td>
-                                <td>71837383</td>
-                                <td>2017-03-13 14:57:11</td>
-
-                                <td class="text-center">开启</td>
-                                <td class="text-center">
-                                    <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-travellog-review-edit.html"'>编辑</button>
-                                </td>
-                            </tr>
-
-
-                            <tr>
-                                <td><input name="ids" type="checkbox"></td>
-                                <td>
-                                    3
-                                </td>
-                                <td>北京一日游</td>
-                                <td>71837383</td>
-                                <td>2017-03-13 14:57:11</td>
-
-                                <td class="text-center">开启</td>
-                                <td class="text-center">
-                                    <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-travellog-review-edit.html"'>编辑</button>
-                                </td>
-                            </tr>
-
-
-                            <tr>
-                                <td><input name="ids" type="checkbox"></td>
-                                <td>
-                                    4
-                                </td>
-                                <td>北京一日游</td>
-                                <td>71837383</td>
-                                <td>2017-03-13 14:57:11</td>
-
-                                <td class="text-center">开启</td>
-                                <td class="text-center">
-                                    <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-travellog-review-edit.html"'>编辑</button>
-                                </td>
-                            </tr>
-
-
-                            <tr>
-                                <td><input name="ids" type="checkbox"></td>
-                                <td>
-                                    5
-                                </td>
-                                <td>北京一日游</td>
-                                <td>71837383</td>
-                                <td>2017-03-13 14:57:11</td>
-
-                                <td class="text-center">开启</td>
-                                <td class="text-center">
-                                    <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-travellog-review-edit.html"'>编辑</button>
-                                </td>
-                            </tr>
-
-
-                            <tr>
-                                <td><input name="ids" type="checkbox"></td>
-                                <td>
-                                    6
-                                </td>
-                                <td>北京一日游</td>
-                                <td>71837383</td>
-                                <td>2017-03-13 14:57:11</td>
-
-                                <td class="text-center">开启</td>
-                                <td class="text-center">
-                                    <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-travellog-review-edit.html"'>编辑</button>
-                                </td>
-                            </tr>
-
-
-                            <tr>
-                                <td><input name="ids" type="checkbox"></td>
-                                <td>
-                                    7
-                                </td>
-                                <td>北京一日游</td>
-                                <td>71837383</td>
-                                <td>2017-03-13 14:57:11</td>
-
-                                <td class="text-center">开启</td>
-                                <td class="text-center">
-                                    <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-travellog-review-edit.html"'>编辑</button>
-                                </td>
-                            </tr>
-
-
-                            <tr>
-                                <td><input name="ids" type="checkbox"></td>
-                                <td>
-                                    8
-                                </td>
-                                <td>北京一日游</td>
-                                <td>71837383</td>
-                                <td>2017-03-13 14:57:11</td>
-
-                                <td class="text-center">开启</td>
-                                <td class="text-center">
-                                    <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-travellog-review-edit.html"'>编辑</button>
-                                </td>
-                            </tr>
-
-
-
-
+                            <c:forEach items="${teachers.list}" var="teacher" varStatus="num">
+                                <tr>
+                                    <td><input name="ids" type="checkbox"></td>
+                                    <td>
+                                            ${num.count}
+                                    </td>
+                                    <td>${teacher.teacherName}</td>
+                                    <td>${teacher.teacherEmail}</td>
+                                    <td>${teacher.teacherPhone}</td>
+                                    <td>${teacher.teacherCollage}</td>
+                                    <td>
+                                        <c:if test="${teacher.teacherStatus eq 2}">未启用</c:if>
+                                        <c:if test="${teacher.teacherStatus eq 1}">已启用</c:if>
+                                    </td>
+                                    <td class="text-center">
+                                        <c:if test="${teacher.teacherStatus eq 2}"><button type="button" class="btn bg-olive btn-xs" onclick='location.href="${pageContext.request.contextPath}/manager/checked/enableTeacher.do?teacherId=${teacher.teacherId}"'>启用</button></c:if>
+                                        <c:if test="${teacher.teacherStatus eq 1}"><button type="button" class="btn bg-olive btn-xs" onclick='location.href="${pageContext.request.contextPath}/manager/checked/disableTeacher.do?teacherId=${teacher.teacherId}"'>禁用</button></c:if>
+                                    </td>
+                                </tr>
+                            </c:forEach>
                             </tbody>
                             <!--
                         <tfoot>
@@ -278,26 +167,6 @@
                         </table>
                         <!--数据列表/-->
 
-                        <!--工具栏-->
-                        <div class="pull-left">
-                            <div class="form-group form-inline">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-default" title="新建" onclick='location.href="all-travellog-review-edit.html"'><i class="fa fa-file-o"></i> 新建</button>
-                                    <button type="button" class="btn btn-default" title="删除" onclick='confirm("你确认要删除吗？")'><i class="fa fa-trash-o"></i> 删除</button>
-                                    <button type="button" class="btn btn-default" title="开启" onclick='confirm("你确认要开启吗？")'><i class="fa fa-check"></i> 开启</button>
-                                    <button type="button" class="btn btn-default" title="屏蔽" onclick='confirm("你确认要屏蔽吗？")'><i class="fa fa-ban"></i> 屏蔽</button>
-                                    <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i class="fa fa-refresh"></i> 刷新</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="box-tools pull-right">
-                            <div class="has-feedback">
-                                <input type="text" class="form-control input-sm" placeholder="搜索">
-                                <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                            </div>
-                        </div>
-                        <!--工具栏/-->
-
                     </div>
                     <!-- 数据表格 /-->
 
@@ -309,13 +178,14 @@
                 <div class="box-footer">
                     <div class="pull-left">
                         <div class="form-group form-inline">
-                            总共2 页，共14 条数据。 每页
-                            <select class="form-control">
-                                <option>10</option>
-                                <option>15</option>
-                                <option>20</option>
-                                <option>50</option>
-                                <option>80</option>
+                            当前第${teachers.pageNum} 页，总共${teachers.pages} 页，共${teachers.total} 条数据。 每页
+                            <select class="form-control" id="changePageSize" onchange="changePageSize()">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
                             </select> 条
                         </div>
                     </div>
@@ -323,17 +193,24 @@
                     <div class="box-tools pull-right">
                         <ul class="pagination">
                             <li>
-                                <a href="#" aria-label="Previous">首页</a>
+                                <a href="${pageContext.request.contextPath}/manager/checked/showTeacher.do?page=1&size=${teachers.pageSize}"
+                                   aria-label="Previous">首页
+                                </a>
                             </li>
-                            <li><a href="#">上一页</a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#">下一页</a></li>
                             <li>
-                                <a href="#" aria-label="Next">尾页</a>
+                                <a href="${pageContext.request.contextPath}/manager/checked/showTeacher.do?page=${teachers.pageNum-1}&size=${teachers.pageSize}">上一页</a>
+                            </li>
+                            <c:forEach begin="1" end="${teachers.pages}" var="pageNum">
+                                <li>
+                                    <a href="${pageContext.request.contextPath}/manager/checked/showTeacher.do?page=${pageNum}&size=${teachers.pageSize}">${pageNum}</a>
+                                </li>
+                            </c:forEach>
+                            <li>
+                                <a href="${pageContext.request.contextPath}/manager/checked/showTeacher.do?page=${teachers.pageNum+1}&size=${teachers.pageSize}">下一页</a>
+                            </li>
+                            <li>
+                                <a href="${pageContext.request.contextPath}/manager/checked/showTeacher.do?page=${teachers.pages}&size=${teachers.pageSize}"
+                                   aria-label="Next">尾页</a>
                             </li>
                         </ul>
                     </div>
@@ -353,9 +230,11 @@
     <!-- 底部导航 -->
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
-            <b>Version</b> 1.0.8
+            <b>Version</b> 1.0.1
         </div>
-        <strong>Copyright &copy; 2014-2017 <a href="http://www.itcast.cn">研究院研发部</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2019-2020 <a
+                href="https://www.rossontheway.com">ross King</a>.
+        </strong> All rights reserved.
     </footer>
     <!-- 底部导航 /-->
 
@@ -408,6 +287,15 @@
 <script src="${pageContext.request.contextPath}/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.js"></script>
 <script src="${pageContext.request.contextPath}/plugins/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 <script>
+    function changePageSize() {
+        //获取下拉框的值
+        var pageSize = $("#changePageSize").val();
+
+        //向服务器发送请求，改变没页显示条数
+        location.href = "${pageContext.request.contextPath}/manager/checked/showTeacher.do?page=${teachers.pageNum}&size="
+            + pageSize;
+    }
+
     $(document).ready(function() {
         // 选择框
         $(".select2").select2();

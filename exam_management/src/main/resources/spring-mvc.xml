@@ -37,16 +37,6 @@
     
     <!-- 查看jsp页面效果，后面删除即可   -->
     <mvc:view-controller path="/showTeacherCourse.do" view-name="teacher/course-edit"/>
-    <mvc:view-controller path="/showManagerMain.do" view-name="manager/main"/>
-    <mvc:view-controller path="/showManagerStu.do" view-name="manager/student"/>
-    <mvc:view-controller path="/showManagerTea.do" view-name="manager/teacher"/>
-    <mvc:view-controller path="/showManagerClass.do" view-name="manager/class"/>
-    <mvc:view-controller path="/showManagerClasse.do" view-name="manager/class-edit"/>
-    <mvc:view-controller path="/showManagerCou.do" view-name="manager/course"/>
-    <mvc:view-controller path="/showManagerCoue.do" view-name="manager/course-edit"/>
-    <mvc:view-controller path="/showManagerExam.do" view-name="manager/exam"/>
-    <mvc:view-controller path="/showManagerExame.do" view-name="manager/exam-edit"/>
-
 
     <!--
         支持AOP的注解支持，AOP底层使用代理技术

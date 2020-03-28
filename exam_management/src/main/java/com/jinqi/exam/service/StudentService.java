@@ -5,6 +5,8 @@ import com.jinqi.exam.exception.DuplicateEmailException;
 import com.jinqi.exam.exception.StudentDisableException;
 import com.jinqi.exam.exception.StudentNotFoundException;
 
+import java.util.List;
+
 /**
  * 处理学生信息
  */
@@ -17,4 +19,6 @@ public interface StudentService {
     Student checkInfo(Integer studentId);
 
     Integer updateInfo(Student student);
+
+    List<Student> getAll(Integer page,Integer size);
 }

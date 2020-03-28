@@ -11,7 +11,7 @@
                      class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-                <p>xxx</p>
+                <p>${man.managerName}</p>
                 <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
             </div>
         </div>
@@ -20,7 +20,7 @@
         <ul class="sidebar-menu">
             <li class="header">菜单</li>
             <li id="admin-index">
-                <a href="${pageContext.request.contextPath}/pages/main.jsp">
+                <a href="${pageContext.request.contextPath}/manager/checked/showMain.do">
                     <i class="fa fa-dashboard"></i>
                     <span>首页</span></a></li>
 
@@ -36,12 +36,12 @@
                 <ul class="treeview-menu">
 
                     <li id="system-setting">
-                        <a href="${pageContext.request.contextPath}/role/findAll.do">
+                        <a href="${pageContext.request.contextPath}/manager/checked/showTeacher.do?page=1&size=6">
                             <i class="fa fa-circle-o"></i> 教师管理
                         </a>
                     </li>
                     <li id="system-setting">
-                        <a href="${pageContext.request.contextPath}/permission/findAll.do">
+                        <a href="${pageContext.request.contextPath}/manager/checked/showStudent.do?page=1&size=6">
                             <i class="fa fa-circle-o"></i> 学生管理
                         </a>
                     </li>
@@ -88,7 +88,7 @@
                 </a>
                 <ul class="treeview-menu">
                     <li id="system-setting">
-                        <a href="${pageContext.request.contextPath}/product/findAll.do">
+                        <a href="${pageContext.request.contextPath}/manager/checked/showInfo.do">
                             <i class="fa fa-circle-o"></i> 个人设置
                         </a>
                     </li>

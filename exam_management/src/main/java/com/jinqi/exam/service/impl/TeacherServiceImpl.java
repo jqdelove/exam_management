@@ -1,5 +1,6 @@
 package com.jinqi.exam.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.jinqi.exam.dao.TeacherMapper;
 import com.jinqi.exam.entity.Teacher;
 import com.jinqi.exam.exception.*;
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service("teacherService")
 @Transactional(propagation= Propagation.REQUIRED,rollbackFor=Exception.class)
@@ -46,5 +49,11 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public Integer updateInfo(Teacher teacher) {
         return teacherMapper.updateByPrimaryKeySelective(teacher);
+    }
+
+    @Override
+    public List<Teacher> getAll(Integer page, Integer size) {
+        PageHelper.startPage(page,size);
+        return teacherMapper.selectAll();
     }
 }

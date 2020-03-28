@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jinqi.exam.dao.ManagerMapper" >
+  <resultMap id="BaseResultMap" type="com.jinqi.exam.entity.Manager" >
+    <id column="MANAGER_ID" property="managerId" jdbcType="INTEGER" />
+    <result column="MANAGER_NAME" property="managerName" jdbcType="VARCHAR" />
+    <result column="MANAGER_EMAIL" property="managerEmail" jdbcType="VARCHAR" />
+    <result column="MANAGER_PHONE" property="managerPhone" jdbcType="VARCHAR" />
+    <result column="MANAGER_PWD" property="managerPwd" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    MANAGER_ID, MANAGER_NAME, MANAGER_EMAIL, MANAGER_PHONE, MANAGER_PWD
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jinqi.exam.entity.ManagerExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_MANAGER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_MANAGER
+    where MANAGER_ID = #{managerId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByEmailAndPwd" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List" />
+    from T_MANAGER
+    where MANAGER_EMAIL = #{managerEmail} and MANAGER_PWD = #{managerPwd}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from T_MANAGER
+    where MANAGER_ID = #{managerId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.jinqi.exam.entity.ManagerExample" >
+    delete from T_MANAGER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.jinqi.exam.entity.Manager" >
+    insert into T_MANAGER (MANAGER_ID, MANAGER_NAME, MANAGER_EMAIL, 
+      MANAGER_PHONE, MANAGER_PWD)
+    values (#{managerId,jdbcType=INTEGER}, #{managerName,jdbcType=VARCHAR}, #{managerEmail,jdbcType=VARCHAR}, 
+      #{managerPhone,jdbcType=VARCHAR}, #{managerPwd,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.jinqi.exam.entity.Manager" >
+    insert into T_MANAGER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="managerId != null" >
+        MANAGER_ID,
+      </if>
+      <if test="managerName != null" >
+        MANAGER_NAME,
+      </if>
+      <if test="managerEmail != null" >
+        MANAGER_EMAIL,
+      </if>
+      <if test="managerPhone != null" >
+        MANAGER_PHONE,
+      </if>
+      <if test="managerPwd != null" >
+        MANAGER_PWD,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="managerId != null" >
+        #{managerId,jdbcType=INTEGER},
+      </if>
+      <if test="managerName != null" >
+        #{managerName,jdbcType=VARCHAR},
+      </if>
+      <if test="managerEmail != null" >
+        #{managerEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="managerPhone != null" >
+        #{managerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="managerPwd != null" >
+        #{managerPwd,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.jinqi.exam.entity.ManagerExample" resultType="java.lang.Integer" >
+    select count(*) from T_MANAGER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update T_MANAGER
+    <set >
+      <if test="record.managerId != null" >
+        MANAGER_ID = #{record.managerId,jdbcType=INTEGER},
+      </if>
+      <if test="record.managerName != null" >
+        MANAGER_NAME = #{record.managerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.managerEmail != null" >
+        MANAGER_EMAIL = #{record.managerEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.managerPhone != null" >
+        MANAGER_PHONE = #{record.managerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.managerPwd != null" >
+        MANAGER_PWD = #{record.managerPwd,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update T_MANAGER
+    set MANAGER_ID = #{record.managerId,jdbcType=INTEGER},
+      MANAGER_NAME = #{record.managerName,jdbcType=VARCHAR},
+      MANAGER_EMAIL = #{record.managerEmail,jdbcType=VARCHAR},
+      MANAGER_PHONE = #{record.managerPhone,jdbcType=VARCHAR},
+      MANAGER_PWD = #{record.managerPwd,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jinqi.exam.entity.Manager" >
+    update T_MANAGER
+    <set >
+      <if test="managerName != null" >
+        MANAGER_NAME = #{managerName,jdbcType=VARCHAR},
+      </if>
+      <if test="managerEmail != null" >
+        MANAGER_EMAIL = #{managerEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="managerPhone != null" >
+        MANAGER_PHONE = #{managerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="managerPwd != null" >
+        MANAGER_PWD = #{managerPwd,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where MANAGER_ID = #{managerId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jinqi.exam.entity.Manager" >
+    update T_MANAGER
+    set MANAGER_NAME = #{managerName,jdbcType=VARCHAR},
+      MANAGER_EMAIL = #{managerEmail,jdbcType=VARCHAR},
+      MANAGER_PHONE = #{managerPhone,jdbcType=VARCHAR},
+      MANAGER_PWD = #{managerPwd,jdbcType=VARCHAR}
+    where MANAGER_ID = #{managerId,jdbcType=INTEGER}
+  </update>
+  <select resultMap="BaseResultMap" parameterType="com.jinqi.exam.entity.ManagerExample" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_MANAGER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

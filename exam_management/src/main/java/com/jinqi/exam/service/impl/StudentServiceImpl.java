@@ -1,5 +1,6 @@
 package com.jinqi.exam.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.jinqi.exam.dao.StudentMapper;
 import com.jinqi.exam.entity.Student;
 import com.jinqi.exam.exception.DuplicateEmailException;
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service("studentService")
 @Transactional(propagation= Propagation.REQUIRED,rollbackFor=Exception.class)
@@ -49,5 +52,11 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Integer updateInfo(Student student) {
         return studentMapper.updateByPrimaryKeySelective(student);
+    }
+
+    @Override
+    public List<Student> getAll(Integer page,Integer size) {
+        PageHelper.startPage(page,size);
+        return studentMapper.selectAll();
     }
 }

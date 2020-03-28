@@ -67,6 +67,16 @@
     <url-pattern>/teacher/checked/*</url-pattern>
   </filter-mapping>
 
+  <!-- 管理员登录过滤器 -->
+  <filter>
+    <filter-name>ManagerCheckLoginFilter</filter-name>
+    <filter-class>com.jinqi.exam.filter.ManagerCheckLoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>ManagerCheckLoginFilter</filter-name>
+    <url-pattern>/manager/checked/*</url-pattern>
+  </filter-mapping>
+
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>

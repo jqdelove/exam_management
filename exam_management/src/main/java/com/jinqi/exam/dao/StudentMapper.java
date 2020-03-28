@@ -21,6 +21,8 @@ public interface StudentMapper {
 
     List<Student> selectByExample(StudentExample example);
 
+    List<Student> selectAll();
+
     Student selectByPrimaryKey(Integer studentId);
 
     Student selectByEmail(String studentEmail);

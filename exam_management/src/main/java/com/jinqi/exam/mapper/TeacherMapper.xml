@@ -108,6 +108,12 @@
     and TEACHER_PWD = #{teacherPwd}
   </select>
 
+  <select id="selectAll" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from T_TEACHER
+    order by 5 desc
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from T_TEACHER
     where TEACHER_ID = #{teacherId,jdbcType=INTEGER}

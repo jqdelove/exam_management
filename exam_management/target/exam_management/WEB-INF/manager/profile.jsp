@@ -69,12 +69,12 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                User Profile
+                个人信息
             </h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="#">Examples</a></li>
-                <li class="active">User profile</li>
+                <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li><a href="#">个人管理</a></li>
+                <li class="active">个人信息</li>
             </ol>
         </section>
 
@@ -89,23 +89,19 @@
                         <div class="box-body box-profile">
                             <img class="profile-user-img img-responsive img-circle" src="${pageContext.request.contextPath}/img/user4-128x128.jpg" alt="User profile picture">
 
-                            <h3 class="profile-username text-center">Nina Mcintire</h3>
+                            <h3 class="profile-username text-center">${manager.managerName}</h3>
 
-                            <p class="text-muted text-center">Software Engineer</p>
+                            <p class="text-muted text-center">管理员</p>
 
                             <ul class="list-group list-group-unbordered">
                                 <li class="list-group-item">
-                                    <b>Followers</b> <a class="pull-right">1,322</a>
+                                    <b>管理人数</b> <a class="pull-right">1,322</a>
                                 </li>
                                 <li class="list-group-item">
-                                    <b>Following</b> <a class="pull-right">543</a>
-                                </li>
-                                <li class="list-group-item">
-                                    <b>Friends</b> <a class="pull-right">13,287</a>
+                                    <b>管理权限</b> <a class="pull-right">所有权限</a>
                                 </li>
                             </ul>
 
-                            <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
                         </div>
                         <!-- /.box-body -->
                     </div>
@@ -119,64 +115,77 @@
                 <div class="col-md-9">
                     <div class="nav-tabs-custom">
                         <ul class="nav nav-tabs">
-                            <li class="active"><a href="#settings" data-toggle="tab">Settings</a></li>
+                            <li class="active"><a href="#settings" data-toggle="tab">设置</a></li>
+                            <li><a href="#timeline" data-toggle="tab">修改密码</a></li>
                         </ul>
                         <div class="tab-content">
                             <%--   个人信息     --%>
                             <div class="active tab-pane" id="settings">
-                                <form class="form-horizontal">
+                                <form class="form-horizontal" action="${pageContext.request.contextPath}/manager/checked/updateInfo.do" method="post">
                                     <div class="form-group">
-                                        <label for="inputName" class="col-sm-2 control-label">Name</label>
+                                        <label for="managerName" class="col-sm-2 control-label">姓名</label>
 
                                         <div class="col-sm-10">
-                                            <input type="email" class="form-control" id="inputName" placeholder="Name">
+                                            <input type="text" class="form-control" id="managerName" placeholder="姓名" name="managerName" value="${manager.managerName}">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+                                        <label for="managerEmail" class="col-sm-2 control-label">邮箱</label>
 
                                         <div class="col-sm-10">
-                                            <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                                            <input type="email" class="form-control" id="managerEmail" placeholder="邮箱" name="managerEmail" value="${manager.managerEmail}" readonly="readonly">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="inputName" class="col-sm-2 control-label">Name</label>
+                                        <label for="managerPhone" class="col-sm-2 control-label">电话</label>
 
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="inputName" placeholder="Name">
+                                            <input type="text" class="form-control" id="managerPhone" placeholder="电话" name="managerPhone" value="${manager.managerPhone}">
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
 
-                                        <div class="col-sm-10">
-                                            <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputSkills" class="col-sm-2 control-label">Skills</label>
-
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
-                                        </div>
-                                    </div>
                                     <div class="form-group">
                                         <div class="col-sm-offset-2 col-sm-10">
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
+                                                    <input type="checkbox"> 我同意 <a href="#">协议</a>
                                                 </label>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-offset-2 col-sm-10">
-                                            <button type="submit" class="btn btn-danger">Submit</button>
+                                            <button type="submit" class="btn btn-danger">提交</button>
                                         </div>
                                     </div>
                                 </form>
                             </div>
                             <!-- /.tab-pane -->
+
+                                <div class="tab-pane" id="timeline">
+                                    <!-- The timeline -->
+                                    <form class="form-horizontal" action="${pageContext.request.contextPath}/manager/checked/updateInfo.do" method="post">
+                                        <div class="form-group">
+                                            <label for="managerPwd" class="col-sm-2 control-label">新密码</label>
+
+                                            <div class="col-sm-10">
+                                                <input type="password" class="form-control" id="managerPwd" placeholder="新密码" name="managerPwd">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="managerRePwd" class="col-sm-2 control-label">确认密码</label>
+
+                                            <div class="col-sm-10">
+                                                <input type="password" class="form-control" id="managerRePwd" placeholder="确认密码">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-offset-2 col-sm-10">
+                                                <button type="submit" class="btn btn-danger">提交</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
                         </div>
                         <!-- /.tab-content -->
                     </div>
@@ -195,9 +204,11 @@
     <!-- 底部导航 -->
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
-            <b>Version</b> 1.0.8
+            <b>Version</b> 1.0.1
         </div>
-        <strong>Copyright &copy; 2014-2017 <a href="http://www.itcast.cn">研究院研发部</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2019-2020 <a
+                href="https://www.rossontheway.com">ross King</a>.
+        </strong> All rights reserved.
     </footer>
     <!-- 底部导航 /-->
 

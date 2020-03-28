@@ -184,7 +184,7 @@
 					class="dropdown-toggle" data-toggle="dropdown"> <img
 						src="${pageContext.request.contextPath}/img/user2-160x160.jpg"
 						class="user-image" alt="User Image"> <span class="hidden-xs">
-							xxx
+							${man.managerName}
 					</span>
 
 				</a>
@@ -194,7 +194,7 @@
 							src="${pageContext.request.contextPath}/img/user2-160x160.jpg"
 							class="img-circle" alt="User Image">
 							<p>
-								张猿猿 - 管理员
+								${man.managerName} - 管理员
 								<small>最后登录 11:20AM</small>
 							</p>
 						</li>
@@ -202,10 +202,10 @@
 						<!-- Menu Footer-->
 						<li class="user-footer">
 							<div class="pull-left">
-								<a href="#" class="btn btn-default btn-flat">修改密码</a>
+								<a href="${pageContext.request.contextPath}/manager/checked/showInfo.do" class="btn btn-default btn-flat">修改密码</a>
 							</div>
 							<div class="pull-right">
-								<a href="${pageContext.request.contextPath}/logout.do"
+								<a href="${pageContext.request.contextPath}/manager/logout.do"
 									class="btn btn-default btn-flat">注销</a>
 							</div>
 						</li>

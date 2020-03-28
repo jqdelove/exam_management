@@ -110,6 +110,12 @@
         and STUDENT_PWD = #{studentPwd}
   </select>
 
+  <select id="selectAll" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from T_STUDENT
+    order by 6 desc
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from T_STUDENT
     where STUDENT_ID = #{studentId,jdbcType=INTEGER}
