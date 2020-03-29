@@ -10,10 +10,12 @@ com/jinqi/exam/exception/TeacherDisableException.class
 com/jinqi/exam/entity/TeacherCourseExample$GeneratedCriteria.class
 com/jinqi/exam/controller/StudentController.class
 com/jinqi/exam/entity/ExaminationSyllabusExample$Criterion.class
+com/jinqi/exam/service/ManagerService.class
 com/jinqi/exam/entity/ClazzStudentExample$Criterion.class
 com/jinqi/exam/entity/ClazzCourseExample$Criterion.class
 com/jinqi/exam/entity/ClazzCourse.class
 com/jinqi/exam/service/impl/ClazzStudentServiceImpl.class
+com/jinqi/exam/entity/ManagerExample$Criterion.class
 com/jinqi/exam/entity/ClazzExample$Criteria.class
 com/jinqi/exam/entity/ScoreExample$GeneratedCriteria.class
 com/jinqi/exam/service/impl/TeacherCourseServiceImpl.class
@@ -52,7 +54,9 @@ com/jinqi/exam/service/impl/TeacherServiceImpl.class
 com/jinqi/exam/entity/ExaminationTestPaperExample$Criteria.class
 com/jinqi/exam/entity/Score.class
 com/jinqi/exam/dao/TeacherStudentMapper.class
+com/jinqi/exam/controller/ManagerController.class
 com/jinqi/exam/entity/Teacher.class
+com/jinqi/exam/entity/Manager.class
 com/jinqi/exam/entity/CourseExample$Criterion.class
 com/jinqi/exam/service/StudentService.class
 com/jinqi/exam/entity/ExaminationQuestionsExample.class
@@ -61,6 +65,7 @@ com/jinqi/exam/entity/ScoreExample$Criterion.class
 com/jinqi/exam/entity/ClazzExample$Criterion.class
 com/jinqi/exam/service/impl/StudentServiceImpl.class
 com/jinqi/exam/entity/TeacherCourseExample$Criterion.class
+com/jinqi/exam/entity/ManagerExample.class
 com/jinqi/exam/entity/ExaminationTestPaperExample.class
 com/jinqi/exam/entity/ScoreExample.class
 com/jinqi/exam/entity/ClazzStudentExample$Criteria.class
@@ -80,6 +85,7 @@ com/jinqi/exam/exception/TeacherDuplicateEmailException.class
 com/jinqi/exam/entity/ExaminationQuestionsExample$Criterion.class
 com/jinqi/exam/entity/Course.class
 com/jinqi/exam/entity/TeacherStudentExample$Criteria.class
+com/jinqi/exam/dao/ManagerMapper.class
 com/jinqi/exam/vo/AdminVo.class
 com/jinqi/exam/entity/TeacherExample$Criteria.class
 com/jinqi/exam/entity/ExaminationSyllabusExample$Criteria.class
@@ -91,8 +97,10 @@ com/jinqi/exam/entity/KnowledgeQuestionsExample$GeneratedCriteria.class
 com/jinqi/exam/entity/ClazzCourseExample$GeneratedCriteria.class
 com/jinqi/exam/entity/TeacherStudentExample$Criterion.class
 com/jinqi/exam/entity/ExaminationSyllabusExample.class
+com/jinqi/exam/service/impl/ManagerServiceImpl.class
 com/jinqi/exam/entity/KnowledgePoints.class
 com/jinqi/exam/entity/ClazzTeacherExample$GeneratedCriteria.class
+com/jinqi/exam/entity/ManagerExample$GeneratedCriteria.class
 com/jinqi/exam/service/impl/ClazzServiceImpl.class
 com/jinqi/exam/entity/TestPaperExample$GeneratedCriteria.class
 com/jinqi/exam/entity/TestPaper.class
@@ -110,11 +118,14 @@ com/jinqi/exam/dao/TestPaperMapper.class
 com/jinqi/exam/dao/KnowledgePointsMapper.class
 com/jinqi/exam/entity/ClazzTeacher.class
 com/jinqi/exam/dao/TeacherMapper.class
+com/jinqi/exam/exception/ManagerNotFoundException.class
 com/jinqi/exam/entity/ClazzTeacherExample$Criterion.class
 com/jinqi/exam/entity/ScoreExample$Criteria.class
 com/jinqi/exam/entity/TeacherCourseExample.class
 com/jinqi/exam/exception/TeacherNotFoundException.class
 com/jinqi/exam/entity/TeacherStudent.class
+com/jinqi/exam/entity/ManagerExample$Criteria.class
+com/jinqi/exam/filter/ManagerCheckLoginFilter.class
 com/jinqi/exam/entity/CourseExample.class
 com/jinqi/exam/dao/StudentMapper.class
 com/jinqi/exam/dao/ExaminationTestPaperMapper.class

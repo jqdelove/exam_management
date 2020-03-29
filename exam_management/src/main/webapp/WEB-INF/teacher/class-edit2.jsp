@@ -125,7 +125,7 @@
                 </div>
                 <!--游客信息/-->
                 <div class="col-md-10 data text-center">
-                    <button type="button" class="btn bg-default" onclick="history.back(-1);">返回上一页</button>
+                    <button type="button" class="btn text-red bg-default" onclick="history.back(-1);">返回上一页</button>
                 </div>
                 <!-- .box-footer
     <div class="box-footer"></div>

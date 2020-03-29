@@ -12,4 +12,8 @@ public interface ClazzStudentService {
     List<ClazzStudent> getClazzStudent(Integer classId);
 
     List<ClazzStudent> getClazzStudent(Integer classId,Integer courseId);
+
+    ClazzStudent getClazzStudent2(Integer studentId);
+
+    Integer setClass(Integer studentId,Integer classId);
 }

@@ -1,20 +1,13 @@
 package com.jinqi.exam.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.jinqi.exam.entity.Manager;
-import com.jinqi.exam.entity.Student;
-import com.jinqi.exam.entity.Teacher;
+import com.jinqi.exam.entity.*;
 import com.jinqi.exam.exception.ManagerNotFoundException;
-import com.jinqi.exam.service.ManagerService;
-import com.jinqi.exam.service.StudentService;
-import com.jinqi.exam.service.TeacherService;
+import com.jinqi.exam.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -33,6 +26,12 @@ public class ManagerController {
 
     @Autowired
     private TeacherService teacherService;
+
+    @Autowired
+    private ClazzStudentService clazzStudentService;
+
+    @Autowired
+    private ClazzService clazzService;
 
     /**
      * 跳转登录页面
@@ -192,5 +191,47 @@ public class ManagerController {
         tmp.setTeacherStatus(2);
         teacherService.updateInfo(tmp);
         return "redirect:/manager/checked/showTeacher.do";
+    }
+
+    /**
+     * 编辑学生详情
+     * @param studentId
+     * @param map
+     * @return
+     */
+    @RequestMapping("/checked/editStudent.do")
+    public String editStudent(Integer studentId,Map map){
+        Student student1 = studentService.checkInfo(studentId);
+        map.put("student1",student1);
+        return "manager/student-edit";
+    }
+
+    /**
+     * 修改学生信息
+     * @param studentId
+     * @return
+     */
+    @RequestMapping("/checked/saveStudent.do")
+    public String saveStudent(Integer studentId,@ModelAttribute Student student,Integer classId){
+        ClazzStudent student2 = clazzStudentService.getClazzStudent2(studentId);
+        if (null == student2){
+            clazzStudentService.setClass(studentId,classId);
+            student.setStudentId(studentId);
+            studentService.updateInfo(student);
+        }else {
+            student.setStudentId(studentId);
+            studentService.updateInfo(student);
+        }
+        return "redirect:/manager/checked/editStudent.do?studentId=" + studentId;
+    }
+
+    /**
+     * 查询所有可用班级
+     * @return
+     */
+    @RequestMapping(value = "/checked/showAllClazz.do", produces="application/json;charset=utf-8")
+    public @ResponseBody List<Clazz> showAllClazz(){
+        List<Clazz> clazzes = clazzService.getAll();
+        return clazzes;
     }
 }

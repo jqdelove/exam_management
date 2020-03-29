@@ -13,6 +13,8 @@
     <result column="STUDENT_COLLAGE" property="studentCollage" jdbcType="VARCHAR" />
     <result column="STUDENT_PWD" property="studentPwd" jdbcType="VARCHAR" />
     <result column="STUDENT_STATUS" property="studentStatus" jdbcType="INTEGER" />
+    <result column="CLASS_NAME" property="className"/>
+    <association property="clazzStudent" column="STUDENT_ID" select="com.jinqi.exam.dao.ClazzStudentMapper.selectByStudentId"/>
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -74,7 +76,7 @@
   </sql>
   <sql id="Base_Column_List" >
     STUDENT_ID, STUDENT_NAME, STUDENT_BIRTH, STUDENT_SEX, STUDENT_ADDRESS, STUDENT_EMAIL, 
-    STUDENT_PHONE, STUDENT_MAJOR, STUDENT_COLLAGE, STUDENT_PWD, STUDENT_STATUS
+    STUDENT_PHONE, STUDENT_MAJOR, STUDENT_COLLAGE, STUDENT_PWD, STUDENT_STATUS, CLASS_NAME
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jinqi.exam.entity.StudentExample" >
     select
@@ -91,10 +93,13 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from T_STUDENT
-    where STUDENT_ID = #{studentId,jdbcType=INTEGER}
+    select
+      TS.STUDENT_ID, TS.STUDENT_NAME, TS.STUDENT_BIRTH, TS.STUDENT_SEX, TS.STUDENT_ADDRESS, TS.STUDENT_EMAIL,
+      TS.STUDENT_PHONE, TS.STUDENT_MAJOR, TS.STUDENT_COLLAGE, TS.STUDENT_PWD, TS.STUDENT_STATUS, TC.CLASS_NAME
+    from T_STUDENT TS
+        left join T_CLASS_STUDENT TCS on TS.STUDENT_ID = TCS.STUDENT_ID
+        left join T_CLASS TC on TCS.CLASS_ID = TC.CLASS_ID
+    where TS.STUDENT_ID = #{studentId,jdbcType=INTEGER}
   </select>
 
   <select id="selectByEmail" resultMap="BaseResultMap" parameterType="java.lang.String">

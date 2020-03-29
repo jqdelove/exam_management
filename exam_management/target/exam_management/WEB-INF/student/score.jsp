@@ -153,7 +153,7 @@
                                         <td>${score.course.courseMajor}</td>
                                         <td class="text-center">
                                             <button type="button" class="btn bg-olive btn-xs">详情</button>
-                                            <button type="button" class="btn bg-olive btn-xs">编辑</button>
+                                            <button type="button" class="btn bg-purple-active btn-xs">编辑</button>
                                         </td>
                                     </tr>
                                 </c:forEach>

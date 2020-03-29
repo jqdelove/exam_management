@@ -26,4 +26,17 @@ public class ClazzStudentServiceImpl implements ClazzStudentService {
     public List<ClazzStudent> getClazzStudent(Integer classId, Integer courseId) {
         return clazzStudentMapper.selectByClassIdAndCourseId(classId,courseId);
     }
+
+    @Override
+    public ClazzStudent getClazzStudent2(Integer studentId) {
+        return clazzStudentMapper.selectByStudentId(studentId);
+    }
+
+    @Override
+    public Integer setClass(Integer studentId, Integer classId) {
+        ClazzStudent clazzStudent = new ClazzStudent();
+        clazzStudent.setClassId(classId);
+        clazzStudent.setStudentId(studentId);
+        return clazzStudentMapper.insertSelective(clazzStudent);
+    }
 }

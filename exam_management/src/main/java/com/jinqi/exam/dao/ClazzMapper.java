@@ -21,6 +21,8 @@ public interface ClazzMapper {
 
     List<Clazz> selectByExample(ClazzExample example);
 
+    List<Clazz> selectAll();
+
     Clazz selectByPrimaryKey(Integer classId);
 
     int updateByExampleSelective(@Param("record") Clazz record, @Param("example") ClazzExample example);

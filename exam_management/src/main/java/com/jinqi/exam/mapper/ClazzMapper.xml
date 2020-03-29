@@ -87,6 +87,12 @@
     from T_CLASS
     where CLASS_ID = #{classId,jdbcType=INTEGER}
   </select>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from T_CLASS
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from T_CLASS
     where CLASS_ID = #{classId,jdbcType=INTEGER}

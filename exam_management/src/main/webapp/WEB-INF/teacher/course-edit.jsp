@@ -155,19 +155,19 @@
                         <th class="">班级ID</th>
                         <th class="">班级名</th>
                         <th class="">班级人数</th>
-                        <th class="">备注</th>
+                        <th class="">操作</th>
                     </tr>
                     </thead>
                     <tbody>
 
                     <c:forEach items="${clazzCourses}" var="clazzCourse">
                     <tr>
-                        <td><a href="${pageContext.request.contextPath}/teacher/checked/showClazzScore.do?classId=${clazzCourse.clazz.classId}&courseId=${clazzCourse.course.courseId}">${clazzCourse.clazz.classId}</a></td>
+                        <td>${clazzCourse.clazz.classId}</td>
                         <td>${clazzCourse.clazz.className}</td>
                         <td>
                             ${clazzCourse.clazz.classAmount}
                         </td>
-                        <td><input type="text" size="20" value=""></td>
+                        <td><button type="button" class="btn bg-orange-active btn-xs" onclick='location.href="${pageContext.request.contextPath}/teacher/checked/showClazzScore.do?classId=${clazzCourse.clazz.classId}&courseId=${clazzCourse.course.courseId}"'>查看班级成绩</button></td>
                     </tr>
                     </c:forEach>
 
@@ -342,7 +342,7 @@
 
             <!--工具栏-->
             <div class="box-tools text-center">
-                <button type="button" class="btn bg-default" onclick="history.back(-1);">返回上一页</button>
+                <button type="button" class="btn text-yellow bg-default" onclick="history.back(-1);">返回上一页</button>
             </div>
             <!--工具栏/-->
 

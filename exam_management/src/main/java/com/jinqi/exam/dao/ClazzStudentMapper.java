@@ -23,6 +23,8 @@ public interface ClazzStudentMapper {
 
     ClazzStudent selectByPrimaryKey(Integer classStudentId);
 
+    ClazzStudent selectByStudentId(Integer studentId);
+
     List<ClazzStudent> selectByClassId(Integer classId);
 
     List<ClazzStudent> selectByClassIdAndCourseId(@Param("classId") Integer classId,@Param("courseId") Integer courseId);

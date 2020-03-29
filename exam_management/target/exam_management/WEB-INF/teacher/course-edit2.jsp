@@ -345,7 +345,7 @@
 
             <!--工具栏-->
             <div class="box-tools text-center">
-                <button type="button" class="btn bg-default" onclick="history.back(-1);">返回上一页</button>
+                <button type="button" class="btn text-yellow bg-default" onclick="history.back(-1);">返回上一页</button>
             </div>
             <!--工具栏/-->
 

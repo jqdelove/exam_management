@@ -100,6 +100,13 @@
     where TC.CLASS_ID = #{classId}
   </select>
 
+  <select id="selectByStudentId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select TC.CLASS_STUDENT_ID, TC.CLASS_ID, TC.STUDENT_ID
+    from T_CLASS_STUDENT TC
+        left join T_STUDENT TS on TC.STUDENT_ID = TS.STUDENT_ID
+    where TC.STUDENT_ID = #{studentId}
+  </select>
+
   <select id="selectByClassIdAndCourseId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
     select TC.CLASS_STUDENT_ID, TC.CLASS_ID, TC.STUDENT_ID, T.SCORE_NUMBER<!--这边查出的字段给上面association的column作为参数-->
     from T_CLASS_STUDENT TC

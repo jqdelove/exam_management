@@ -26,6 +26,26 @@ public class Student implements Serializable {
 
     private Integer studentStatus;
 
+    private ClazzStudent clazzStudent;
+
+    private String className;
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    public ClazzStudent getClazzStudent() {
+        return clazzStudent;
+    }
+
+    public void setClazzStudent(ClazzStudent clazzStudent) {
+        this.clazzStudent = clazzStudent;
+    }
+
     private static final long serialVersionUID = 1L;
 
     public Integer getStudentId() {
