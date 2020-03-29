@@ -5,4 +5,4 @@
 
 学生及教师端：http://129.204.207.233:8080/exam_management
 
-新增管理员端会在稍后更新：http://129.204.207.233:8080/exam_management/manager/showLogin.do
+新增管理员端已更新（加入给学生分配班级以及维护学生信息）：http://129.204.207.233:8080/exam_management/manager/showLogin.do
