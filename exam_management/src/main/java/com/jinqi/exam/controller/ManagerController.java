@@ -234,4 +234,28 @@ public class ManagerController {
         List<Clazz> clazzes = clazzService.getAll();
         return clazzes;
     }
+
+    /**
+     * 编辑教师详情
+     * @param teacherId
+     * @param map
+     * @return
+     */
+    @RequestMapping("/checked/editTeacher.do")
+    public String editTeacher(Integer teacherId,Map map){
+        Teacher teacher1 = teacherService.checkInfo(teacherId);
+        map.put("teacher1",teacher1);
+        return "manager/teacher-edit";
+    }
+
+    /**
+     * 修改教师信息（未完待续）
+     * @return
+     */
+    @RequestMapping("/checked/saveTeacher.do")
+    public String saveTeacher(Integer teacherId,@ModelAttribute Teacher teacher){
+        teacher.setTeacherId(teacherId);
+        teacherService.updateInfo(teacher);
+        return "redirect:/manager/checked/editTeacher.do?teacherId=" + teacherId;
+    }
 }

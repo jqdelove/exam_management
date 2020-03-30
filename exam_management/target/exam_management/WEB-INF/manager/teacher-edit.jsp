@@ -2,19 +2,18 @@
   Created by IntelliJ IDEA.
   User: jinqi
   Date: 2020/2/23
-  Time: 16:33
+  Time: 16:49
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
 <head>
     <!-- 页面meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>教师管理</title>
+    <title>教师详情</title>
     <meta name="description" content="AdminLTE2定制版">
     <meta name="keywords" content="AdminLTE2定制版">
 
@@ -53,6 +52,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/bootstrap-slider/slider.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.css">
 </head>
+
 <body class="hold-transition skin-purple sidebar-mini">
 
 <div class="wrapper">
@@ -71,13 +71,13 @@
         <!-- 内容头部 -->
         <section class="content-header">
             <h1>
-                教师管理
-                <small>教师列表</small>
+                教师详情
+                <small>教师详情表单</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="${pageContext.request.contextPath}/manager/checked/showMain.do"><i class="fa fa-dashboard"></i> 首页</a></li>
-                <li><a href="${pageContext.request.contextPath}/manager/checked/showTeacher.do?page=1&size=6">教师管理</a></li>
-                <li class="active">教师列表</li>
+                <li><a href="all-admin-index.html"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li><a href="all-travellog-review-list.html">教师详情</a></li>
+                <li class="active">教师详情表单</li>
             </ol>
         </section>
         <!-- 内容头部 /-->
@@ -85,140 +85,92 @@
         <!-- 正文区域 -->
         <section class="content">
 
-            <!-- .box-body -->
-            <div class="box box-primary">
-                <div class="box-header with-border">
-                    <h3 class="box-title">列表</h3>
-                </div>
+            <div class="box-body">
 
-                <div class="box-body">
+                <!--tab页-->
+                <div class="nav-tabs-custom">
 
-                    <!-- 数据表格 -->
-                    <div class="table-box">
+                    <!--tab头-->
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a href="#tab-form" data-toggle="tab">表单</a>
+                        </li>
+                    </ul>
+                    <!--tab头/-->
 
-                        <!--工具栏-->
-                        <div class="pull-left">
-                            <div class="form-group form-inline">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-default" title="删除" onclick='confirm("你确认要删除吗？")'><i class="fa fa-trash-o"></i> 删除</button>
-                                    <button type="button" class="btn btn-default" title="开启" onclick='confirm("你确认要启用吗？")'><i class="fa fa-check"></i> 启用</button>
-                                    <button type="button" class="btn btn-default" title="屏蔽" onclick='confirm("你确认要禁用吗？")'><i class="fa fa-ban"></i> 禁用</button>
-                                    <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i class="fa fa-refresh"></i> 刷新</button>
-                                </div>
+                    <!--tab内容-->
+                    <div class="tab-content">
+
+                        <!--表单内容-->
+                        <div class="tab-pane active" id="tab-form">
+                            <div class="row data-type">
+                                <form action="${pageContext.request.contextPath}/manager/checked/saveTeacher.do?teacherId=${teacher1.teacherId}" method="post">
+                                    <div class="col-md-2 title">ID</div>
+                                    <div class="col-md-10 data text">
+                                        ${teacher1.teacherId}
+                                    </div>
+
+                                    <div class="col-md-2 title">教师姓名</div>
+                                    <div class="col-md-10 data">
+                                        <input type="text" class="form-control" placeholder="学生姓名" value="${teacher1.teacherName}" name="teacherName">
+                                    </div>
+
+                                    <div class="col-md-2 title">性别</div>
+                                    <div class="col-md-10 data">
+                                        <select class="form-control" name="teacherSex">
+                                            <option>
+                                                <c:if test="${teacher1.teacherSex eq '男'}">男</c:if>
+                                                <c:if test="${teacher1.teacherSex eq '女'}">女</c:if>
+                                            </option>
+                                            <c:if test="${teacher1.teacherSex eq '男'}">
+                                                <option>女</option>
+                                            </c:if>
+                                            <c:if test="${teacher1.teacherSex eq '女'}">
+                                                <option>男</option>
+                                            </c:if>
+                                            <c:if test="${empty teacher1.teacherSex}">
+                                                <option>男</option>
+                                                <option>女</option>
+                                            </c:if>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-2 title rowHeight2x">家庭住址</div>
+                                    <div class="col-md-10 data rowHeight2x">
+                                            <textarea class="form-control" rows="3" placeholder="家庭住址" name=teacherAddress"">${teacher1.teacherAddress}</textarea>
+                                    </div>
+                                    <div class="col-md-2 title">学院</div>
+                                    <div class="col-md-10 data">
+                                        <input type="text" class="form-control" placeholder="学院" value="${teacher1.teacherCollage}" name="teacherCollage">
+                                    </div>
+                                    <div class="col-md-2 title">班级</div>
+                                    <div class="col-md-10 data">
+                                        <c:forEach items="${teacher1.clazzTeachers}" var="classTeacher">
+                                            ${classTeacher.classId}班
+                                        </c:forEach>
+                                    </div>
+
+                                    <div class="col-md-2 title"></div>
+                                    <div class="col-md-10 data text-center">
+                                        <button type="submit" class="btn bg-maroon">保存</button>
+                                        <button type="button" class="btn text-yellow bg-default" onclick="location.href='${pageContext.request.contextPath}/manager/checked/showTeacher.do?page=1&size=6'">返回</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
-                        <div class="box-tools pull-right">
-                            <div class="has-feedback">
-                                <input type="text" class="form-control input-sm" placeholder="搜索">
-                                <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                            </div>
-                        </div>
-                        <!--工具栏/-->
-
-                        <!--数据列表-->
-                        <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
-                            <thead>
-                            <tr>
-                                <th class="" style="padding-right:0px;">
-                                    <input id="selall" type="checkbox" class="icheckbox_square-blue">
-                                </th>
-                                <th class="sorting_asc">ID</th>
-                                <th class="sorting">教师姓名</th>
-                                <th class="sorting">邮箱</th>
-                                <th class="sorting">电话</th>
-                                <th class="text-center sorting">学院</th>
-                                <th class="sorting">是否启用账户</th>
-                                <th class="text-center">操作</th>
-                            </tr>
-                            </thead>
-
-                            <tbody>
-                            <c:forEach items="${teachers.list}" var="teacher" varStatus="num">
-                                <tr>
-                                    <td><input name="ids" type="checkbox"></td>
-                                    <td>
-                                            ${num.count}
-                                    </td>
-                                    <td>${teacher.teacherName}</td>
-                                    <td>${teacher.teacherEmail}</td>
-                                    <td>${teacher.teacherPhone}</td>
-                                    <td>${teacher.teacherCollage}</td>
-                                    <td>
-                                        <c:if test="${teacher.teacherStatus eq 2}">未启用</c:if>
-                                        <c:if test="${teacher.teacherStatus eq 1}">已启用</c:if>
-                                    </td>
-                                    <td class="text-center">
-                                        <c:if test="${teacher.teacherStatus eq 2}"><button type="button" class="btn bg-olive btn-xs" onclick='location.href="${pageContext.request.contextPath}/manager/checked/enableTeacher.do?teacherId=${teacher.teacherId}"'>启用</button></c:if>
-                                        <c:if test="${teacher.teacherStatus eq 1}"><button type="button" class="btn bg-olive btn-xs" onclick='location.href="${pageContext.request.contextPath}/manager/checked/disableTeacher.do?teacherId=${teacher.teacherId}"'>禁用</button></c:if>
-                                        <button type="button" class="btn bg-orange btn-xs" onclick='location.href="${pageContext.request.contextPath}/manager/checked/editTeacher.do?teacherId=${teacher.teacherId}"'>编辑详情</button>
-                                    </td>
-                                </tr>
-                            </c:forEach>
-                            </tbody>
-                            <!--
-                        <tfoot>
-                        <tr>
-                        <th>Rendering engine</th>
-                        <th>Browser</th>
-                        <th>Platform(s)</th>
-                        <th>Engine version</th>
-                        <th>CSS grade</th>
-                        </tr>
-                        </tfoot>-->
-                        </table>
-                        <!--数据列表/-->
+                        <!--表单内容/-->
 
                     </div>
-                    <!-- 数据表格 /-->
-
+                    <!--tab内容/-->
 
                 </div>
-                <!-- /.box-body -->
+                <!--tab页/-->
 
-                <!-- .box-footer-->
-                <div class="box-footer">
-                    <div class="pull-left">
-                        <div class="form-group form-inline">
-                            当前第${teachers.pageNum} 页，总共${teachers.pages} 页，共${teachers.total} 条数据。 每页
-                            <select class="form-control" id="changePageSize" onchange="changePageSize()">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                                <option>6</option>
-                            </select> 条
-                        </div>
-                    </div>
 
-                    <div class="box-tools pull-right">
-                        <ul class="pagination">
-                            <li>
-                                <a href="${pageContext.request.contextPath}/manager/checked/showTeacher.do?page=1&size=${teachers.pageSize}"
-                                   aria-label="Previous">首页
-                                </a>
-                            </li>
-                            <li>
-                                <a href="${pageContext.request.contextPath}/manager/checked/showTeacher.do?page=${teachers.pageNum-1}&size=${teachers.pageSize}">上一页</a>
-                            </li>
-                            <c:forEach begin="1" end="${teachers.pages}" var="pageNum">
-                                <li>
-                                    <a href="${pageContext.request.contextPath}/manager/checked/showTeacher.do?page=${pageNum}&size=${teachers.pageSize}">${pageNum}</a>
-                                </li>
-                            </c:forEach>
-                            <li>
-                                <a href="${pageContext.request.contextPath}/manager/checked/showTeacher.do?page=${teachers.pageNum+1}&size=${teachers.pageSize}">下一页</a>
-                            </li>
-                            <li>
-                                <a href="${pageContext.request.contextPath}/manager/checked/showTeacher.do?page=${teachers.pages}&size=${teachers.pageSize}"
-                                   aria-label="Next">尾页</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                </div>
+                <!-- .box-footer
+    <div class="box-footer"></div>
+    -->
                 <!-- /.box-footer-->
-
 
             </div>
 
@@ -288,14 +240,26 @@
 <script src="${pageContext.request.contextPath}/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.js"></script>
 <script src="${pageContext.request.contextPath}/plugins/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 <script>
-    function changePageSize() {
-        //获取下拉框的值
-        var pageSize = $("#changePageSize").val();
+    $(function(){
+        $.ajax({
+            url:"${pageContext.request.contextPath}/manager/checked/showAllClazz.do",
+            type:"post",
+            dataType:"json",
+            success:function (clazzes) {
+                //遍历传过来的List<Clazz>，然后new option，往每一个option中添加
+                $(clazzes).each(function(index,clazz){
+                    var option = new Option(clazz.classId,index+1);
+                    var $option = $(option);
+                    var select = $("#clazzAll");
+                    // select.append($option);
 
-        //向服务器发送请求，改变没页显示条数
-        location.href = "${pageContext.request.contextPath}/manager/checked/showTeacher.do?page=${teachers.pageNum}&size="
-            + pageSize;
-    }
+                });
+            },
+            error:function(){
+                console.log("出错了");
+            }
+        });
+    });
 
     $(document).ready(function() {
         // 选择框
@@ -319,25 +283,16 @@
 
 
     $(document).ready(function() {
+        $('#datepicker-a5').datepicker({
+            autoclose: true,
+            language: 'zh-CN'
+        });
+    });
 
+
+    $(document).ready(function() {
         // 激活导航位置
         setSidebarActive("travellog-review");
-
-        // 列表按钮
-        $("#dataList td input[type='checkbox']").iCheck({
-            checkboxClass: 'icheckbox_square-blue',
-            increaseArea: '20%'
-        });
-        // 全选操作
-        $("#selall").click(function() {
-            var clicks = $(this).is(':checked');
-            if (!clicks) {
-                $("#dataList td input[type='checkbox']").iCheck("uncheck");
-            } else {
-                $("#dataList td input[type='checkbox']").iCheck("check");
-            }
-            $(this).data("clicks", !clicks);
-        });
     });
 </script>
 </body>

@@ -2,6 +2,7 @@ package com.jinqi.exam.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class Teacher implements Serializable {
     private Integer teacherId;
@@ -23,6 +24,26 @@ public class Teacher implements Serializable {
     private String teacherPwd;
 
     private Integer teacherStatus;
+
+    private List<ClazzTeacher> clazzTeachers;
+
+    private String className;
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    public List<ClazzTeacher> getClazzTeachers() {
+        return clazzTeachers;
+    }
+
+    public void setClazzTeachers(List<ClazzTeacher> clazzTeachers) {
+        this.clazzTeachers = clazzTeachers;
+    }
 
     private static final long serialVersionUID = 1L;
 

@@ -150,6 +150,7 @@
                                     <td class="text-center">
                                         <c:if test="${teacher.teacherStatus eq 2}"><button type="button" class="btn bg-olive btn-xs" onclick='location.href="${pageContext.request.contextPath}/manager/checked/enableTeacher.do?teacherId=${teacher.teacherId}"'>启用</button></c:if>
                                         <c:if test="${teacher.teacherStatus eq 1}"><button type="button" class="btn bg-olive btn-xs" onclick='location.href="${pageContext.request.contextPath}/manager/checked/disableTeacher.do?teacherId=${teacher.teacherId}"'>禁用</button></c:if>
+                                        <button type="button" class="btn bg-orange btn-xs" onclick='location.href="${pageContext.request.contextPath}/manager/checked/editTeacher.do?teacherId=${teacher.teacherId}"'>编辑详情</button>
                                     </td>
                                 </tr>
                             </c:forEach>

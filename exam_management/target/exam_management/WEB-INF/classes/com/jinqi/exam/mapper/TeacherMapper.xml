@@ -12,6 +12,9 @@
     <result column="TEACHER_COLLAGE" property="teacherCollage" jdbcType="VARCHAR" />
     <result column="TEACHER_PWD" property="teacherPwd" jdbcType="VARCHAR" />
     <result column="TEACHER_STATUS" property="teacherStatus" jdbcType="INTEGER" />
+<!--    <result column="CLASS_NAME" property="className"/>-->
+    <collection property="clazzTeachers" ofType="com.jinqi.exam.entity.ClazzTeacher" column="TEACHER_ID"
+                javaType="java.util.ArrayList" fetchType="lazy" select="com.jinqi.exam.dao.ClazzTeacherMapper.selectByTeacherId"/>
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -91,9 +94,12 @@
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
-    <include refid="Base_Column_List" />
-    from T_TEACHER
-    where TEACHER_ID = #{teacherId,jdbcType=INTEGER}
+      TT.TEACHER_ID, TT.TEACHER_NAME, TT.TEACHER_BIRTH, TT.TEACHER_SEX, TT.TEACHER_EMAIL, TT.TEACHER_PHONE,
+      TT.TEACHER_ADDRESS, TT.TEACHER_COLLAGE, TT.TEACHER_PWD, TT.TEACHER_STATUS
+    from T_TEACHER TT
+#         left join T_CLASS_TEACHER TCT on TT.TEACHER_ID = TCT.TEACHER_ID
+#         left join T_CLASS TC on TCT.CLASS_ID = TC.CLASS_ID
+    where TT.TEACHER_ID = #{teacherId,jdbcType=INTEGER}
   </select>
   <select id="selectByEmail" resultMap="BaseResultMap" parameterType="java.lang.String">
     select <include refid="Base_Column_List" />

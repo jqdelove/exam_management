@@ -137,9 +137,7 @@
 
                                     <div class="col-md-2 title rowHeight2x">家庭住址</div>
                                     <div class="col-md-10 data rowHeight2x">
-                                        <label>
                                             <textarea class="form-control" rows="3" placeholder="家庭住址" name=studentAddress"">${student1.studentAddress}</textarea>
-                                        </label>
                                     </div>
                                     <div class="col-md-2 title">学院</div>
                                     <div class="col-md-10 data">
@@ -158,8 +156,8 @@
                                                 </c:if>
                                                 <c:if test="${!empty student1.clazzStudent.classId}">
                                                     <c:if test="${student1.clazzStudent.classId eq 2}">2</c:if>
-                                                </c:if>班
-                                            </option>
+                                                </c:if>
+                                            </option>班
                                         </select>
 
                                     </div>
