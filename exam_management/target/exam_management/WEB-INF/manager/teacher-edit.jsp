@@ -144,9 +144,11 @@
                                         <input type="text" class="form-control" placeholder="学院" value="${teacher1.teacherCollage}" name="teacherCollage">
                                     </div>
                                     <div class="col-md-2 title">班级</div>
-                                    <div class="col-md-10 data">
+                                    <div class="col-md-10 data" id="classCheckbox">
                                         <c:forEach items="${teacher1.clazzTeachers}" var="classTeacher">
-                                            ${classTeacher.classId}班
+                                            <c:if test="${!empty classTeacher.classId}">
+                                                <input type="checkbox" checked>${classTeacher.classId}班</input>
+                                            </c:if>
                                         </c:forEach>
                                     </div>
 
