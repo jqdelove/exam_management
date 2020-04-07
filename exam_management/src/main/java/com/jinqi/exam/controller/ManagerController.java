@@ -227,7 +227,7 @@ public class ManagerController {
 
     /**
      * 查询所有可用班级
-     * @return
+     * @return 返回json对象
      */
     @RequestMapping(value = "/checked/showAllClazz.do", produces="application/json;charset=utf-8")
     public @ResponseBody List<Clazz> showAllClazz(){
@@ -273,4 +273,30 @@ public class ManagerController {
         map.put("clazzes",pageInfo);
         return "manager/class";
     }
+
+    /**
+     * 编辑班级详情
+     * @param classId
+     * @param map
+     * @return
+     */
+    @RequestMapping("/checked/showClazzDtl.do")
+    public String showClazzDtl(Integer classId,Map map){
+        Clazz clazz = clazzService.getClazz(classId);
+        map.put("clazz",clazz);
+        return "manager/class-edit";
+    }
+
+    /**
+     * 修改班级信息
+     * @param classId
+     * @return
+     */
+    @RequestMapping("/checked/editClazz.do")
+    public String editClazz(Integer classId,@ModelAttribute Clazz clazz){
+        clazz.setClassId(classId);
+        clazzService.editClass(clazz);
+        return "redirect:/manager/checked/showClazzDtl.do?classId=" + classId;
+    }
+
 }

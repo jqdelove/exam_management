@@ -151,8 +151,7 @@
                                             </c:if>
                                         </td>
                                         <td class="text-center">
-                                            <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-travellog-manage-edit.html"'>编辑</button>
-                                            <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-travellog-review-list.html"'>查看评论</button>
+                                            <button type="button" class="btn bg-olive btn-xs" onclick='location.href="${pageContext.request.contextPath}/manager/checked/showClazzDtl.do?classId=${clazz.classId}"'>编辑详情</button>
                                         </td>
                                     </tr>
                                 </c:forEach>

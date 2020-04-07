@@ -5,7 +5,8 @@
   Time: 16:49
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <!-- 页面meta -->
@@ -103,48 +104,35 @@
                         <!--表单内容-->
                         <div class="tab-pane active" id="tab-form">
                             <div class="row data-type">
-                                <div class="col-md-2 title">ID</div>
-                                <div class="col-md-10 data text">
-                                    xxxxx
-                                </div>
-
-                                <div class="col-md-2 title">游记名称</div>
-                                <div class="col-md-10 data">
-                                    <input type="text" class="form-control" placeholder="游记名称" value="">
-                                </div>
-
-                                <div class="col-md-2 title">会员</div>
-                                <div class="col-md-10 data">
-                                    <input type="text" class="form-control" placeholder="会员" value="">
-                                </div>
-
-                                <div class="col-md-2 title rowHeight2x">点评内容</div>
-                                <div class="col-md-10 data rowHeight2x">
-                                    <textarea class="form-control" rows="3" placeholder="点评内容"></textarea>
-                                </div>
-
-                                <div class="col-md-2 title">日期</div>
-                                <div class="col-md-10 data">
-                                    <div class="input-group date">
-                                        <div class="input-group-addon">
-                                            <i class="fa fa-calendar"></i>
-                                        </div>
-                                        <input type="text" class="form-control pull-right" id="datepicker-a5">
+                                <form action="${pageContext.request.contextPath}/manager/checked/editClazz.do?classId=${clazz.classId}" method="post">
+                                    <div class="col-md-2 title">班级ID</div>
+                                    <div class="col-md-10 data text">
+                                        ${clazz.classId}
                                     </div>
-                                </div>
-                                <div class="col-md-2 title">审核</div>
-                                <div class="col-md-10 data">
-                                    <select class="form-control">
-                                        <option>开启</option>
-                                        <option>屏蔽</option>
-                                    </select>
-                                </div>
 
-                                <div class="col-md-2 title"></div>
-                                <div class="col-md-10 data text-center">
-                                    <button type="button" class="btn bg-maroon">保存</button>
-                                    <button type="button" class="btn bg-default" onclick="history.back(-1);">返回</button>
-                                </div>
+                                    <div class="col-md-2 title">班级名称</div>
+                                    <div class="col-md-10 data">
+                                        <input type="text" class="form-control" placeholder="班级名称" value="${clazz.className}" name="className">
+                                    </div>
+
+                                    <div class="col-md-2 title">班级人数</div>
+                                    <div class="col-md-10 data">
+                                        <input type="text" class="form-control" placeholder="班级人数" value="${clazz.classAmount}" name="classAmount">
+                                    </div>
+
+                                    <div class="col-md-2 title">负责老师</div>
+                                    <div class="col-md-10 data">
+                                        <c:forEach items="${clazz.clazzTeachers}" var="clazzTeacher">
+                                            ${clazzTeacher.teacher.teacherName}
+                                        </c:forEach>
+                                    </div>
+
+                                    <div class="col-md-2 title"></div>
+                                    <div class="col-md-10 data text-center">
+                                        <button type="submit" class="btn bg-maroon">保存</button>
+                                        <button type="button" class="btn bg-default" onclick='location.href="${pageContext.request.contextPath}/manager/checked/showAllClazzes.do?page=1&size=6"'>返回</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                         <!--表单内容/-->
@@ -172,9 +160,11 @@
     <!-- 底部导航 -->
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
-            <b>Version</b> 1.0.8
+            <b>Version</b> 1.0.1
         </div>
-        <strong>Copyright &copy; 2014-2017 <a href="http://www.itcast.cn">研究院研发部</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2019-2020 <a
+                href="https://www.rossontheway.com">ross King</a>.
+        </strong> All rights reserved.
     </footer>
     <!-- 底部导航 /-->
 
