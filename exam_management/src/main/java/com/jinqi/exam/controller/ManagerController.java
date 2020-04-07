@@ -249,7 +249,7 @@ public class ManagerController {
     }
 
     /**
-     * 修改教师信息（未完待续）
+     * 修改教师信息
      * @return
      */
     @RequestMapping("/checked/saveTeacher.do")
@@ -257,5 +257,20 @@ public class ManagerController {
         teacher.setTeacherId(teacherId);
         teacherService.updateInfo(teacher);
         return "redirect:/manager/checked/editTeacher.do?teacherId=" + teacherId;
+    }
+
+    /**
+     * 显示所有班级信息
+     * @param map
+     * @param page
+     * @param size
+     * @return
+     */
+    @RequestMapping("/checked/showAllClazzes.do")
+    public String showAllClazzes(Map map,@RequestParam(name = "page",required = true,defaultValue = "1")int page, @RequestParam(name = "size",required = true,defaultValue = "6")int size){
+        List<Clazz> clazzes = clazzService.getAll(page, size);
+        PageInfo<Clazz> pageInfo = new PageInfo<>(clazzes);
+        map.put("clazzes",pageInfo);
+        return "manager/class";
     }
 }

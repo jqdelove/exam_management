@@ -5,6 +5,8 @@
     <id column="CLASS_ID" property="classId" jdbcType="INTEGER" />
     <result column="CLASS_NAME" property="className" jdbcType="VARCHAR" />
     <result column="CLASS_AMOUNT" property="classAmount" jdbcType="INTEGER" />
+    <collection property="clazzTeachers" ofType="com.jinqi.exam.entity.ClazzTeacher" column="CLASS_ID"
+                javaType="java.util.ArrayList" fetchType="lazy" select="com.jinqi.exam.dao.ClazzTeacherMapper.selectByClazzId"/>
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -93,6 +95,7 @@
     <include refid="Base_Column_List" />
     from T_CLASS
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from T_CLASS
     where CLASS_ID = #{classId,jdbcType=INTEGER}

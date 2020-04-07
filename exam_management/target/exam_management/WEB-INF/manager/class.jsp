@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <!-- 页面meta -->
@@ -123,234 +124,38 @@
                                     <input id="selall" type="checkbox" class="icheckbox_square-blue">
                                 </th>
                                 <th class="sorting_asc">ID</th>
-                                <th class="sorting">标题</th>
-                                <th class="sorting">作者</th>
-
-                                <th class="">优质</th>
-                                <th class="">精华</th>
-                                <th class="">实用</th>
-                                <th class="">审核</th>
-                                <th class="">推荐</th>
-                                <th class="">固顶</th>
-
-                                <th class="sorting">收藏数</th>
-                                <th class="sorting">点赞数</th>
-
-                                <th class="sorting">排序</th>
-                                <th class="text-center sorting">屏蔽</th>
+                                <th class="sorting">班级编号</th>
+                                <th class="sorting">班级名</th>
+                                <th class="">班级人数</th>
+                                <th class="">负责教师</th>
                                 <th class="text-center">操作</th>
                             </tr>
                             </thead>
+
                             <tbody>
-
-                            <tr>
-                                <td><input name="ids" type="checkbox"></td>
-                                <td>
-                                    1
-                                </td>
-                                <td>西安一日游（内含攻略）</td>
-                                <td>bipeng0405</td>
-
-                                <td>Y</td>
-                                <td>Y</td>
-                                <td>Y</td>
-                                <td>Y</td>
-                                <td>N</td>
-                                <td>N</td>
-
-                                <td>1231</td>
-                                <td>342</td>
-
-                                <td class=""><input type="text" size="5" value="0"></td>
-                                <td class="text-center">开启</td>
-                                <td class="text-center">
-                                    <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-travellog-manage-edit.html"'>编辑</button>
-                                    <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-travellog-review-list.html"'>查看评论</button>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td><input name="ids" type="checkbox"></td>
-                                <td>
-                                    2
-                                </td>
-                                <td>西安一日游（内含攻略）</td>
-                                <td>bipeng0405</td>
-
-                                <td>Y</td>
-                                <td>Y</td>
-                                <td>Y</td>
-                                <td>Y</td>
-                                <td>N</td>
-                                <td>N</td>
-
-                                <td>1231</td>
-                                <td>342</td>
-
-                                <td class=""><input type="text" size="5" value="0"></td>
-                                <td class="text-center">开启</td>
-                                <td class="text-center">
-                                    <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-travellog-manage-edit.html"'>编辑</button>
-                                    <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-travellog-review-list.html"'>查看评论</button>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td><input name="ids" type="checkbox"></td>
-                                <td>
-                                    3
-                                </td>
-                                <td>西安一日游（内含攻略）</td>
-                                <td>bipeng0405</td>
-
-                                <td>Y</td>
-                                <td>Y</td>
-                                <td>Y</td>
-                                <td>Y</td>
-                                <td>N</td>
-                                <td>N</td>
-
-                                <td>1231</td>
-                                <td>342</td>
-
-                                <td class=""><input type="text" size="5" value="0"></td>
-                                <td class="text-center">开启</td>
-                                <td class="text-center">
-                                    <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-travellog-manage-edit.html"'>编辑</button>
-                                    <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-travellog-review-list.html"'>查看评论</button>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td><input name="ids" type="checkbox"></td>
-                                <td>
-                                    4
-                                </td>
-                                <td>西安一日游（内含攻略）</td>
-                                <td>bipeng0405</td>
-
-                                <td>Y</td>
-                                <td>Y</td>
-                                <td>Y</td>
-                                <td>Y</td>
-                                <td>N</td>
-                                <td>N</td>
-
-                                <td>1231</td>
-                                <td>342</td>
-
-                                <td class=""><input type="text" size="5" value="0"></td>
-                                <td class="text-center">开启</td>
-                                <td class="text-center">
-                                    <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-travellog-manage-edit.html"'>编辑</button>
-                                    <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-travellog-review-list.html"'>查看评论</button>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td><input name="ids" type="checkbox"></td>
-                                <td>
-                                    5
-                                </td>
-                                <td>西安一日游（内含攻略）</td>
-                                <td>bipeng0405</td>
-
-                                <td>Y</td>
-                                <td>Y</td>
-                                <td>Y</td>
-                                <td>Y</td>
-                                <td>N</td>
-                                <td>N</td>
-
-                                <td>1231</td>
-                                <td>342</td>
-
-                                <td class=""><input type="text" size="5" value="0"></td>
-                                <td class="text-center">开启</td>
-                                <td class="text-center">
-                                    <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-travellog-manage-edit.html"'>编辑</button>
-                                    <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-travellog-review-list.html"'>查看评论</button>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td><input name="ids" type="checkbox"></td>
-                                <td>
-                                    6
-                                </td>
-                                <td>西安一日游（内含攻略）</td>
-                                <td>bipeng0405</td>
-
-                                <td>Y</td>
-                                <td>Y</td>
-                                <td>Y</td>
-                                <td>Y</td>
-                                <td>N</td>
-                                <td>N</td>
-
-                                <td>1231</td>
-                                <td>342</td>
-
-                                <td class=""><input type="text" size="5" value="0"></td>
-                                <td class="text-center">开启</td>
-                                <td class="text-center">
-                                    <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-travellog-manage-edit.html"'>编辑</button>
-                                    <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-travellog-review-list.html"'>查看评论</button>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td><input name="ids" type="checkbox"></td>
-                                <td>
-                                    7
-                                </td>
-                                <td>西安一日游（内含攻略）</td>
-                                <td>bipeng0405</td>
-
-                                <td>Y</td>
-                                <td>Y</td>
-                                <td>Y</td>
-                                <td>Y</td>
-                                <td>N</td>
-                                <td>N</td>
-
-                                <td>1231</td>
-                                <td>342</td>
-
-                                <td class=""><input type="text" size="5" value="0"></td>
-                                <td class="text-center">开启</td>
-                                <td class="text-center">
-                                    <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-travellog-manage-edit.html"'>编辑</button>
-                                    <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-travellog-review-list.html"'>查看评论</button>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td><input name="ids" type="checkbox"></td>
-                                <td>
-                                    8
-                                </td>
-                                <td>西安一日游（内含攻略）</td>
-                                <td>bipeng0405</td>
-
-                                <td>Y</td>
-                                <td>Y</td>
-                                <td>Y</td>
-                                <td>Y</td>
-                                <td>N</td>
-                                <td>N</td>
-
-                                <td>1231</td>
-                                <td>342</td>
-
-                                <td class=""><input type="text" size="5" value="0"></td>
-                                <td class="text-center">开启</td>
-                                <td class="text-center">
-                                    <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-travellog-manage-edit.html"'>编辑</button>
-                                    <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-travellog-review-list.html"'>查看评论</button>
-                                </td>
-                            </tr>
-
+                                <c:forEach items="${clazzes.list}" var="clazz" varStatus="num">
+                                    <tr>
+                                        <td><input name="ids" type="checkbox"></td>
+                                        <td>
+                                            ${num.count}
+                                        </td>
+                                        <td>${clazz.classId}</td>
+                                        <td>${clazz.className}</td>
+                                        <td>${clazz.classAmount}</td>
+                                        <td>
+                                            <c:forEach items="${clazz.clazzTeachers}" var="clazzTeacher">
+                                                ${clazzTeacher.teacher.teacherName}
+                                            </c:forEach>
+                                            <c:if test="${empty clazz.clazzTeachers}">
+                                                未分配教师
+                                            </c:if>
+                                        </td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-travellog-manage-edit.html"'>编辑</button>
+                                            <button type="button" class="btn bg-olive btn-xs" onclick='location.href="all-travellog-review-list.html"'>查看评论</button>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
                             </tbody>
                             <!--
                         <tfoot>
@@ -365,26 +170,6 @@
                         </table>
                         <!--数据列表/-->
 
-                        <!--工具栏-->
-                        <div class="pull-left">
-                            <div class="form-group form-inline">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-default" title="新建" onclick='location.href="all-travellog-manage-edit.html"'><i class="fa fa-file-o"></i> 新建</button>
-                                    <button type="button" class="btn btn-default" title="删除" onclick='confirm("你确认要删除吗？")'><i class="fa fa-trash-o"></i> 删除</button>
-                                    <button type="button" class="btn btn-default" title="开启" onclick='confirm("你确认要开启吗？")'><i class="fa fa-check"></i> 开启</button>
-                                    <button type="button" class="btn btn-default" title="屏蔽" onclick='confirm("你确认要屏蔽吗？")'><i class="fa fa-ban"></i> 屏蔽</button>
-                                    <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i class="fa fa-refresh"></i> 刷新</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="box-tools pull-right">
-                            <div class="has-feedback">
-                                <input type="text" class="form-control input-sm" placeholder="搜索">
-                                <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                            </div>
-                        </div>
-                        <!--工具栏/-->
-
                     </div>
                     <!-- 数据表格 /-->
 
@@ -396,13 +181,14 @@
                 <div class="box-footer">
                     <div class="pull-left">
                         <div class="form-group form-inline">
-                            总共2 页，共14 条数据。 每页
-                            <select class="form-control">
-                                <option>10</option>
-                                <option>15</option>
-                                <option>20</option>
-                                <option>50</option>
-                                <option>80</option>
+                            当前第${clazzes.pageNum} 页，总共${clazzes.pages} 页，共${clazzes.total} 条数据。 每页
+                            <select class="form-control" id="changePageSize" onchange="changePageSize()">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
                             </select> 条
                         </div>
                     </div>
@@ -410,17 +196,24 @@
                     <div class="box-tools pull-right">
                         <ul class="pagination">
                             <li>
-                                <a href="#" aria-label="Previous">首页</a>
+                                <a href="${pageContext.request.contextPath}/manager/checked/showAllClazzes.do?page=1&size=${clazzes.pageSize}"
+                                   aria-label="Previous">首页
+                                </a>
                             </li>
-                            <li><a href="#">上一页</a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#">下一页</a></li>
                             <li>
-                                <a href="#" aria-label="Next">尾页</a>
+                                <a href="${pageContext.request.contextPath}/manager/checked/showAllClazzes.do?page=${clazzes.pageNum-1}&size=${clazzes.pageSize}">上一页</a>
+                            </li>
+                            <c:forEach begin="1" end="${clazzes.pages}" var="pageNum">
+                                <li>
+                                    <a href="${pageContext.request.contextPath}/manager/checked/showAllClazzes.do?page=${pageNum}&size=${clazzes.pageSize}">${pageNum}</a>
+                                </li>
+                            </c:forEach>
+                            <li>
+                                <a href="${pageContext.request.contextPath}/manager/checked/showAllClazzes.do?page=${clazzes.pageNum+1}&size=${clazzes.pageSize}">下一页</a>
+                            </li>
+                            <li>
+                                <a href="${pageContext.request.contextPath}/manager/checked/showAllClazzes.do?page=${clazzes.pages}&size=${clazzes.pageSize}"
+                                   aria-label="Next">尾页</a>
                             </li>
                         </ul>
                     </div>
@@ -440,9 +233,11 @@
     <!-- 底部导航 -->
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
-            <b>Version</b> 1.0.8
+            <b>Version</b> 1.0.1
         </div>
-        <strong>Copyright &copy; 2014-2017 <a href="http://www.itcast.cn">研究院研发部</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2019-2020 <a
+                href="https://www.rossontheway.com">ross King</a>.
+        </strong> All rights reserved.
     </footer>
     <!-- 底部导航 /-->
 
@@ -495,6 +290,15 @@
 <script src="${pageContext.request.contextPath}/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.js"></script>
 <script src="${pageContext.request.contextPath}/plugins/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 <script>
+    function changePageSize() {
+        //获取下拉框的值
+        var pageSize = $("#changePageSize").val();
+
+        //向服务器发送请求，改变没页显示条数
+        location.href = "${pageContext.request.contextPath}/manager/checked/showAllClazzes.do?page=${clazzes.pageNum}&size="
+            + pageSize;
+    }
+
     $(document).ready(function() {
         // 选择框
         $(".select2").select2();

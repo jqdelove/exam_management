@@ -137,7 +137,7 @@
 
                                     <div class="col-md-2 title rowHeight2x">家庭住址</div>
                                     <div class="col-md-10 data rowHeight2x">
-                                            <textarea class="form-control" rows="3" placeholder="家庭住址" name=studentAddress"">${student1.studentAddress}</textarea>
+                                            <textarea class="form-control" rows="3" placeholder="家庭住址" name="studentAddress">${student1.studentAddress}</textarea>
                                     </div>
                                     <div class="col-md-2 title">学院</div>
                                     <div class="col-md-10 data">

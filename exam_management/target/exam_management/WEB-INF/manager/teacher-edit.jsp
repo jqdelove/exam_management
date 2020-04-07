@@ -105,7 +105,7 @@
                         <div class="tab-pane active" id="tab-form">
                             <div class="row data-type">
                                 <form action="${pageContext.request.contextPath}/manager/checked/saveTeacher.do?teacherId=${teacher1.teacherId}" method="post">
-                                    <div class="col-md-2 title">ID</div>
+                                    <div class="col-md-2 title">教师ID</div>
                                     <div class="col-md-10 data text">
                                         ${teacher1.teacherId}
                                     </div>
@@ -137,7 +137,7 @@
 
                                     <div class="col-md-2 title rowHeight2x">家庭住址</div>
                                     <div class="col-md-10 data rowHeight2x">
-                                            <textarea class="form-control" rows="3" placeholder="家庭住址" name=teacherAddress"">${teacher1.teacherAddress}</textarea>
+                                            <textarea class="form-control" rows="3" placeholder="家庭住址" name="teacherAddress">${teacher1.teacherAddress}</textarea>
                                     </div>
                                     <div class="col-md-2 title">学院</div>
                                     <div class="col-md-10 data">
@@ -147,9 +147,13 @@
                                     <div class="col-md-10 data" id="classCheckbox">
                                         <c:forEach items="${teacher1.clazzTeachers}" var="classTeacher">
                                             <c:if test="${!empty classTeacher.classId}">
-                                                <input type="checkbox" checked>${classTeacher.classId}班</input>
+                                                ${classTeacher.classId}班
                                             </c:if>
+
                                         </c:forEach>
+                                        <c:if test="${empty teacher1.clazzTeachers}">
+                                            未分配班级
+                                        </c:if>
                                     </div>
 
                                     <div class="col-md-2 title"></div>

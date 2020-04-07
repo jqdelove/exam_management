@@ -11,4 +11,6 @@ public interface ClazzService {
     Integer editClass(Clazz clazz);
 
     List<Clazz> getAll();
+
+    List<Clazz> getAll(int page,int size);
 }

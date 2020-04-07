@@ -60,17 +60,17 @@
                 <ul class="treeview-menu">
 
                     <li id="system-setting">
-                        <a href="${pageContext.request.contextPath}/product/findAll.do">
+                        <a href="${pageContext.request.contextPath}/manager/checked/showAllClazzes.do?page=1&size=6">
                             <i class="fa fa-circle-o"></i> 班级管理
                         </a>
                     </li>
                     <li id="system-setting">
-                        <a href="${pageContext.request.contextPath}/orders/findAll.do?page=1&size=4">
+                        <a href="${pageContext.request.contextPath}/orders/findAll.do?page=1&size=6">
                             <i class="fa fa-circle-o"></i> 课程管理
                         </a>
                     </li>
                     <li id="system-setting">
-                        <a href="${pageContext.request.contextPath}/orders/findAll.do?page=1&size=4">
+                        <a href="${pageContext.request.contextPath}/orders/findAll.do?page=1&size=6">
                             <i class="fa fa-circle-o"></i> 考试管理
                         </a>
                     </li>

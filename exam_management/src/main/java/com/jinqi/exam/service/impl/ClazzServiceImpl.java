@@ -1,6 +1,7 @@
 package com.jinqi.exam.service.impl;
 
 
+import com.github.pagehelper.PageHelper;
 import com.jinqi.exam.dao.ClazzMapper;
 import com.jinqi.exam.entity.Clazz;
 import com.jinqi.exam.service.ClazzService;
@@ -32,4 +33,11 @@ public class ClazzServiceImpl implements ClazzService {
     public List<Clazz> getAll() {
         return clazzMapper.selectAll();
     }
+
+    @Override
+    public List<Clazz> getAll(int page, int size) {
+        PageHelper.startPage(page,size);
+        return clazzMapper.selectAll();
+    }
+
 }

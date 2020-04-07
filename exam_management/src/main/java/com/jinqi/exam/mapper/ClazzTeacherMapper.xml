@@ -99,6 +99,15 @@
     where S.TEACHER_ID = #{teacherId}
   </select>
 
+  <select id="selectByClazzId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+      S.CLASS_TEACHER_ID, S.CLASS_ID, S.TEACHER_ID
+    from T_CLASS_TEACHER S
+           left join T_CLASS TC on S.CLASS_ID = TC.CLASS_ID
+           left join T_TEACHER TS on S.TEACHER_ID = TS.TEACHER_ID
+    where S.CLASS_ID = #{classId}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from T_CLASS_TEACHER
     where CLASS_TEACHER_ID = #{classTeacherId,jdbcType=INTEGER}
