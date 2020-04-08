@@ -98,7 +98,7 @@
                             <input type="text" class="form-control" placeholder="课程编号" value="${course.courseId}" readonly>
                         </div>
 
-                        <div class="col-md-2 title">开课时间</div>
+                        <div class="col-md-2 title">课程开课时间</div>
                         <div class="col-md-4 data">
                             <div class="input-group date">
                                 <div class="input-group-addon">
@@ -118,7 +118,7 @@
                             <input type="text" class="form-control" placeholder="报名人数" name="courseAmount" value="${course.courseAmount}">
                         </div>
 
-                        <div class="col-md-2 title">结课时间</div>
+                        <div class="col-md-2 title">课程结课时间</div>
                         <div class="col-md-4 data">
                             <div class="input-group date">
                                 <div class="input-group-addon">
