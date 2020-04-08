@@ -34,6 +34,9 @@ public class ManagerController {
     @Autowired
     private ClazzService clazzService;
 
+    @Autowired
+    private CourseService courseService;
+
     /**
      * 跳转登录页面
      * @return
@@ -316,4 +319,27 @@ public class ManagerController {
         return teachers;
     }
 
+    /**
+     * 显示所有课程
+     * @return
+     */
+    @RequestMapping("/checked/showAllCourses.do")
+    public String showAllCourses(Map map,@RequestParam(name = "page",required = true,defaultValue = "1")int page, @RequestParam(name = "size",required = true,defaultValue = "6")int size){
+        List<Course> courses = courseService.getAll(page, size);
+        PageInfo pageInfo = new PageInfo(courses);
+        map.put("courses",pageInfo);
+        return "manager/course";
+    }
+
+    /**
+     * 显示课程详情
+     * @param courseId
+     * @return
+     */
+    @RequestMapping("/checked/showCourseDtl.do")
+    public String showCourseDtl(Integer courseId,Map map){
+        Course course = courseService.getCourse(courseId);
+        map.put("course",course);
+        return "manager/course-edit";
+    }
 }

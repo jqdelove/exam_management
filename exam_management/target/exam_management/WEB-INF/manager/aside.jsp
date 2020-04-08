@@ -65,7 +65,7 @@
                         </a>
                     </li>
                     <li id="system-setting">
-                        <a href="${pageContext.request.contextPath}/orders/findAll.do?page=1&size=6">
+                        <a href="${pageContext.request.contextPath}/manager/checked/showAllCourses.do?page=1&size=6">
                             <i class="fa fa-circle-o"></i> 课程管理
                         </a>
                     </li>

@@ -16,6 +16,16 @@ public class Course implements Serializable {
 
     private String courseMajor;
 
+    private String teacherName;
+
+    public String getTeacherName() {
+        return teacherName;
+    }
+
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
+    }
+
     private static final long serialVersionUID = 1L;
 
     public Integer getCourseId() {

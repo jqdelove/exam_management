@@ -89,7 +89,7 @@
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.24367817" />
-    <property name="settings.editor.selected.configurable" value="settings.github" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -247,6 +247,8 @@
       <workItem from="1585663966408" duration="1351000" />
       <workItem from="1586221550167" duration="6381000" />
       <workItem from="1586258283281" duration="2886000" />
+      <workItem from="1586308028394" duration="12389000" />
+      <workItem from="1586345967095" duration="4220000" />
     </task>
     <servers />
   </component>

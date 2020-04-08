@@ -224,7 +224,7 @@
             dataType:"json",
             success:function (teachers) {
                 for(var i=0 ;i<teachers.length;i++){ //几个人有几个checkbox
-                    $("#teacherBox").append("<input type='checkbox' value='"+teachers[i].teacherId+"' name='header'/>"+teachers[i].teacherName);
+                    $("#teacherBox").append("<input type='checkbox' value='"+teachers[i].teacherId+"' name='header' checked/>"+teachers[i].teacherName);
                 }
             },
             error:function(){

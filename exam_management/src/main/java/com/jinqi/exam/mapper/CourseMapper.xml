@@ -8,6 +8,7 @@
     <result column="COURSE_BEGIN_TIME" property="courseBeginTime" jdbcType="DATE" />
     <result column="COURSE_END_TIME" property="courseEndTime" jdbcType="DATE" />
     <result column="COURSE_MAJOR" property="courseMajor" jdbcType="VARCHAR" />
+    <result column="TEACHER_NAME" property="teacherName"/>
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -85,10 +86,18 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
+      TC.COURSE_ID, TC.COURSE_NAME, TC.COURSE_AMOUNT, TC.COURSE_BEGIN_TIME, TC.COURSE_END_TIME, TC.COURSE_MAJOR, TT.TEACHER_NAME
+    from T_COURSE TC
+        left join T_TEACHER_COURSE TTC on TC.COURSE_ID = TTC.COURSE_ID
+        left join T_TEACHER TT on TTC.TEACHER_ID = TT.TEACHER_ID
+    where TC.COURSE_ID = #{courseId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
     <include refid="Base_Column_List" />
     from T_COURSE
-    where COURSE_ID = #{courseId,jdbcType=INTEGER}
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
@@ -240,4 +249,5 @@
       order by ${orderByClause}
     </if>
   </select>
+
 </mapper>
