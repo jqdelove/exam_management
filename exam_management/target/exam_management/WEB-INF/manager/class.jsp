@@ -127,7 +127,6 @@
                                 <th class="sorting">班级编号</th>
                                 <th class="sorting">班级名</th>
                                 <th class="">班级人数</th>
-                                <th class="">负责教师</th>
                                 <th class="text-center">操作</th>
                             </tr>
                             </thead>
@@ -142,14 +141,6 @@
                                         <td>${clazz.classId}</td>
                                         <td>${clazz.className}</td>
                                         <td>${clazz.classAmount}</td>
-                                        <td>
-                                            <c:forEach items="${clazz.clazzTeachers}" var="clazzTeacher">
-                                                ${clazzTeacher.teacher.teacherName}
-                                            </c:forEach>
-                                            <c:if test="${empty clazz.clazzTeachers}">
-                                                未分配教师
-                                            </c:if>
-                                        </td>
                                         <td class="text-center">
                                             <button type="button" class="btn bg-olive btn-xs" onclick='location.href="${pageContext.request.contextPath}/manager/checked/showClazzDtl.do?classId=${clazz.classId}"'>编辑详情</button>
                                         </td>

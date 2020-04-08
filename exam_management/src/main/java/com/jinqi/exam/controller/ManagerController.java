@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -282,8 +283,14 @@ public class ManagerController {
      */
     @RequestMapping("/checked/showClazzDtl.do")
     public String showClazzDtl(Integer classId,Map map){
-        Clazz clazz = clazzService.getClazz(classId);
-        map.put("clazz",clazz);
+        List<Clazz> clazz = clazzService.getClazz(classId);
+        Clazz clazz1 = clazz.get(0);
+        List teacherNames = new ArrayList();
+        for (Clazz clazz2 : clazz) {
+            teacherNames.add(clazz2.getTeacherName());
+        }
+        map.put("clazz",clazz1);
+        map.put("teacherNames",teacherNames);
         return "manager/class-edit";
     }
 
@@ -297,6 +304,16 @@ public class ManagerController {
         clazz.setClassId(classId);
         clazzService.editClass(clazz);
         return "redirect:/manager/checked/showClazzDtl.do?classId=" + classId;
+    }
+
+    /**
+     * 查询所有教师
+     * @return 返回json对象
+     */
+    @RequestMapping(value = "/checked/showAllTeacher.do", produces="application/json;charset=utf-8")
+    public @ResponseBody List<Teacher> showAllTeacher(){
+        List<Teacher> teachers = teacherService.getAll();
+        return teachers;
     }
 
 }

@@ -145,15 +145,15 @@
                                     </div>
                                     <div class="col-md-2 title">班级</div>
                                     <div class="col-md-10 data" id="classCheckbox">
-                                        <c:forEach items="${teacher1.clazzTeachers}" var="classTeacher">
-                                            <c:if test="${!empty classTeacher.classId}">
-                                                ${classTeacher.classId}班
-                                            </c:if>
+<%--                                        <c:forEach items="${teacher1.clazzTeachers}" var="classTeacher">--%>
+<%--                                            <c:if test="${!empty classTeacher.classId}">--%>
+<%--                                                ${classTeacher.classId}班--%>
+<%--                                            </c:if>--%>
 
-                                        </c:forEach>
-                                        <c:if test="${empty teacher1.clazzTeachers}">
-                                            未分配班级
-                                        </c:if>
+<%--                                        </c:forEach>--%>
+<%--                                        <c:if test="${empty teacher1.clazzTeachers}">--%>
+<%--                                            未分配班级--%>
+<%--                                        </c:if>--%>
                                     </div>
 
                                     <div class="col-md-2 title"></div>
@@ -253,13 +253,9 @@
             dataType:"json",
             success:function (clazzes) {
                 //遍历传过来的List<Clazz>，然后new option，往每一个option中添加
-                $(clazzes).each(function(index,clazz){
-                    var option = new Option(clazz.classId,index+1);
-                    var $option = $(option);
-                    var select = $("#clazzAll");
-                    // select.append($option);
-
-                });
+                for(var i=0 ;i<clazzes.length;i++){ //几个人有几个checkbox
+                    $("#classCheckbox").append("<input type='checkbox' value='"+clazzes[i].classId+"' name='header'/>"+clazzes[i].className);
+                }
             },
             error:function(){
                 console.log("出错了");

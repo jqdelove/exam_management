@@ -56,4 +56,9 @@ public class TeacherServiceImpl implements TeacherService {
         PageHelper.startPage(page,size);
         return teacherMapper.selectAll();
     }
+
+    @Override
+    public List<Teacher> getAll() {
+        return teacherMapper.selectAll();
+    }
 }

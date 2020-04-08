@@ -20,8 +20,8 @@ public class ClazzServiceImpl implements ClazzService {
     private ClazzMapper clazzMapper;
 
     @Override
-    public Clazz getClazz(Integer classId) {
-        return clazzMapper.selectByPrimaryKey(classId);
+    public List<Clazz> getClazz(Integer classId) {
+        return clazzMapper.selectByClassId(classId);
     }
 
     @Override

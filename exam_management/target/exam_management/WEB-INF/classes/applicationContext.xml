@@ -32,7 +32,7 @@
     </bean>
 
     <!-- 配置mybatis的sqlSessionFactory，让spring创建sqlSessionFactory对象	-->
-    <bean id="sqlSessionFactory" name="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <bean id="sqlSessionFactory" name="sqlSessionFactory" class="com.jinqi.exam.factory.FixedSqlSessionFactory">
         <!-- 指定mybatis主配置文件 -->
         <property name="configLocation" value="classpath:mybatis-config.xml"/>
         <!-- 配置数据源	-->

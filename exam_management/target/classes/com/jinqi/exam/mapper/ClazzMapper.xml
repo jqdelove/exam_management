@@ -5,8 +5,9 @@
     <id column="CLASS_ID" property="classId" jdbcType="INTEGER" />
     <result column="CLASS_NAME" property="className" jdbcType="VARCHAR" />
     <result column="CLASS_AMOUNT" property="classAmount" jdbcType="INTEGER" />
-    <collection property="clazzTeachers" ofType="com.jinqi.exam.entity.ClazzTeacher" column="CLASS_ID"
-                javaType="java.util.ArrayList" fetchType="lazy" select="com.jinqi.exam.dao.ClazzTeacherMapper.selectByClazzId"/>
+    <result column="TEACHER_NAME" property="teacherName" />
+<!--    <collection property="clazzTeachers" ofType="com.jinqi.exam.entity.ClazzTeacher" column="CLASS_ID"-->
+<!--                javaType="java.util.ArrayList" fetchType="lazy" select="com.jinqi.exam.dao.ClazzTeacherMapper.selectByClazzId"/>-->
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -67,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    CLASS_ID, CLASS_NAME, CLASS_AMOUNT
+    CLASS_ID, CLASS_NAME, CLASS_AMOUNT, TEACHER_NAME
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jinqi.exam.entity.ClazzExample" >
     select
@@ -84,10 +85,19 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from T_CLASS
-    where CLASS_ID = #{classId,jdbcType=INTEGER}
+    select
+      TC.CLASS_ID, TC.CLASS_NAME, TC.CLASS_AMOUNT
+    from T_CLASS TC
+    where TC.CLASS_ID = #{classId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByClassId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+      TC.CLASS_ID, TC.CLASS_NAME, TC.CLASS_AMOUNT, TT.TEACHER_NAME
+    from T_CLASS TC
+           left join T_CLASS_TEACHER TCT on TC.CLASS_ID = TCT.CLASS_ID
+           left join T_TEACHER TT on TCT.TEACHER_ID = TT.TEACHER_ID
+    where TC.CLASS_ID = #{classId,jdbcType=INTEGER}
   </select>
 
   <select id="selectAll" resultMap="BaseResultMap">

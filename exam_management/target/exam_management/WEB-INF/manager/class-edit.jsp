@@ -121,9 +121,9 @@
                                     </div>
 
                                     <div class="col-md-2 title">负责老师</div>
-                                    <div class="col-md-10 data">
-                                        <c:forEach items="${clazz.clazzTeachers}" var="clazzTeacher">
-                                            ${clazzTeacher.teacher.teacherName}
+                                    <div class="col-md-10 data" id="teacherBox">
+                                        <c:forEach items="${teacherNames}" var="teacherName">
+                                            ${teacherName}
                                         </c:forEach>
                                     </div>
 
@@ -217,6 +217,22 @@
 <script src="${pageContext.request.contextPath}/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.js"></script>
 <script src="${pageContext.request.contextPath}/plugins/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 <script>
+    $(function(){
+        $.ajax({
+            url:"${pageContext.request.contextPath}/manager/checked/showAllTeacher.do",
+            type:"post",
+            dataType:"json",
+            success:function (teachers) {
+                for(var i=0 ;i<teachers.length;i++){ //几个人有几个checkbox
+                    $("#teacherBox").append("<input type='checkbox' value='"+teachers[i].teacherId+"' name='header'/>"+teachers[i].teacherName);
+                }
+            },
+            error:function(){
+                console.log("出错了");
+            }
+        });
+    });
+
     $(document).ready(function() {
         // 选择框
         $(".select2").select2();

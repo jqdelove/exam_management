@@ -12,6 +12,16 @@ public class Clazz implements Serializable {
 
     private List<ClazzTeacher> clazzTeachers;
 
+    private String teacherName;
+
+    public String getTeacherName() {
+        return teacherName;
+    }
+
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
+    }
+
     private static final long serialVersionUID = 1L;
 
     public List<ClazzTeacher> getClazzTeachers() {

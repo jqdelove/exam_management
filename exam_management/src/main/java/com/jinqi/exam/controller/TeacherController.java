@@ -178,7 +178,8 @@ public class TeacherController {
     public String showClazzDtl(Integer classId, Map<String, Object> map){
         List<ClazzStudent> clazzStudents = clazzStudentService.getClazzStudent(classId);
         map.put("clazzStudents",clazzStudents);
-        Clazz clazz = clazzService.getClazz(classId);
+        List<Clazz> clazzes = clazzService.getClazz(classId);
+        Clazz clazz = clazzes.get(0);
         map.put("clazz",clazz);
         return "teacher/class-edit";
     }

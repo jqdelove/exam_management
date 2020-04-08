@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ClazzService {
 
-    Clazz getClazz(Integer classId);
+    List<Clazz> getClazz(Integer classId);
 
     Integer editClass(Clazz clazz);
 

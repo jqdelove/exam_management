@@ -19,4 +19,6 @@ public interface TeacherService {
     Integer updateInfo(Teacher teacher);
 
     List<Teacher> getAll(Integer page,Integer size);
+
+    List<Teacher> getAll();
 }
