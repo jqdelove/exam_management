@@ -8,4 +8,6 @@ public interface CourseService {
     List<Course> getAll(int page,int size);
 
     Course getCourse(Integer courseId);
+
+    Integer updateInfo(Course course);
 }

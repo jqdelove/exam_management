@@ -28,4 +28,9 @@ public class CourseServiceImpl implements CourseService {
     public Course getCourse(Integer courseId) {
         return courseMapper.selectByPrimaryKey(courseId);
     }
+
+    @Override
+    public Integer updateInfo(Course course) {
+        return courseMapper.updateByPrimaryKeySelective(course);
+    }
 }

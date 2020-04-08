@@ -342,4 +342,16 @@ public class ManagerController {
         map.put("course",course);
         return "manager/course-edit";
     }
+
+    /**
+     * 编辑课程信息
+     * @param courseId
+     * @return
+     */
+    @RequestMapping("/checked/editCourse.do")
+    public String editCourse(Integer courseId,@ModelAttribute Course course){
+        course.setCourseId(courseId);
+        courseService.updateInfo(course);
+        return "redirect:/manager/checked/showCourseDtl.do?courseId=" + courseId;
+    }
 }

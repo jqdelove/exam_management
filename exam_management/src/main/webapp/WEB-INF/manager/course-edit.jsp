@@ -87,68 +87,68 @@
 
         <!-- 正文区域 -->
         <section class="content">
+            <form action="${pageContext.request.contextPath}/manager/checked/editCourse.do?courseId=${course.courseId}" method="post">
+                <!--订单信息-->
+                <div class="panel panel-default">
+                    <div class="panel-heading">订单信息</div>
+                    <div class="row data-type">
 
-            <!--订单信息-->
-            <div class="panel panel-default">
-                <div class="panel-heading">订单信息</div>
-                <div class="row data-type">
-
-                    <div class="col-md-2 title">课程编号</div>
-                    <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="课程编号" value="${course.courseId}" readonly>
-                    </div>
-
-                    <div class="col-md-2 title">开课时间</div>
-                    <div class="col-md-4 data">
-                        <div class="input-group date">
-                            <div class="input-group-addon">
-                                <i class="fa fa-calendar"></i>
-                            </div>
-                            <input type="text" class="form-control pull-right" id="datepicker-a3" value="<fmt:formatDate value="${course.courseBeginTime}"
-                                                        pattern="yyyy年MM月dd日 "/>">
+                        <div class="col-md-2 title">课程编号</div>
+                        <div class="col-md-4 data">
+                            <input type="text" class="form-control" placeholder="课程编号" value="${course.courseId}" readonly>
                         </div>
-                    </div>
-                    <div class="col-md-2 title">课程名称</div>
-                    <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="课程名称" value="${course.courseName}">
-                    </div>
 
-                    <div class="col-md-2 title">报名人数</div>
-                    <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="报名人数" value="${course.courseAmount}">
-                    </div>
-
-                    <div class="col-md-2 title">结课时间</div>
-                    <div class="col-md-4 data">
-                        <div class="input-group date">
-                            <div class="input-group-addon">
-                                <i class="fa fa-calendar"></i>
+                        <div class="col-md-2 title">开课时间</div>
+                        <div class="col-md-4 data">
+                            <div class="input-group date">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                <input type="text" class="form-control pull-right" id="datepicker-a3" value="<fmt:formatDate value="${course.courseBeginTime}"
+                                                            pattern="yyyy年MM月dd日 "/>">
                             </div>
-                            <input type="text" class="form-control pull-right" id="datepicker-a6" value="<fmt:formatDate value="${course.courseEndTime}"
-                                                        pattern="yyyy年MM月dd日 "/>">
                         </div>
-                    </div>
-                    <div class="col-md-2 title">任课教师</div>
-                    <div class="col-md-4 data">
-                        <input type="text" class="form-control" placeholder="任课教师" value="${course.teacherName}">
-                    </div>
+                        <div class="col-md-2 title">课程名称</div>
+                        <div class="col-md-4 data">
+                            <input type="text" class="form-control" placeholder="课程名称" name="courseName" value="${course.courseName}">
+                        </div>
 
-                    <div class="col-md-2 title rowHeight2x">其他信息</div>
-                    <div class="col-md-10 data rowHeight2x">
-                        <textarea class="form-control" rows="3" placeholder="其他信息"></textarea>
-                    </div>
+                        <div class="col-md-2 title">报名人数</div>
+                        <div class="col-md-4 data">
+                            <input type="text" class="form-control" placeholder="报名人数" name="courseAmount" value="${course.courseAmount}">
+                        </div>
 
+                        <div class="col-md-2 title">结课时间</div>
+                        <div class="col-md-4 data">
+                            <div class="input-group date">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                <input type="text" class="form-control pull-right" id="datepicker-a6" value="<fmt:formatDate value="${course.courseEndTime}"
+                                                            pattern="yyyy年MM月dd日 "/>">
+                            </div>
+                        </div>
+                        <div class="col-md-2 title">任课教师</div>
+                        <div class="col-md-4 data">
+                            <input type="text" class="form-control" placeholder="任课教师" value="${course.teacherName}">
+                        </div>
+
+                        <div class="col-md-2 title rowHeight2x">其他信息</div>
+                        <div class="col-md-10 data rowHeight2x">
+                            <textarea class="form-control" rows="3" placeholder="其他信息"></textarea>
+                        </div>
+
+                    </div>
                 </div>
-            </div>
-            <!--订单信息/-->
+                <!--订单信息/-->
 
-            <!--工具栏-->
-            <div class="box-tools text-center">
-                <button type="button" class="btn bg-maroon">保存</button>
-                <button type="button" class="btn bg-default" onclick="history.back(-1);">返回</button>
-            </div>
-            <!--工具栏/-->
-
+                <!--工具栏-->
+                <div class="box-tools text-center">
+                    <button type="submit" class="btn bg-maroon">保存</button>
+                    <button type="button" class="btn bg-default" onclick='location.href="${pageContext.request.contextPath}/manager/checked/showAllCourses.do?page=1&size=6"'>返回</button>
+                </div>
+                <!--工具栏/-->
+            </form>
         </section>
         <!-- 正文区域 /-->
 
