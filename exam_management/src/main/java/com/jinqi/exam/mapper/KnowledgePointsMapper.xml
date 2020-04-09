@@ -84,9 +84,10 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from T_KNOWLEDGE_POINTS
+    select
+      TK.KNOWLEDGE_POINTS_ID, TK.COURSE_ID, TK.EXAMINATION_SYLLABUS_ID, TK.KNOWLEDGE_POINTS_CONTENT, TC.COURSE_NAME
+    from T_KNOWLEDGE_POINTS TK
+        left join T_COURSE TC on TK.COURSE_ID = TC.COURSE_ID
     where KNOWLEDGE_POINTS_ID = #{knowledgePointsId,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">

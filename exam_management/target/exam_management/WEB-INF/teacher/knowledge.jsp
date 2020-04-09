@@ -107,11 +107,12 @@
                             <div class="form-group form-inline">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-default" title="新建"
-                                            onclick='location.href="all-order-manage-edit.html"'><i
-                                            class="fa fa-file-o"></i> 新建
+                                            onclick='location.href="${pageContext.request.contextPath}/teacher/checked/showCreateKnowledge.do"'>
+                                        <i class="fa fa-file-o"></i> 新建
                                     </button>
                                     <button type="button" class="btn btn-default" title="删除"
-                                            onclick='confirm("你确认要删除吗？")'><i class="fa fa-trash-o"></i> 删除
+                                            onclick='location.href="${pageContext.request.contextPath}/teacher/checked/deleteKnowledge.do"'>
+                                        <i class="fa fa-trash-o"></i> 删除
                                     </button>
                                     <button type="button" class="btn btn-default" title="开启"
                                             onclick='confirm("你确认要开启吗？")'><i class="fa fa-check"></i> 开启
@@ -152,7 +153,7 @@
                             <tbody>
                             <c:forEach items="${knowledgePoints.list}" var="knowledgePoint" varStatus="num">
                                 <tr>
-                                    <td><input name="ids" type="checkbox"></td>
+                                    <td><input name="ids" type="checkbox" value="${knowledgePoint.knowledgePointsId}"></td>
                                     <td>
                                         ${num.count}
                                     </td>

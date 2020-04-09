@@ -278,4 +278,46 @@ public class TeacherController {
         return "teacher/knowledge-edit";
     }
 
+    /**
+     * 修改时知识点
+     * @param knowledgePointsId
+     * @return
+     */
+    @RequestMapping("/checked/editKnowledge.do")
+    public String editKnowledge(Integer knowledgePointsId,@ModelAttribute KnowledgePoints knowledgePoints){
+        knowledgePoints.setKnowledgePointsId(knowledgePointsId);
+        knowledgePointsService.updateInfo(knowledgePoints);
+        return "redirect:/teacher/checked/showKnowledgeDtl.do?knowledgePointsId=" + knowledgePointsId;
+    }
+
+    /**
+     * 跳转新建知识点页面
+     * @return
+     */
+    @RequestMapping("/checked/showCreateKnowledge.do")
+    public String showCreateKnowledge(){
+        return "teacher/knowledge-create";
+    }
+
+    /**
+     * 新建知识点
+     * @return
+     */
+    @RequestMapping("/checked/createKnowledge.do")
+    public String createKnowledge(@ModelAttribute KnowledgePoints knowledgePoints){
+        knowledgePointsService.addKnowledge(knowledgePoints);
+        return "redirect:/teacher/checked/showKnowledge.do?page=1&size=6";
+    }
+
+    /**
+     * 删除知识点
+     * @param ids
+     * @return
+     */
+    @RequestMapping("/checked/deleteKnowledge.do")
+    public String deleteKnowledge(Integer ids){
+        System.out.println(ids);
+//        knowledgePointsService.deleteKnowledge(ids);
+        return "redirect:/teacher/checked/showKnowledge.do?page=1&size=6";
+    }
 }

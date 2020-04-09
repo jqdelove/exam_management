@@ -105,7 +105,7 @@
                         <!--表单内容-->
                         <div class="tab-pane active" id="tab-form">
                                 <div class="row data-type">
-                                    <form action="${pageContext.request.contextPath}" method="post">
+                                    <form action="${pageContext.request.contextPath}/teacher/checked/editKnowledge.do?knowledgePointsId=${knowledge.knowledgePointsId}" method="post">
                                         <div class="col-md-2 title">知识点ID</div>
                                         <div class="col-md-10 data text">
                                             ${knowledge.knowledgePointsId}
@@ -113,17 +113,17 @@
 
                                         <div class="col-md-2 title">课程名称</div>
                                         <div class="col-md-10 data">
-                                            <input type="text" class="form-control" placeholder="课程名称" value="${knowledge.courseName}" name="">
+                                            <input type="text" class="form-control" placeholder="课程名称" value="${knowledge.courseName}" name="" readonly>
                                         </div>
 
                                         <div class="col-md-2 title">大纲编号</div>
                                         <div class="col-md-10 data">
-                                            <input type="text" class="form-control" placeholder="大纲编号" value="${knowledge.examinationSyllabusId}" name="">
+                                            <input type="text" class="form-control" placeholder="大纲编号" value="${knowledge.examinationSyllabusId}" name="examinationSyllabusId">
                                         </div>
 
                                         <div class="col-md-2 title">知识点内容</div>
                                         <div class="col-md-10 data">
-                                                <textarea class="form-control" rows="1" placeholder="知识点内容" name="">${knowledge.knowledgePointsContent}</textarea>
+                                                <textarea class="form-control" rows="1" placeholder="知识点内容" name="knowledgePointsContent">${knowledge.knowledgePointsContent}</textarea>
                                         </div>
 
     <%--                                    <div class="col-md-2 title">审核</div>--%>

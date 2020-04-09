@@ -28,4 +28,19 @@ public class KnowledgePointsServiceImpl implements KnowledgePointsService {
     public KnowledgePoints getKnowledge(Integer knowledgePointsId) {
         return knowledgePointsMapper.selectByPrimaryKey(knowledgePointsId);
     }
+
+    @Override
+    public Integer updateInfo(KnowledgePoints knowledgePoints) {
+        return knowledgePointsMapper.updateByPrimaryKeySelective(knowledgePoints);
+    }
+
+    @Override
+    public Integer addKnowledge(KnowledgePoints knowledgePoints) {
+        return knowledgePointsMapper.insertSelective(knowledgePoints);
+    }
+
+    @Override
+    public Integer deleteKnowledge(Integer knowledgePointsId) {
+        return knowledgePointsMapper.deleteByPrimaryKey(knowledgePointsId);
+    }
 }

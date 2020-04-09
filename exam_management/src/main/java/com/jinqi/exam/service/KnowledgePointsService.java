@@ -9,4 +9,10 @@ public interface KnowledgePointsService {
     List<KnowledgePoints> getAll(Integer teacherId,int page,int size);
 
     KnowledgePoints getKnowledge(Integer knowledgePointsId);
+
+    Integer updateInfo(KnowledgePoints knowledgePoints);
+
+    Integer addKnowledge(KnowledgePoints knowledgePoints);
+
+    Integer deleteKnowledge(Integer knowledgePointsId);
 }
