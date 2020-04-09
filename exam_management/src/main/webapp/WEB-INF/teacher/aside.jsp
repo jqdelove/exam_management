@@ -50,7 +50,7 @@
                         </a>
                     </li>
                     <li id="system-setting">
-                        <a href="${pageContext.request.contextPath}">
+                        <a href="${pageContext.request.contextPath}/teacher/checked/showExaminationSyllabus.do?page=1&size=6">
                             <i class="fa fa-circle-o"></i> 录入大纲
                         </a>
                     </li>

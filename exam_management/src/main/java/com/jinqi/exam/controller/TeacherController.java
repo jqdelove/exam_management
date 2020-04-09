@@ -45,6 +45,9 @@ public class TeacherController {
     @Autowired
     private KnowledgePointsService knowledgePointsService;
 
+    @Autowired
+    private ExaminationSyllabusService examinationSyllabusService;
+
     /**
      * 跳转注册页面
      * @return
@@ -311,13 +314,41 @@ public class TeacherController {
 
     /**
      * 删除知识点
-     * @param ids
+     * @param knowledgePointsId
      * @return
      */
     @RequestMapping("/checked/deleteKnowledge.do")
-    public String deleteKnowledge(Integer ids){
-        System.out.println(ids);
-//        knowledgePointsService.deleteKnowledge(ids);
+    public String deleteKnowledge(Integer knowledgePointsId){
+        knowledgePointsService.deleteKnowledge(knowledgePointsId);
         return "redirect:/teacher/checked/showKnowledge.do?page=1&size=6";
     }
+
+    /**
+     * 教师查询和自己课程相关的大纲，知识点只能在一个大纲中出现一次
+     * @param session
+     * @param map
+     * @param page
+     * @param size
+     * @return
+     */
+    @RequestMapping("/checked/showExaminationSyllabus.do")
+    public String showExaminationSyllabus(HttpSession session,Map map, @RequestParam(name = "page",required = true,defaultValue = "1")int page, @RequestParam(name = "size",required = true,defaultValue = "6")int size){
+        Teacher tea1 = (Teacher) session.getAttribute("tea");
+        List<ExaminationSyllabus> examinationSyllabusList = examinationSyllabusService.getAll(tea1.getTeacherId(), page, size);
+        PageInfo pageInfo = new PageInfo(examinationSyllabusList);
+        map.put("examinationSyllabusList",pageInfo);
+        return "teacher/examinationSyllabus";
+    }
+
+    /**
+     * 删除单条大纲
+     * @return
+     */
+    @RequestMapping("/checked/deleteExaminationSyllabus.do")
+    public String deleteExaminationSyllabus(Integer examinationSyllabusId){
+        examinationSyllabusService.deleteExaminationSyllabus(examinationSyllabusId);
+        return "redirect:/teacher//checked/showExaminationSyllabus.do?page=1&size=6";
+    }
+
+
 }

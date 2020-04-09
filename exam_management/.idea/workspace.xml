@@ -85,26 +85,26 @@
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/webapp/WEB-INF/manager" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/webapp/WEB-INF/teacher" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.24367817" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/webapp/WEB-INF/manager" />
-      <recent name="$PROJECT_DIR$/src/main/webapp/WEB-INF/teacher" />
-      <recent name="$PROJECT_DIR$/src/main/webapp/img" />
-      <recent name="$PROJECT_DIR$/src/main/webapp/WEB-INF/student" />
-      <recent name="$PROJECT_DIR$/src/main/resources" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/webapp" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.jinqi.exam.filter" />
       <recent name="com.jinqi.exam.exception" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/webapp" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/webapp/WEB-INF/teacher" />
+      <recent name="$PROJECT_DIR$/src/main/webapp/WEB-INF/manager" />
+      <recent name="$PROJECT_DIR$/src/main/webapp/img" />
+      <recent name="$PROJECT_DIR$/src/main/webapp/WEB-INF/student" />
+      <recent name="$PROJECT_DIR$/src/main/resources" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -249,6 +249,10 @@
       <workItem from="1586258283281" duration="2886000" />
       <workItem from="1586308028394" duration="12389000" />
       <workItem from="1586345967095" duration="4220000" />
+      <workItem from="1586352351839" duration="746000" />
+      <workItem from="1586395554763" duration="7157000" />
+      <workItem from="1586414747982" duration="3374000" />
+      <workItem from="1586432556621" duration="6759000" />
     </task>
     <servers />
   </component>

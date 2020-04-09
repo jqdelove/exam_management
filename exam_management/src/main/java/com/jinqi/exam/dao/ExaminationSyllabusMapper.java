@@ -23,6 +23,8 @@ public interface ExaminationSyllabusMapper {
 
     ExaminationSyllabus selectByPrimaryKey(Integer examinationSyllabusId);
 
+    List<ExaminationSyllabus> selectAll(Integer teacherId);
+
     int updateByExampleSelective(@Param("record") ExaminationSyllabus record, @Param("example") ExaminationSyllabusExample example);
 
     int updateByExample(@Param("record") ExaminationSyllabus record, @Param("example") ExaminationSyllabusExample example);

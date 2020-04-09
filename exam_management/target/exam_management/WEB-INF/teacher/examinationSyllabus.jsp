@@ -15,7 +15,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>知识点管理</title>
+    <title>录入大纲管理</title>
     <meta name="description" content="AdminLTE2定制版">
     <meta name="keywords" content="AdminLTE2定制版">
 
@@ -77,13 +77,13 @@
         <!-- 内容头部 -->
         <section class="content-header">
             <h1>
-                知识点管理
-                <small>全部知识点</small>
+                录入大纲管理
+                <small>全部大纲</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="all-admin-index.html"><i class="fa fa-dashboard"></i> 首页</a></li>
-                <li><a href="all-order-manage-list.html">知识点管理</a></li>
-                <li class="active">全部知识点</li>
+                <li><a href="all-order-manage-list.html">录入大纲管理</a></li>
+                <li class="active">全部大纲</li>
             </ol>
         </section>
         <!-- 内容头部 /-->
@@ -107,11 +107,11 @@
                             <div class="form-group form-inline">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-default" title="新建"
-                                            onclick='location.href="${pageContext.request.contextPath}/teacher/checked/showCreateKnowledge.do"'>
+                                            onclick='location.href="${pageContext.request.contextPath}"'>
                                         <i class="fa fa-file-o"></i> 新建
                                     </button>
                                     <button type="button" class="btn btn-default" title="删除"
-                                            onclick='deleteKnowledge()'>
+                                            onclick='deleteExaminationSyllabus()'>
                                         <i class="fa fa-trash-o"></i> 删除
                                     </button>
                                     <button type="button" class="btn btn-default" title="开启"
@@ -142,29 +142,25 @@
                                     <input id="selall" type="checkbox" class="icheckbox_square-blue">
                                 </th>
                                 <th class="sorting_asc">ID</th>
-                                <th class="sorting">知识点编号</th>
-                                <th class="sorting">课程名称</th>
                                 <th class="sorting">大纲编号</th>
-                                <th class="sorting">知识点内容</th>
+                                <th class="sorting">课程名称</th>
 
                                 <th class="text-center">操作</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach items="${knowledgePoints.list}" var="knowledgePoint" varStatus="num">
+                            <c:forEach items="${examinationSyllabusList.list}" var="examinationSyllabus" varStatus="num">
                                 <tr>
-                                    <td><input name="ids" id="ids" type="checkbox" value="${knowledgePoint.knowledgePointsId}"></td>
+                                    <td><input name="ids" id="ids" type="checkbox" value="${examinationSyllabus.examinationSyllabusId}"></td>
                                     <td>
                                         ${num.count}
                                     </td>
-                                    <td>${knowledgePoint.knowledgePointsId}</td>
-                                    <td>${knowledgePoint.courseName}</td>
-                                    <td>${knowledgePoint.examinationSyllabusId}</td>
-                                    <td>${knowledgePoint.knowledgePointsContent}</td>
+                                    <td>${examinationSyllabus.examinationSyllabusId}</td>
+                                    <td>${examinationSyllabus.courseName}</td>
 
                                     <td class="text-center">
                                         <button type="button" class="btn bg-olive btn-xs"
-                                                onclick='location.href="${pageContext.request.contextPath}/teacher/checked/showKnowledgeDtl.do?knowledgePointsId=${knowledgePoint.knowledgePointsId}"'>编辑详情
+                                                onclick='location.href="${pageContext.request.contextPath}"'>编辑详情
                                         </button>
                                     </td>
                                 </tr>
@@ -194,7 +190,7 @@
                 <div class="box-footer">
                     <div class="pull-left">
                         <div class="form-group form-inline">
-                            当前第${knowledgePoints.pageNum} 页，总共${knowledgePoints.pages} 页，共${knowledgePoints.total} 条数据。 每页
+                            当前第${examinationSyllabusList.pageNum} 页，总共${examinationSyllabusList.pages} 页，共${examinationSyllabusList.total} 条数据。 每页
                             <select class="form-control" id="changePageSize" onchange="changePageSize()">
                                 <option>1</option>
                                 <option>2</option>
@@ -209,22 +205,22 @@
                     <div class="box-tools pull-right">
                         <ul class="pagination">
                             <li>
-                                <a href="${pageContext.request.contextPath}/teacher/checked/showKnowledge.do?page=1&size=${knowledgePoints.pageSize}"
+                                <a href="${pageContext.request.contextPath}/teacher/checked/showExaminationSyllabus.do?page=1&size=${examinationSyllabusList.pageSize}"
                                    aria-label="Previous">首页</a>
                             </li>
                             <li>
-                                <a href="${pageContext.request.contextPath}/teacher/checked/showKnowledge.do?page=${knowledgePoints.pageNum-1}&size=${knowledgePoints.pageSize}">上一页</a>
+                                <a href="${pageContext.request.contextPath}/teacher/checked/showExaminationSyllabus.do?page=${examinationSyllabusList.pageNum-1}&size=${examinationSyllabusList.pageSize}">上一页</a>
                             </li>
-                            <c:forEach begin="1" end="${knowledgePoints.pages}" var="pageNum">
+                            <c:forEach begin="1" end="${examinationSyllabusList.pages}" var="pageNum">
                                 <li>
-                                    <a href="${pageContext.request.contextPath}/teacher/checked/showKnowledge.do?page=${pageNum}&size=${knowledgePoints.pageSize}">${pageNum}</a>
+                                    <a href="${pageContext.request.contextPath}/teacher/checked/showExaminationSyllabus.do?page=${pageNum}&size=${examinationSyllabusList.pageSize}">${pageNum}</a>
                                 </li>
                             </c:forEach>
                             <li>
-                                <a href="${pageContext.request.contextPath}/teacher/checked/showKnowledge.do?page=${knowledgePoints.pageNum+1}&size=${knowledgePoints.pageSize}">下一页</a>
+                                <a href="${pageContext.request.contextPath}/teacher/checked/showExaminationSyllabus.do?page=${examinationSyllabusList.pageNum+1}&size=${examinationSyllabusList.pageSize}">下一页</a>
                             </li>
                             <li>
-                                <a href="${pageContext.request.contextPath}/teacher/checked/showKnowledge.do?page=${knowledgePoints.pages}&size=${knowledgePoints.pageSize}"
+                                <a href="${pageContext.request.contextPath}/teacher/checked/showExaminationSyllabus.do?page=${examinationSyllabusList.pages}&size=${examinationSyllabusList.pageSize}"
                                    aria-label="Next">尾页</a>
                             </li>
                         </ul>
@@ -307,14 +303,14 @@
         var pageSize = $("#changePageSize").val();
 
         //向服务器发送请求，改变每页显示条数
-        location.href = "${pageContext.request.contextPath}/teacher/checked/showKnowledge.do?page=${knowledgePoints.pageNum}&size="
+        location.href = "${pageContext.request.contextPath}/teacher/checked/showExaminationSyllabus.do?page=${examinationSyllabusList.pageNum}&size="
             + pageSize;
     }
 
-    function deleteKnowledge() {
-        var knowledgePointsId = $("#ids").val();
+    function deleteExaminationSyllabus() {
+        var examinationSyllabusId = $("#ids").val();
 
-        location.href = "${pageContext.request.contextPath}/teacher/checked/deleteKnowledge.do?knowledgePointsId=" + knowledgePointsId;
+        location.href = "${pageContext.request.contextPath}/teacher/checked/deleteExaminationSyllabus.do?examinationSyllabusId=" + examinationSyllabusId;
     }
 
     $(document).ready(function () {

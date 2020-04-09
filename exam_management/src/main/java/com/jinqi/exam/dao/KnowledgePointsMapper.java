@@ -25,6 +25,8 @@ public interface KnowledgePointsMapper {
 
     List<KnowledgePoints> selectAll(Integer teacherId);
 
+    List<KnowledgePoints> selectByExaminationSyllabusId(Integer examinationSyllabusId);
+
     int updateByExampleSelective(@Param("record") KnowledgePoints record, @Param("example") KnowledgePointsExample example);
 
     int updateByExample(@Param("record") KnowledgePoints record, @Param("example") KnowledgePointsExample example);

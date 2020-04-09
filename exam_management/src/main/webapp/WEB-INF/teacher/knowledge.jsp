@@ -111,7 +111,7 @@
                                         <i class="fa fa-file-o"></i> 新建
                                     </button>
                                     <button type="button" class="btn btn-default" title="删除"
-                                            onclick='location.href="${pageContext.request.contextPath}/teacher/checked/deleteKnowledge.do"'>
+                                            onclick='deleteKnowledge()'>
                                         <i class="fa fa-trash-o"></i> 删除
                                     </button>
                                     <button type="button" class="btn btn-default" title="开启"
@@ -153,7 +153,7 @@
                             <tbody>
                             <c:forEach items="${knowledgePoints.list}" var="knowledgePoint" varStatus="num">
                                 <tr>
-                                    <td><input name="ids" type="checkbox" value="${knowledgePoint.knowledgePointsId}"></td>
+                                    <td><input name="ids" id="ids" type="checkbox" value="${knowledgePoint.knowledgePointsId}"></td>
                                     <td>
                                         ${num.count}
                                     </td>
@@ -309,6 +309,12 @@
         //向服务器发送请求，改变每页显示条数
         location.href = "${pageContext.request.contextPath}/teacher/checked/showKnowledge.do?page=${knowledgePoints.pageNum}&size="
             + pageSize;
+    }
+
+    function deleteKnowledge() {
+        var knowledgePointsId = $("#ids").val();
+
+        location.href = "${pageContext.request.contextPath}/teacher/checked/deleteKnowledge.do?knowledgePointsId=" + knowledgePointsId;
     }
 
     $(document).ready(function () {

@@ -4,6 +4,11 @@
   <resultMap id="BaseResultMap" type="com.jinqi.exam.entity.ExaminationSyllabus" >
     <id column="EXAMINATION_SYLLABUS_ID" property="examinationSyllabusId" jdbcType="INTEGER" />
     <result column="COURSE_ID" property="courseId" jdbcType="INTEGER" />
+    <result column="COURSE_NAME" property="courseName"/>
+    <!-- 查出大纲包含的知识点   -->
+    <collection property="knowledgePointses" ofType="com.jinqi.exam.entity.KnowledgePoints"
+                column="TES.EXAMINATION_SYLLABUS_ID"
+                javaType="java.util.ArrayList" fetchType="lazy" select="com.jinqi.exam.mapper.KnowledgePointsMapper.selectByExaminationSyllabusId"/>
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -64,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    EXAMINATION_SYLLABUS_ID, COURSE_ID
+    EXAMINATION_SYLLABUS_ID, COURSE_ID, KNOWLEDGE_POINTS_ID
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jinqi.exam.entity.ExaminationSyllabusExample" >
     select
@@ -86,6 +91,16 @@
     from T_EXAMINATION_SYLLABUS
     where EXAMINATION_SYLLABUS_ID = #{examinationSyllabusId,jdbcType=INTEGER}
   </select>
+
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select TES.EXAMINATION_SYLLABUS_ID, TES.COURSE_ID, TES.KNOWLEDGE_POINTS_ID, TC.COURSE_NAME
+    from T_EXAMINATION_SYLLABUS TES
+        left join T_COURSE TC on TES.COURSE_ID = TC.COURSE_ID
+        left join T_TEACHER_COURSE TTC on TC.COURSE_ID = TTC.COURSE_ID
+        left join T_TEACHER TT on TTC.TEACHER_ID = TT.TEACHER_ID
+    where TT.TEACHER_ID = #{teacherId}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from T_EXAMINATION_SYLLABUS
     where EXAMINATION_SYLLABUS_ID = #{examinationSyllabusId,jdbcType=INTEGER}
