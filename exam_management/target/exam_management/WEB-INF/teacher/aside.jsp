@@ -45,8 +45,18 @@
                         </a>
                     </li>
                     <li id="system-setting">
-                        <a href="${pageContext.request.contextPath}/sysLog/findAll.do">
-                            <i class="fa fa-circle-o"></i> 成绩管理
+                        <a href="${pageContext.request.contextPath}/teacher/checked/showKnowledge.do?page=1&size=6">
+                            <i class="fa fa-circle-o"></i> 知识点管理
+                        </a>
+                    </li>
+                    <li id="system-setting">
+                        <a href="${pageContext.request.contextPath}">
+                            <i class="fa fa-circle-o"></i> 录入大纲
+                        </a>
+                    </li>
+                    <li id="system-setting">
+                        <a href="${pageContext.request.contextPath}">
+                            <i class="fa fa-circle-o"></i> 试卷管理
                         </a>
                     </li>
                 </ul>

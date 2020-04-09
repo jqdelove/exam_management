@@ -42,6 +42,9 @@ public class TeacherController {
     @Autowired
     private ClazzCourseService clazzCourseService;
 
+    @Autowired
+    private KnowledgePointsService knowledgePointsService;
+
     /**
      * 跳转注册页面
      * @return
@@ -248,6 +251,31 @@ public class TeacherController {
         List<ClazzStudent> clazzStudents = clazzStudentService.getClazzStudent(classId, courseId);
         map.put("clazzStudents",clazzStudents);
         return "teacher/course-edit2";
+    }
+
+    /**
+     * 教师查看所属自己课程的知识点
+     * @return
+     */
+    @RequestMapping("/checked/showKnowledge.do")
+    public String showKnowledge(HttpSession session, Map map, @RequestParam(name = "page",required = true,defaultValue = "1")int page, @RequestParam(name = "size",required = true,defaultValue = "6")int size){
+        Teacher tea1 = (Teacher) session.getAttribute("tea");
+        List<KnowledgePoints> knowledgePoints = knowledgePointsService.getAll(tea1.getTeacherId(), page, size);
+        PageInfo pageInfo =  new PageInfo(knowledgePoints);
+        map.put("knowledgePoints",pageInfo);
+        return "teacher/knowledge";
+    }
+
+    /**
+     * 查看知识点详情
+     * @param knowledgePointsId
+     * @return
+     */
+    @RequestMapping("/checked/showKnowledgeDtl.do")
+    public String showKnowledgeDtl(Integer knowledgePointsId,Map map){
+        KnowledgePoints knowledge = knowledgePointsService.getKnowledge(knowledgePointsId);
+        map.put("knowledge",knowledge);
+        return "teacher/knowledge-edit";
     }
 
 }

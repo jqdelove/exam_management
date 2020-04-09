@@ -6,6 +6,7 @@
     <result column="COURSE_ID" property="courseId" jdbcType="INTEGER" />
     <result column="EXAMINATION_SYLLABUS_ID" property="examinationSyllabusId" jdbcType="INTEGER" />
     <result column="KNOWLEDGE_POINTS_CONTENT" property="knowledgePointsContent" jdbcType="VARCHAR" />
+    <result column="COURSE_NAME" property="courseName"/>
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -88,6 +89,16 @@
     from T_KNOWLEDGE_POINTS
     where KNOWLEDGE_POINTS_ID = #{knowledgePointsId,jdbcType=INTEGER}
   </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+      TK.KNOWLEDGE_POINTS_ID, TK.COURSE_ID, TK.EXAMINATION_SYLLABUS_ID, TK.KNOWLEDGE_POINTS_CONTENT, TC.COURSE_NAME
+    from T_KNOWLEDGE_POINTS TK
+        left join T_COURSE TC on TK.COURSE_ID = TC.COURSE_ID
+        left join T_TEACHER_COURSE TTC on TC.COURSE_ID = TTC.COURSE_ID
+        left join T_TEACHER TT on TTC.TEACHER_ID = TT.TEACHER_ID
+    where TT.TEACHER_ID = #{teacherId}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from T_KNOWLEDGE_POINTS
     where KNOWLEDGE_POINTS_ID = #{knowledgePointsId,jdbcType=INTEGER}

@@ -2,10 +2,11 @@
   Created by IntelliJ IDEA.
   User: jinqi
   Date: 2020/2/23
-  Time: 16:57
+  Time: 16:49
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
 <head>
@@ -13,7 +14,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>课程编辑</title>
+    <title>知识点编辑</title>
     <meta name="description" content="AdminLTE2定制版">
     <meta name="keywords" content="AdminLTE2定制版">
 
@@ -37,35 +38,32 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/jvectormap/jquery-jvectormap-1.2.2.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/datepicker/datepicker3.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/daterangepicker/daterangepicker.css">
-    <link rel="stylesheet"
-          href="${pageContext.request.contextPath}/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/datatables/dataTables.bootstrap.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/treeTable/jquery.treetable.css">
-    <link rel="stylesheet"
-          href="${pageContext.request.contextPath}/plugins/treeTable/jquery.treetable.theme.default.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/treeTable/jquery.treetable.theme.default.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/select2/select2.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/colorpicker/bootstrap-colorpicker.min.css">
-    <link rel="stylesheet"
-          href="${pageContext.request.contextPath}/plugins/bootstrap-markdown/css/bootstrap-markdown.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/bootstrap-markdown/css/bootstrap-markdown.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/adminLTE/css/AdminLTE.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/adminLTE/css/skins/_all-skins.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/ionslider/ion.rangeSlider.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/ionslider/ion.rangeSlider.skinNice.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/bootstrap-slider/slider.css">
-    <link rel="stylesheet"
-          href="${pageContext.request.contextPath}/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.css">
 </head>
+
 <body class="hold-transition skin-purple sidebar-mini">
 
 <div class="wrapper">
 
     <!-- 页面头部 -->
-    <jsp:include page="/WEB-INF/manager/header.jsp"></jsp:include>
+    <jsp:include page="/WEB-INF/teacher/header.jsp"></jsp:include>
     <!-- 页面头部 /-->
 
     <!-- 导航侧栏 -->
-    <jsp:include page="/WEB-INF/manager/aside.jsp"></jsp:include>
+    <jsp:include page="/WEB-INF/teacher/aside.jsp"></jsp:include>
     <!-- 导航侧栏 /-->
 
     <!-- 内容区域 -->
@@ -74,81 +72,93 @@
         <!-- 内容头部 -->
         <section class="content-header">
             <h1>
-                课程管理
-                <small>课程表单</small>
+                知识点管理
+                <small>知识点管理表单</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="all-admin-index.html"><i class="fa fa-dashboard"></i> 首页</a></li>
-                <li><a href="all-order-manage-list.html">课程管理</a></li>
-                <li class="active">课程表单</li>
+                <li><a href="${pageContext.request.contextPath}/teacher/checked/showMain.do"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li><a href="${pageContext.request.contextPath}/teacher/checked/showClazz.do?page=1&size=6">知识点管理</a></li>
+                <li class="active">知识点管理表单</li>
             </ol>
         </section>
         <!-- 内容头部 /-->
 
         <!-- 正文区域 -->
         <section class="content">
-            <form action="${pageContext.request.contextPath}/manager/checked/editCourse.do?courseId=${course.courseId}" method="post">
-                <!--订单信息-->
-                <div class="panel panel-default">
-                    <div class="panel-heading">课程信息</div>
-                    <div class="row data-type">
 
-                        <div class="col-md-2 title">课程编号</div>
-                        <div class="col-md-4 data">
-                            <input type="text" class="form-control" placeholder="课程编号" value="${course.courseId}" readonly>
-                        </div>
+            <div class="box-body">
 
-                        <div class="col-md-2 title">课程开课时间</div>
-                        <div class="col-md-4 data">
-                            <div class="input-group date">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-calendar"></i>
+                <!--tab页-->
+                <div class="nav-tabs-custom">
+
+                    <!--tab头-->
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a href="#tab-form" data-toggle="tab">知识点信息</a>
+                        </li>
+                    </ul>
+                    <!--tab头/-->
+
+                    <!--tab内容-->
+                    <div class="tab-content">
+
+                        <!--表单内容-->
+                        <div class="tab-pane active" id="tab-form">
+                                <div class="row data-type">
+                                    <form action="${pageContext.request.contextPath}" method="post">
+                                        <div class="col-md-2 title">知识点ID</div>
+                                        <div class="col-md-10 data text">
+                                            ${knowledge.knowledgePointsId}
+                                        </div>
+
+                                        <div class="col-md-2 title">课程名称</div>
+                                        <div class="col-md-10 data">
+                                            <input type="text" class="form-control" placeholder="课程名称" value="${knowledge.courseName}" name="">
+                                        </div>
+
+                                        <div class="col-md-2 title">大纲编号</div>
+                                        <div class="col-md-10 data">
+                                            <input type="text" class="form-control" placeholder="大纲编号" value="${knowledge.examinationSyllabusId}" name="">
+                                        </div>
+
+                                        <div class="col-md-2 title">知识点内容</div>
+                                        <div class="col-md-10 data">
+                                                <textarea class="form-control" rows="1" placeholder="知识点内容" name="">${knowledge.knowledgePointsContent}</textarea>
+                                        </div>
+
+    <%--                                    <div class="col-md-2 title">审核</div>--%>
+    <%--                                    <div class="col-md-10 data">--%>
+    <%--                                        <select class="form-control">--%>
+    <%--                                            <option>开启</option>--%>
+    <%--                                            <option>屏蔽</option>--%>
+    <%--                                        </select>--%>
+    <%--                                    </div>--%>
+
+                                        <div class="col-md-2 title"></div>
+                                        <div class="col-md-10 data text-center">
+                                            <button type="submit" class="btn bg-maroon" onclick="">保存</button>
+                                            <button type="button" class="btn bg-default" onclick="location.href='${pageContext.request.contextPath}/teacher/checked/showKnowledge.do?page=1&size=6'">返回</button>
+                                        </div>
+                                    </form>
                                 </div>
-                                <input type="text" class="form-control pull-right" id="datepicker-a3" value="<fmt:formatDate value="${course.courseBeginTime}"
-                                                            pattern="yyyy年MM月dd日 "/>">
-                            </div>
                         </div>
-                        <div class="col-md-2 title">课程名称</div>
-                        <div class="col-md-4 data">
-                            <input type="text" class="form-control" placeholder="课程名称" name="courseName" value="${course.courseName}">
-                        </div>
-
-                        <div class="col-md-2 title">报名人数</div>
-                        <div class="col-md-4 data">
-                            <input type="text" class="form-control" placeholder="报名人数" name="courseAmount" value="${course.courseAmount}">
-                        </div>
-
-                        <div class="col-md-2 title">课程结课时间</div>
-                        <div class="col-md-4 data">
-                            <div class="input-group date">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-calendar"></i>
-                                </div>
-                                <input type="text" class="form-control pull-right" id="datepicker-a6" value="<fmt:formatDate value="${course.courseEndTime}"
-                                                            pattern="yyyy年MM月dd日 "/>">
-                            </div>
-                        </div>
-                        <div class="col-md-2 title">任课教师</div>
-                        <div class="col-md-4 data">
-                            <input type="text" class="form-control" placeholder="任课教师" value="${course.teacherName}">
-                        </div>
-
-                        <div class="col-md-2 title rowHeight2x">其他信息</div>
-                        <div class="col-md-10 data rowHeight2x">
-                            <textarea class="form-control" rows="3" placeholder="其他信息"></textarea>
-                        </div>
+                        <!--表单内容/-->
 
                     </div>
-                </div>
-                <!--订单信息/-->
+                    <!--tab内容/-->
 
-                <!--工具栏-->
-                <div class="box-tools text-center">
-                    <button type="submit" class="btn bg-maroon">保存</button>
-                    <button type="button" class="btn bg-default" onclick='location.href="${pageContext.request.contextPath}/manager/checked/showAllCourses.do?page=1&size=6"'>返回</button>
                 </div>
-                <!--工具栏/-->
-            </form>
+                <!--tab页/-->
+
+
+
+                <!-- .box-footer
+    <div class="box-footer"></div>
+    -->
+                <!-- /.box-footer-->
+
+            </div>
+
         </section>
         <!-- 正文区域 /-->
 
@@ -215,7 +225,7 @@
 <script src="${pageContext.request.contextPath}/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.js"></script>
 <script src="${pageContext.request.contextPath}/plugins/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         // 选择框
         $(".select2").select2();
 
@@ -236,25 +246,17 @@
     }
 
 
-    $(document).ready(function () {
-        $('#datepicker-a3').datepicker({
+    $(document).ready(function() {
+        $('#datepicker-a5').datepicker({
             autoclose: true,
             language: 'zh-CN'
         });
     });
 
 
-    $(document).ready(function () {
-        $('#datepicker-a6').datepicker({
-            autoclose: true,
-            language: 'zh-CN'
-        });
-    });
-
-
-    $(document).ready(function () {
+    $(document).ready(function() {
         // 激活导航位置
-        setSidebarActive("order-manage");
+        setSidebarActive("travellog-review");
     });
 </script>
 </body>

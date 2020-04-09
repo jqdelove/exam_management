@@ -1,19 +1,21 @@
 <%--
   Created by IntelliJ IDEA.
   User: jinqi
-  Date: 2020/2/23
-  Time: 16:57
+  Date: 2020/2/22
+  Time: 18:01
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <html>
+
 <head>
     <!-- 页面meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>课程编辑</title>
+    <title>知识点管理</title>
     <meta name="description" content="AdminLTE2定制版">
     <meta name="keywords" content="AdminLTE2定制版">
 
@@ -56,16 +58,17 @@
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.css">
 </head>
+
 <body class="hold-transition skin-purple sidebar-mini">
 
 <div class="wrapper">
 
     <!-- 页面头部 -->
-    <jsp:include page="/WEB-INF/manager/header.jsp"></jsp:include>
+    <jsp:include page="/WEB-INF/teacher/header.jsp"></jsp:include>
     <!-- 页面头部 /-->
 
     <!-- 导航侧栏 -->
-    <jsp:include page="/WEB-INF/manager/aside.jsp"></jsp:include>
+    <jsp:include page="/WEB-INF/teacher/aside.jsp"></jsp:include>
     <!-- 导航侧栏 /-->
 
     <!-- 内容区域 -->
@@ -74,81 +77,164 @@
         <!-- 内容头部 -->
         <section class="content-header">
             <h1>
-                课程管理
-                <small>课程表单</small>
+                知识点管理
+                <small>全部知识点</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="all-admin-index.html"><i class="fa fa-dashboard"></i> 首页</a></li>
-                <li><a href="all-order-manage-list.html">课程管理</a></li>
-                <li class="active">课程表单</li>
+                <li><a href="all-order-manage-list.html">知识点管理</a></li>
+                <li class="active">全部知识点</li>
             </ol>
         </section>
         <!-- 内容头部 /-->
 
         <!-- 正文区域 -->
         <section class="content">
-            <form action="${pageContext.request.contextPath}/manager/checked/editCourse.do?courseId=${course.courseId}" method="post">
-                <!--订单信息-->
-                <div class="panel panel-default">
-                    <div class="panel-heading">课程信息</div>
-                    <div class="row data-type">
 
-                        <div class="col-md-2 title">课程编号</div>
-                        <div class="col-md-4 data">
-                            <input type="text" class="form-control" placeholder="课程编号" value="${course.courseId}" readonly>
-                        </div>
+            <!-- .box-body -->
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">列表</h3>
+                </div>
 
-                        <div class="col-md-2 title">课程开课时间</div>
-                        <div class="col-md-4 data">
-                            <div class="input-group date">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-calendar"></i>
+                <div class="box-body">
+
+                    <!-- 数据表格 -->
+                    <div class="table-box">
+
+                        <!--工具栏-->
+                        <div class="pull-left">
+                            <div class="form-group form-inline">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default" title="新建"
+                                            onclick='location.href="all-order-manage-edit.html"'><i
+                                            class="fa fa-file-o"></i> 新建
+                                    </button>
+                                    <button type="button" class="btn btn-default" title="删除"
+                                            onclick='confirm("你确认要删除吗？")'><i class="fa fa-trash-o"></i> 删除
+                                    </button>
+                                    <button type="button" class="btn btn-default" title="开启"
+                                            onclick='confirm("你确认要开启吗？")'><i class="fa fa-check"></i> 开启
+                                    </button>
+                                    <button type="button" class="btn btn-default" title="屏蔽"
+                                            onclick='confirm("你确认要屏蔽吗？")'><i class="fa fa-ban"></i> 屏蔽
+                                    </button>
+                                    <button type="button" class="btn btn-default" title="刷新"
+                                            onclick="window.location.reload();"><i class="fa fa-refresh"></i> 刷新
+                                    </button>
                                 </div>
-                                <input type="text" class="form-control pull-right" id="datepicker-a3" value="<fmt:formatDate value="${course.courseBeginTime}"
-                                                            pattern="yyyy年MM月dd日 "/>">
                             </div>
                         </div>
-                        <div class="col-md-2 title">课程名称</div>
-                        <div class="col-md-4 data">
-                            <input type="text" class="form-control" placeholder="课程名称" name="courseName" value="${course.courseName}">
-                        </div>
-
-                        <div class="col-md-2 title">报名人数</div>
-                        <div class="col-md-4 data">
-                            <input type="text" class="form-control" placeholder="报名人数" name="courseAmount" value="${course.courseAmount}">
-                        </div>
-
-                        <div class="col-md-2 title">课程结课时间</div>
-                        <div class="col-md-4 data">
-                            <div class="input-group date">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-calendar"></i>
-                                </div>
-                                <input type="text" class="form-control pull-right" id="datepicker-a6" value="<fmt:formatDate value="${course.courseEndTime}"
-                                                            pattern="yyyy年MM月dd日 "/>">
+                        <div class="box-tools pull-right">
+                            <div class="has-feedback">
+                                <input type="text" class="form-control input-sm" placeholder="搜索">
+                                <span class="glyphicon glyphicon-search form-control-feedback"></span>
                             </div>
                         </div>
-                        <div class="col-md-2 title">任课教师</div>
-                        <div class="col-md-4 data">
-                            <input type="text" class="form-control" placeholder="任课教师" value="${course.teacherName}">
-                        </div>
+                        <!--工具栏/-->
 
-                        <div class="col-md-2 title rowHeight2x">其他信息</div>
-                        <div class="col-md-10 data rowHeight2x">
-                            <textarea class="form-control" rows="3" placeholder="其他信息"></textarea>
-                        </div>
+                        <!--数据列表-->
+                        <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
+                            <thead>
+                            <tr>
+                                <th class="" style="padding-right:0px;">
+                                    <input id="selall" type="checkbox" class="icheckbox_square-blue">
+                                </th>
+                                <th class="sorting_asc">ID</th>
+                                <th class="sorting">知识点编号</th>
+                                <th class="sorting">课程名称</th>
+                                <th class="sorting">大纲编号</th>
+                                <th class="sorting">知识点内容</th>
+
+                                <th class="text-center">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach items="${knowledgePoints.list}" var="knowledgePoint" varStatus="num">
+                                <tr>
+                                    <td><input name="ids" type="checkbox"></td>
+                                    <td>
+                                        ${num.count}
+                                    </td>
+                                    <td>${knowledgePoint.knowledgePointsId}</td>
+                                    <td>${knowledgePoint.courseName}</td>
+                                    <td>${knowledgePoint.examinationSyllabusId}</td>
+                                    <td>${knowledgePoint.knowledgePointsContent}</td>
+
+                                    <td class="text-center">
+                                        <button type="button" class="btn bg-olive btn-xs"
+                                                onclick='location.href="${pageContext.request.contextPath}/teacher/checked/showKnowledgeDtl.do?knowledgePointsId=${knowledgePoint.knowledgePointsId}"'>编辑详情
+                                        </button>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                            <!--
+                        <tfoot>
+                        <tr>
+                        <th>Rendering engine</th>
+                        <th>Browser</th>
+                        <th>Platform(s)</th>
+                        <th>Engine version</th>
+                        <th>CSS grade</th>
+                        </tr>
+                        </tfoot>-->
+                        </table>
+                        <!--数据列表/-->
 
                     </div>
-                </div>
-                <!--订单信息/-->
+                    <!-- 数据表格 /-->
 
-                <!--工具栏-->
-                <div class="box-tools text-center">
-                    <button type="submit" class="btn bg-maroon">保存</button>
-                    <button type="button" class="btn bg-default" onclick='location.href="${pageContext.request.contextPath}/manager/checked/showAllCourses.do?page=1&size=6"'>返回</button>
+
                 </div>
-                <!--工具栏/-->
-            </form>
+                <!-- /.box-body -->
+
+                <!-- .box-footer-->
+                <div class="box-footer">
+                    <div class="pull-left">
+                        <div class="form-group form-inline">
+                            当前第${knowledgePoints.pageNum} 页，总共${knowledgePoints.pages} 页，共${knowledgePoints.total} 条数据。 每页
+                            <select class="form-control" id="changePageSize" onchange="changePageSize()">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                            </select> 条
+                        </div>
+                    </div>
+
+                    <div class="box-tools pull-right">
+                        <ul class="pagination">
+                            <li>
+                                <a href="${pageContext.request.contextPath}/teacher/checked/showKnowledge.do?page=1&size=${knowledgePoints.pageSize}"
+                                   aria-label="Previous">首页</a>
+                            </li>
+                            <li>
+                                <a href="${pageContext.request.contextPath}/teacher/checked/showKnowledge.do?page=${knowledgePoints.pageNum-1}&size=${knowledgePoints.pageSize}">上一页</a>
+                            </li>
+                            <c:forEach begin="1" end="${knowledgePoints.pages}" var="pageNum">
+                                <li>
+                                    <a href="${pageContext.request.contextPath}/teacher/checked/showKnowledge.do?page=${pageNum}&size=${knowledgePoints.pageSize}">${pageNum}</a>
+                                </li>
+                            </c:forEach>
+                            <li>
+                                <a href="${pageContext.request.contextPath}/teacher/checked/showKnowledge.do?page=${knowledgePoints.pageNum+1}&size=${knowledgePoints.pageSize}">下一页</a>
+                            </li>
+                            <li>
+                                <a href="${pageContext.request.contextPath}/teacher/checked/showKnowledge.do?page=${knowledgePoints.pages}&size=${knowledgePoints.pageSize}"
+                                   aria-label="Next">尾页</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                <!-- /.box-footer-->
+
+
+            </div>
+
         </section>
         <!-- 正文区域 /-->
 
@@ -215,6 +301,15 @@
 <script src="${pageContext.request.contextPath}/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.js"></script>
 <script src="${pageContext.request.contextPath}/plugins/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 <script>
+    function changePageSize() {
+        //获取下拉框的值
+        var pageSize = $("#changePageSize").val();
+
+        //向服务器发送请求，改变每页显示条数
+        location.href = "${pageContext.request.contextPath}/teacher/checked/showKnowledge.do?page=${knowledgePoints.pageNum}&size="
+            + pageSize;
+    }
+
     $(document).ready(function () {
         // 选择框
         $(".select2").select2();
@@ -237,24 +332,25 @@
 
 
     $(document).ready(function () {
-        $('#datepicker-a3').datepicker({
-            autoclose: true,
-            language: 'zh-CN'
-        });
-    });
 
-
-    $(document).ready(function () {
-        $('#datepicker-a6').datepicker({
-            autoclose: true,
-            language: 'zh-CN'
-        });
-    });
-
-
-    $(document).ready(function () {
         // 激活导航位置
         setSidebarActive("order-manage");
+
+        // 列表按钮 
+        $("#dataList td input[type='checkbox']").iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            increaseArea: '20%'
+        });
+        // 全选操作 
+        $("#selall").click(function () {
+            var clicks = $(this).is(':checked');
+            if (!clicks) {
+                $("#dataList td input[type='checkbox']").iCheck("uncheck");
+            } else {
+                $("#dataList td input[type='checkbox']").iCheck("check");
+            }
+            $(this).data("clicks", !clicks);
+        });
     });
 </script>
 </body>

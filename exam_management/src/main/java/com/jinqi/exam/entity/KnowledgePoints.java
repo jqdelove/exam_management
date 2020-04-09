@@ -11,7 +11,17 @@ public class KnowledgePoints implements Serializable {
 
     private String knowledgePointsContent;
 
+    private String courseName;
+
     private static final long serialVersionUID = 1L;
+
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
 
     public Integer getKnowledgePointsId() {
         return knowledgePointsId;

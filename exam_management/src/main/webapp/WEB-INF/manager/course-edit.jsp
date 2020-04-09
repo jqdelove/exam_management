@@ -90,7 +90,7 @@
             <form action="${pageContext.request.contextPath}/manager/checked/editCourse.do?courseId=${course.courseId}" method="post">
                 <!--订单信息-->
                 <div class="panel panel-default">
-                    <div class="panel-heading">订单信息</div>
+                    <div class="panel-heading">课程信息</div>
                     <div class="row data-type">
 
                         <div class="col-md-2 title">课程编号</div>
