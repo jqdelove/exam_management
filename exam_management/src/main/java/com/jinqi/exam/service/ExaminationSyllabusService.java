@@ -8,4 +8,6 @@ public interface ExaminationSyllabusService {
     List<ExaminationSyllabus> getAll(Integer teacherId,int page,int size);
 
     Integer deleteExaminationSyllabus(Integer examinationSyllabusId);
+
+    List<ExaminationSyllabus> getExaminationSyllabus(Integer examinationSyllabusId);
 }

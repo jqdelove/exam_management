@@ -21,7 +21,7 @@ public interface ExaminationSyllabusMapper {
 
     List<ExaminationSyllabus> selectByExample(ExaminationSyllabusExample example);
 
-    ExaminationSyllabus selectByPrimaryKey(Integer examinationSyllabusId);
+    List<ExaminationSyllabus> selectByPrimaryKey(Integer examinationSyllabusId);
 
     List<ExaminationSyllabus> selectAll(Integer teacherId);
 

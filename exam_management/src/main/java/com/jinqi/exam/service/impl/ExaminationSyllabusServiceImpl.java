@@ -28,4 +28,9 @@ public class ExaminationSyllabusServiceImpl implements ExaminationSyllabusServic
     public Integer deleteExaminationSyllabus(Integer examinationSyllabusId) {
         return examinationSyllabusMapper.deleteByPrimaryKey(examinationSyllabusId);
     }
+
+    @Override
+    public List<ExaminationSyllabus> getExaminationSyllabus(Integer examinationSyllabusId) {
+        return examinationSyllabusMapper.selectByPrimaryKey(examinationSyllabusId);
+    }
 }

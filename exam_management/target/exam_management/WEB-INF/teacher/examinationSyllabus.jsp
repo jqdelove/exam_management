@@ -160,7 +160,7 @@
 
                                     <td class="text-center">
                                         <button type="button" class="btn bg-olive btn-xs"
-                                                onclick='location.href="${pageContext.request.contextPath}"'>编辑详情
+                                                onclick='location.href="${pageContext.request.contextPath}/teacher/checked/showExaminationSyllabusDtl.do?examinationSyllabusId=${examinationSyllabus.examinationSyllabusId}"'>编辑详情
                                         </button>
                                     </td>
                                 </tr>

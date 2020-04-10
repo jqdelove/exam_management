@@ -101,9 +101,9 @@
   </select>
 
   <select id="selectByExaminationSyllabusId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-    select KNOWLEDGE_POINTS_ID, COURSE_ID, EXAMINATION_SYLLABUS_ID, KNOWLEDGE_POINTS_CONTENT
-        from T_KNOWLEDGE_POINTS
-    where EXAMINATION_SYLLABUS_ID = #{examinationSyllabusId}
+    select TKP.KNOWLEDGE_POINTS_ID, TKP.COURSE_ID, TKP.EXAMINATION_SYLLABUS_ID, TKP.KNOWLEDGE_POINTS_CONTENT
+        from T_KNOWLEDGE_POINTS TKP
+    where TKP.EXAMINATION_SYLLABUS_ID = #{examinationSyllabusId}
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >

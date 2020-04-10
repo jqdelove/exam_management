@@ -350,5 +350,22 @@ public class TeacherController {
         return "redirect:/teacher//checked/showExaminationSyllabus.do?page=1&size=6";
     }
 
+    /**
+     * 查看大纲详情
+     * @param examinationSyllabusId
+     * @return
+     */
+    @RequestMapping("/checked/showExaminationSyllabusDtl.do")
+    public String showExaminationSyllabusDtl(Integer examinationSyllabusId,Map map){
 
+        List<ExaminationSyllabus> examinationSyllabus =
+                examinationSyllabusService.getExaminationSyllabus(examinationSyllabusId);
+        ExaminationSyllabus examinationSyllabus1 = examinationSyllabus.get(0);
+//        List<KnowledgePoints> knowledgePointses = examinationSyllabus.getKnowledgePointses();
+//        for (KnowledgePoints knowledgePoints : knowledgePointses) {
+//            System.out.println(knowledgePoints.getCourseName());
+//        }
+        map.put("examinationSyllabus",examinationSyllabus1);
+        return "teacher/examinationSyllabus-edit";
+    }
 }
