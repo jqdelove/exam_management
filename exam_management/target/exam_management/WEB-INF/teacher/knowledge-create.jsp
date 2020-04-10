@@ -108,17 +108,14 @@
                                     <form action="${pageContext.request.contextPath}/teacher/checked/createKnowledge.do?" method="post">
                                         <div class="col-md-2 title">知识点ID</div>
                                         <div class="col-md-10 data text">
-
+                                            <input type="text" class="form-control" placeholder="由系统生成" readonly>
                                         </div>
 
                                         <div class="col-md-2 title">课程ID</div>
                                         <div class="col-md-10 data">
-                                            <input type="text" class="form-control" placeholder="课程ID" name="courseId">
-                                        </div>
+                                            <select class="form-control" id="clazzAll" name="courseId" style="width: 100px">
 
-                                        <div class="col-md-2 title">大纲编号</div>
-                                        <div class="col-md-10 data">
-                                            <input type="text" class="form-control" placeholder="大纲编号" name="examinationSyllabusId">
+                                            </select>
                                         </div>
 
                                         <div class="col-md-2 title">知识点内容</div>
@@ -217,6 +214,27 @@
 <script src="${pageContext.request.contextPath}/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.js"></script>
 <script src="${pageContext.request.contextPath}/plugins/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 <script>
+    $(function(){
+        $.ajax({
+            url:"${pageContext.request.contextPath}/teacher/checked/showSelectCourse.do",
+            type:"post",
+            dataType:"json",
+            success:function (teacherCourses) {
+                //遍历传过来的List<Clazz>，然后new option，往每一个option中添加
+                $(teacherCourses).each(function(index,teacherCourse){
+                    var option = new Option(teacherCourse.courseId,teacherCourse.courseId);
+                    var $option = $(option);
+                    var select = $("#clazzAll");
+                    select.append($option);
+
+                });
+            },
+            error:function(){
+                console.log("出错了");
+            }
+        });
+    });
+
     $(document).ready(function() {
         // 选择框
         $(".select2").select2();

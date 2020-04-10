@@ -12,6 +12,16 @@ public class ExaminationSyllabus implements Serializable {
 
     private List<SyllabusKnowledge> syllabusKnowledges;
 
+    private List<KnowledgePoints> knowledgePoints;
+
+    public List<KnowledgePoints> getKnowledgePoints() {
+        return knowledgePoints;
+    }
+
+    public void setKnowledgePoints(List<KnowledgePoints> knowledgePoints) {
+        this.knowledgePoints = knowledgePoints;
+    }
+
     public List<SyllabusKnowledge> getSyllabusKnowledges() {
         return syllabusKnowledges;
     }

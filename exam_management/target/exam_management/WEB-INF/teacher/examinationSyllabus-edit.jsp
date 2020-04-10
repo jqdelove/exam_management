@@ -125,11 +125,9 @@
 
                                         <div class="col-md-2 title">知识点内容</div>
                                         <div class="col-md-10 data">
-                                                <textarea class="form-control" rows="1" placeholder="知识点内容" name="knowledgePointsContent">
-                                                    <c:forEach items="${examinationSyllabus.syllabusKnowledges}" var="syllabusKnowledge">
-                                                        ${syllabusKnowledge.knowledgePoints.knowledgePointsContent}
-                                                    </c:forEach>
-                                                </textarea>
+                                                <c:forEach items="${examinationSyllabus.syllabusKnowledges}" var="syllabusKnowledge">
+                                                    ${syllabusKnowledge.knowledgePoints.knowledgePointsContent}
+                                                </c:forEach>
                                         </div>
 
     <%--                                    <div class="col-md-2 title">审核</div>--%>

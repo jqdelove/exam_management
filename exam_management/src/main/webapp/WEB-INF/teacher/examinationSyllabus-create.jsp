@@ -105,25 +105,22 @@
                         <!--表单内容-->
                         <div class="tab-pane active" id="tab-form">
                                 <div class="row data-type">
-                                    <form action="${pageContext.request.contextPath}" method="post">
-                                        <div class="col-md-2 title">知识点ID</div>
+                                    <form action="${pageContext.request.contextPath}/teacher/checked/createExaminationSyllabus.do" method="post">
+                                        <div class="col-md-2 title">大纲编号</div>
                                         <div class="col-md-10 data text">
-
+                                            <input type="text" class="form-control" placeholder="由系统生成" readonly>
                                         </div>
 
                                         <div class="col-md-2 title">课程ID</div>
                                         <div class="col-md-10 data">
-                                            <input type="text" class="form-control" placeholder="课程ID" name="courseId">
+                                            <select class="form-control" id="clazzAll" name="courseId" style="width: 100px">
+
+                                            </select>
                                         </div>
 
-                                        <div class="col-md-2 title">大纲编号</div>
-                                        <div class="col-md-10 data">
-                                            <input type="text" class="form-control" placeholder="大纲编号" name="examinationSyllabusId">
-                                        </div>
+                                        <div class="col-md-2 title">知识点编号</div>
+                                        <div class="col-md-10 data" id="classCheckbox">
 
-                                        <div class="col-md-2 title">知识点内容</div>
-                                        <div class="col-md-10 data">
-                                                <textarea class="form-control" rows="1" placeholder="知识点内容" name="knowledgePointsContent"></textarea>
                                         </div>
 
                                         <div class="col-md-2 title"></div>
@@ -217,6 +214,42 @@
 <script src="${pageContext.request.contextPath}/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.js"></script>
 <script src="${pageContext.request.contextPath}/plugins/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 <script>
+    $(function(){
+        $.ajax({
+            url:"${pageContext.request.contextPath}/teacher/checked/showSelectCourse.do",
+            type:"post",
+            dataType:"json",
+            success:function (teacherCourses) {
+                $(teacherCourses).each(function(index,teacherCourse){
+                    var option = new Option(teacherCourse.courseId,teacherCourse.courseId);
+                    var $option = $(option);
+                    var select = $("#clazzAll");
+                    select.append($option);
+
+                });
+            },
+            error:function(){
+                console.log("出错了");
+            }
+        });
+    });
+
+    $(function(){
+        $.ajax({
+            url:"${pageContext.request.contextPath}/teacher/checked/showAllKnowledge.do",
+            type:"post",
+            dataType:"json",
+            success:function (knowledgePoints) {
+                for(var i=0 ;i<knowledgePoints.length;i++){
+                    $("#classCheckbox").append("<input type='checkbox' value='"+knowledgePoints[i].knowledgePointsId+"' name='knowledgePointsId'/>"+knowledgePoints[i].knowledgePointsContent+" ");
+                }
+            },
+            error:function(){
+                console.log("出错了");
+            }
+        });
+    });
+
     $(document).ready(function() {
         // 选择框
         $(".select2").select2();

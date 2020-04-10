@@ -8,6 +8,8 @@ public interface KnowledgePointsService {
 
     List<KnowledgePoints> getAll(Integer teacherId,int page,int size);
 
+    List<KnowledgePoints> getAll(Integer teacherId);
+
     KnowledgePoints getKnowledge(Integer knowledgePointsId);
 
     Integer updateInfo(KnowledgePoints knowledgePoints);

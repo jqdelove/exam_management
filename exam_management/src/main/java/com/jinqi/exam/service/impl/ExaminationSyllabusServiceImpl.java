@@ -33,4 +33,9 @@ public class ExaminationSyllabusServiceImpl implements ExaminationSyllabusServic
     public List<ExaminationSyllabus> getExaminationSyllabus(Integer examinationSyllabusId) {
         return examinationSyllabusMapper.selectByPrimaryKey(examinationSyllabusId);
     }
+
+    @Override
+    public Integer createExaminationSyllabus(ExaminationSyllabus examinationSyllabus) {
+        return examinationSyllabusMapper.insertSelective(examinationSyllabus);
+    }
 }

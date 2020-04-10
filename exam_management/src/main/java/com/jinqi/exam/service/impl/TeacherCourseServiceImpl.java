@@ -23,4 +23,9 @@ public class TeacherCourseServiceImpl implements TeacherCourseService {
         PageHelper.startPage(page,size);
         return teacherCourseMapper.selectByTeacherId(teacherId);
     }
+
+    @Override
+    public List<TeacherCourse> getTeacherCourse(Integer teacherId) {
+        return teacherCourseMapper.selectByTeacherId(teacherId);
+    }
 }

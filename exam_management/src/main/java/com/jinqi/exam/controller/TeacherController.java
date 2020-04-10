@@ -7,13 +7,11 @@ import com.jinqi.exam.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -47,6 +45,9 @@ public class TeacherController {
 
     @Autowired
     private ExaminationSyllabusService examinationSyllabusService;
+
+    @Autowired
+    private SyllabusKnowledgeService syllabusKnowledgeService;
 
     /**
      * 跳转注册页面
@@ -361,10 +362,6 @@ public class TeacherController {
         List<ExaminationSyllabus> examinationSyllabus =
                 examinationSyllabusService.getExaminationSyllabus(examinationSyllabusId);
         ExaminationSyllabus examinationSyllabus1 = examinationSyllabus.get(0);
-        List<SyllabusKnowledge> syllabusKnowledges = examinationSyllabus1.getSyllabusKnowledges();
-        for (SyllabusKnowledge syllabusKnowledge : syllabusKnowledges) {
-            System.out.println(syllabusKnowledge.getKnowledgePoints().getKnowledgePointsContent());
-        }
         map.put("examinationSyllabus",examinationSyllabus1);
         return "teacher/examinationSyllabus-edit";
     }
@@ -376,5 +373,53 @@ public class TeacherController {
     @RequestMapping("/checked/showCreateExaminationSyllabus.do")
     public String showCreateExaminationSyllabus(){
         return "teacher/examinationSyllabus-create";
+    }
+
+    /**
+     * 前台页面显示教师所教课程下拉框
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "/checked/showSelectCourse.do", produces="application/json;charset=utf-8")
+    public @ResponseBody List<TeacherCourse> showCourse(HttpSession session){
+        Teacher tea1 = (Teacher) session.getAttribute("tea");
+        List<TeacherCourse> teacherCourses = teacherCourseService.getTeacherCourse(tea1.getTeacherId());
+        return teacherCourses;
+    }
+
+    /**
+     * 前台页面显示教师所生成的知识点
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "/checked/showAllKnowledge.do",produces="application/json;charset=utf-8")
+    public @ResponseBody List<KnowledgePoints> showKnowledge(HttpSession session){
+        Teacher tea1 = (Teacher) session.getAttribute("tea");
+        List<KnowledgePoints> knowledgePoints = knowledgePointsService.getAll(tea1.getTeacherId());
+        return knowledgePoints;
+    }
+
+    /**
+     * 新建大纲
+     * @param courseId
+     * @param
+     * @return
+     */
+    @RequestMapping("/checked/createExaminationSyllabus.do")
+    public String createExaminationSyllabus(Integer courseId,Integer knowledgePointsIds){
+        ExaminationSyllabus examinationSyllabus = new ExaminationSyllabus();
+        examinationSyllabus.setCourseId(courseId);
+
+        examinationSyllabusService.createExaminationSyllabus(examinationSyllabus);
+
+        SyllabusKnowledge syllabusKnowledge = null;
+//        for (Integer knowledgePointsId : knowledgePointsIds) {
+            syllabusKnowledge = new SyllabusKnowledge();
+            syllabusKnowledge.setExaminationSyllabusId(examinationSyllabus.getExaminationSyllabusId());
+            syllabusKnowledge.setKnowledgePointsId(knowledgePointsIds);
+            syllabusKnowledgeService.createSyllabusKnowledge(syllabusKnowledge);
+//        }
+
+        return "redirect:/teacher/checked/showExaminationSyllabus.do?page=1&size=6";
     }
 }

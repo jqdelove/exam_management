@@ -126,7 +126,7 @@
         insert into T_EXAMINATION_SYLLABUS (EXAMINATION_SYLLABUS_ID, COURSE_ID)
         values (#{examinationSyllabusId,jdbcType=INTEGER}, #{courseId,jdbcType=INTEGER})
     </insert>
-    <insert id="insertSelective" parameterType="com.jinqi.exam.entity.ExaminationSyllabus">
+    <insert id="insertSelective" parameterType="com.jinqi.exam.entity.ExaminationSyllabus" useGeneratedKeys="true" keyProperty="examinationSyllabusId" >
         insert into T_EXAMINATION_SYLLABUS
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="examinationSyllabusId != null">

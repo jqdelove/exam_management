@@ -25,6 +25,11 @@ public class KnowledgePointsServiceImpl implements KnowledgePointsService {
     }
 
     @Override
+    public List<KnowledgePoints> getAll(Integer teacherId) {
+        return knowledgePointsMapper.selectAll(teacherId);
+    }
+
+    @Override
     public KnowledgePoints getKnowledge(Integer knowledgePointsId) {
         return knowledgePointsMapper.selectByPrimaryKey(knowledgePointsId);
     }

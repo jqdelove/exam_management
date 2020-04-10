@@ -7,5 +7,7 @@ import java.util.List;
 public interface TeacherCourseService {
 
     List<TeacherCourse> getTeacherCourse(Integer teacherId,int page,int size);
+
+    List<TeacherCourse> getTeacherCourse(Integer teacherId);
 }
 

@@ -10,4 +10,6 @@ public interface ExaminationSyllabusService {
     Integer deleteExaminationSyllabus(Integer examinationSyllabusId);
 
     List<ExaminationSyllabus> getExaminationSyllabus(Integer examinationSyllabusId);
+
+    Integer createExaminationSyllabus(ExaminationSyllabus examinationSyllabus);
 }
