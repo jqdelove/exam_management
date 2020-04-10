@@ -8,9 +8,17 @@ public class ExaminationSyllabus implements Serializable {
 
     private Integer courseId;
 
-    private List<KnowledgePoints> knowledgePointses;
-
     private String courseName;
+
+    private List<SyllabusKnowledge> syllabusKnowledges;
+
+    public List<SyllabusKnowledge> getSyllabusKnowledges() {
+        return syllabusKnowledges;
+    }
+
+    public void setSyllabusKnowledges(List<SyllabusKnowledge> syllabusKnowledges) {
+        this.syllabusKnowledges = syllabusKnowledges;
+    }
 
     public String getCourseName() {
         return courseName;
@@ -20,17 +28,6 @@ public class ExaminationSyllabus implements Serializable {
         this.courseName = courseName;
     }
 
-    public void addKnowledgePoints(KnowledgePoints knowledgePoints){
-        knowledgePointses.add(knowledgePoints);
-    }
-
-    public List<KnowledgePoints> getKnowledgePointses() {
-        return knowledgePointses;
-    }
-
-    public void setKnowledgePointses(List<KnowledgePoints> knowledgePointses) {
-        this.knowledgePointses = knowledgePointses;
-    }
 
     private static final long serialVersionUID = 1L;
 

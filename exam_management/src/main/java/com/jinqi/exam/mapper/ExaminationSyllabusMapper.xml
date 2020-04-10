@@ -9,10 +9,8 @@
   
   <resultMap id="getKnowledgePointses" type="com.jinqi.exam.entity.ExaminationSyllabus" extends="BaseResultMap">
     <!-- 查出大纲包含的知识点   -->
-    <collection property="knowledgePointses" ofType="com.jinqi.exam.entity.KnowledgePoints"
-                column="TES.EXAMINATION_SYLLABUS_ID"
-                javaType="java.util.ArrayList" fetchType="eager"
-                select="com.jinqi.exam.mapper.KnowledgePointsMapper.selectByExaminationSyllabusId"/>
+          <collection property="syllabusKnowledges" ofType="com.jinqi.exam.entity.SyllabusKnowledge" column="EXAMINATION_SYLLABUS_ID"
+                      javaType="java.util.ArrayList" fetchType="lazy" select="com.jinqi.exam.dao.SyllabusKnowledgeMapper.selectByExaminationSyllabusId"/>
   </resultMap>
   
     <sql id="Example_Where_Clause">
@@ -94,13 +92,14 @@
         </if>
     </select>
     <select id="selectByPrimaryKey" resultMap="getKnowledgePointses" parameterType="java.lang.Integer">
-        select TES.EXAMINATION_SYLLABUS_ID,
+        select
                TES.COURSE_ID,
                TES.KNOWLEDGE_POINTS_ID,
-               TC.COURSE_NAME
+               TC.COURSE_NAME,
+               TES.EXAMINATION_SYLLABUS_ID as EXAMINATION_SYLLABUS_ID
         from T_EXAMINATION_SYLLABUS TES
                  left join T_COURSE TC on TES.COURSE_ID = TC.COURSE_ID
-        where TES.EXAMINATION_SYLLABUS_ID = #{examinationSyllabusId,jdbcType=INTEGER}
+        where TES.EXAMINATION_SYLLABUS_ID = #{examinationSyllabusId}
     </select>
 
     <select id="selectAll" resultMap="BaseResultMap" parameterType="java.lang.Integer">

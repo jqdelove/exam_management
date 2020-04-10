@@ -361,11 +361,20 @@ public class TeacherController {
         List<ExaminationSyllabus> examinationSyllabus =
                 examinationSyllabusService.getExaminationSyllabus(examinationSyllabusId);
         ExaminationSyllabus examinationSyllabus1 = examinationSyllabus.get(0);
-//        List<KnowledgePoints> knowledgePointses = examinationSyllabus.getKnowledgePointses();
-//        for (KnowledgePoints knowledgePoints : knowledgePointses) {
-//            System.out.println(knowledgePoints.getCourseName());
-//        }
+        List<SyllabusKnowledge> syllabusKnowledges = examinationSyllabus1.getSyllabusKnowledges();
+        for (SyllabusKnowledge syllabusKnowledge : syllabusKnowledges) {
+            System.out.println(syllabusKnowledge.getKnowledgePoints().getKnowledgePointsContent());
+        }
         map.put("examinationSyllabus",examinationSyllabus1);
         return "teacher/examinationSyllabus-edit";
+    }
+
+    /**
+     * 新建大纲页面
+     * @return
+     */
+    @RequestMapping("/checked/showCreateExaminationSyllabus.do")
+    public String showCreateExaminationSyllabus(){
+        return "teacher/examinationSyllabus-create";
     }
 }

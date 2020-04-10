@@ -118,15 +118,17 @@
 
                                         <div class="col-md-2 title">知识点编号</div>
                                         <div class="col-md-10 data">
-                                            <c:forEach items="${examinationSyllabus.knowledgePointses}" var="knowledgePoint">
-                                            <input type="text" class="form-control" placeholder="大纲编号" value="${knowledgePoint.knowledgePointsId}" name="examinationSyllabusId">
+                                            <c:forEach items="${examinationSyllabus.syllabusKnowledges}" var="syllabusKnowledge">
+                                            ${syllabusKnowledge.knowledgePointsId}
                                             </c:forEach>
                                         </div>
 
                                         <div class="col-md-2 title">知识点内容</div>
                                         <div class="col-md-10 data">
                                                 <textarea class="form-control" rows="1" placeholder="知识点内容" name="knowledgePointsContent">
-                                                    <c:forEach items="${examinationSyllabus.knowledgePointses}" var="knowledgePoint">${knowledgePoint.knowledgePointsContent}</c:forEach>
+                                                    <c:forEach items="${examinationSyllabus.syllabusKnowledges}" var="syllabusKnowledge">
+                                                        ${syllabusKnowledge.knowledgePoints.knowledgePointsContent}
+                                                    </c:forEach>
                                                 </textarea>
                                         </div>
 

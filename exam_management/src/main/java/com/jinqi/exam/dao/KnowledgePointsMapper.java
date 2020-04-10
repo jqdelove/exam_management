@@ -23,6 +23,8 @@ public interface KnowledgePointsMapper {
 
     KnowledgePoints selectByPrimaryKey(Integer knowledgePointsId);
 
+    KnowledgePoints selectByKnowledgePointsId(Integer knowledgePointsId);
+
     List<KnowledgePoints> selectAll(Integer teacherId);
 
     List<KnowledgePoints> selectByExaminationSyllabusId(@Param("examinationSyllabusId") Integer examinationSyllabusId);

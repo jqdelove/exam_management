@@ -14,7 +14,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>大纲编辑</title>
+    <title>新建大纲</title>
     <meta name="description" content="AdminLTE2定制版">
     <meta name="keywords" content="AdminLTE2定制版">
 
@@ -72,13 +72,13 @@
         <!-- 内容头部 -->
         <section class="content-header">
             <h1>
-                大纲录入管理
-                <small>大纲管理录入表单</small>
+                新建大纲
+                <small>新建大纲表单</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="${pageContext.request.contextPath}/teacher/checked/showMain.do"><i class="fa fa-dashboard"></i> 首页</a></li>
-                <li><a href="${pageContext.request.contextPath}/teacher/checked/showClazz.do?page=1&size=6">大纲录入管理</a></li>
-                <li class="active">大纲录入管理表单</li>
+                <li><a href="${pageContext.request.contextPath}/teacher/checked/showClazz.do?page=1&size=6">新建大纲</a></li>
+                <li class="active">新建大纲表单</li>
             </ol>
         </section>
         <!-- 内容头部 /-->
@@ -106,39 +106,25 @@
                         <div class="tab-pane active" id="tab-form">
                                 <div class="row data-type">
                                     <form action="${pageContext.request.contextPath}" method="post">
-                                        <div class="col-md-2 title">大纲编号</div>
+                                        <div class="col-md-2 title">知识点ID</div>
                                         <div class="col-md-10 data text">
-                                            ${examinationSyllabus.examinationSyllabusId}
+
                                         </div>
 
-                                        <div class="col-md-2 title">课程名称</div>
+                                        <div class="col-md-2 title">课程ID</div>
                                         <div class="col-md-10 data">
-                                            <input type="text" class="form-control" placeholder="课程名称" value="${examinationSyllabus.courseName}" name="" readonly>
+                                            <input type="text" class="form-control" placeholder="课程ID" name="courseId">
                                         </div>
 
-                                        <div class="col-md-2 title">知识点编号</div>
+                                        <div class="col-md-2 title">大纲编号</div>
                                         <div class="col-md-10 data">
-                                            <c:forEach items="${examinationSyllabus.syllabusKnowledges}" var="syllabusKnowledge">
-                                            ${syllabusKnowledge.knowledgePointsId}
-                                            </c:forEach>
+                                            <input type="text" class="form-control" placeholder="大纲编号" name="examinationSyllabusId">
                                         </div>
 
                                         <div class="col-md-2 title">知识点内容</div>
                                         <div class="col-md-10 data">
-                                                <textarea class="form-control" rows="1" placeholder="知识点内容" name="knowledgePointsContent">
-                                                    <c:forEach items="${examinationSyllabus.syllabusKnowledges}" var="syllabusKnowledge">
-                                                        ${syllabusKnowledge.knowledgePoints.knowledgePointsContent}
-                                                    </c:forEach>
-                                                </textarea>
+                                                <textarea class="form-control" rows="1" placeholder="知识点内容" name="knowledgePointsContent"></textarea>
                                         </div>
-
-    <%--                                    <div class="col-md-2 title">审核</div>--%>
-    <%--                                    <div class="col-md-10 data">--%>
-    <%--                                        <select class="form-control">--%>
-    <%--                                            <option>开启</option>--%>
-    <%--                                            <option>屏蔽</option>--%>
-    <%--                                        </select>--%>
-    <%--                                    </div>--%>
 
                                         <div class="col-md-2 title"></div>
                                         <div class="col-md-10 data text-center">
