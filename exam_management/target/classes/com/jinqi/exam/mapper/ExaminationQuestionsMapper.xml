@@ -5,6 +5,10 @@
     <id column="EXAMINATION_QUESTIONS_ID" property="examinationQuestionsId" jdbcType="INTEGER" />
     <result column="EXAMINATION_QUESTIONS_CONTENT" property="examinationQuestionsContent" jdbcType="VARCHAR" />
     <result column="EXAMINATION_QUESTIONS_ANSWER" property="examinationQuestionsAnswer" jdbcType="VARCHAR" />
+    <result column="EXAMINATION_SELECT_1" property="examinationSelect1" jdbcType="VARCHAR" />
+    <result column="EXAMINATION_SELECT_2" property="examinationSelect2" jdbcType="VARCHAR" />
+    <result column="EXAMINATION_SELECT_3" property="examinationSelect3" jdbcType="VARCHAR" />
+    <result column="EXAMINATION_SELECT_4" property="examinationSelect4" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -65,7 +69,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    EXAMINATION_QUESTIONS_ID, EXAMINATION_QUESTIONS_CONTENT, EXAMINATION_QUESTIONS_ANSWER
+    EXAMINATION_QUESTIONS_ID, EXAMINATION_QUESTIONS_CONTENT, EXAMINATION_QUESTIONS_ANSWER, 
+    EXAMINATION_SELECT_1, EXAMINATION_SELECT_2, EXAMINATION_SELECT_3, EXAMINATION_SELECT_4
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jinqi.exam.entity.ExaminationQuestionsExample" >
     select
@@ -99,9 +104,13 @@
   </delete>
   <insert id="insert" parameterType="com.jinqi.exam.entity.ExaminationQuestions" >
     insert into T_EXAMINATION_QUESTIONS (EXAMINATION_QUESTIONS_ID, EXAMINATION_QUESTIONS_CONTENT, 
-      EXAMINATION_QUESTIONS_ANSWER)
+      EXAMINATION_QUESTIONS_ANSWER, EXAMINATION_SELECT_1, 
+      EXAMINATION_SELECT_2, EXAMINATION_SELECT_3, 
+      EXAMINATION_SELECT_4)
     values (#{examinationQuestionsId,jdbcType=INTEGER}, #{examinationQuestionsContent,jdbcType=VARCHAR}, 
-      #{examinationQuestionsAnswer,jdbcType=VARCHAR})
+      #{examinationQuestionsAnswer,jdbcType=VARCHAR}, #{examinationSelect1,jdbcType=VARCHAR}, 
+      #{examinationSelect2,jdbcType=VARCHAR}, #{examinationSelect3,jdbcType=VARCHAR}, 
+      #{examinationSelect4,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.jinqi.exam.entity.ExaminationQuestions" >
     insert into T_EXAMINATION_QUESTIONS
@@ -115,6 +124,18 @@
       <if test="examinationQuestionsAnswer != null" >
         EXAMINATION_QUESTIONS_ANSWER,
       </if>
+      <if test="examinationSelect1 != null" >
+        EXAMINATION_SELECT_1,
+      </if>
+      <if test="examinationSelect2 != null" >
+        EXAMINATION_SELECT_2,
+      </if>
+      <if test="examinationSelect3 != null" >
+        EXAMINATION_SELECT_3,
+      </if>
+      <if test="examinationSelect4 != null" >
+        EXAMINATION_SELECT_4,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="examinationQuestionsId != null" >
@@ -125,6 +146,18 @@
       </if>
       <if test="examinationQuestionsAnswer != null" >
         #{examinationQuestionsAnswer,jdbcType=VARCHAR},
+      </if>
+      <if test="examinationSelect1 != null" >
+        #{examinationSelect1,jdbcType=VARCHAR},
+      </if>
+      <if test="examinationSelect2 != null" >
+        #{examinationSelect2,jdbcType=VARCHAR},
+      </if>
+      <if test="examinationSelect3 != null" >
+        #{examinationSelect3,jdbcType=VARCHAR},
+      </if>
+      <if test="examinationSelect4 != null" >
+        #{examinationSelect4,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -146,6 +179,18 @@
       <if test="record.examinationQuestionsAnswer != null" >
         EXAMINATION_QUESTIONS_ANSWER = #{record.examinationQuestionsAnswer,jdbcType=VARCHAR},
       </if>
+      <if test="record.examinationSelect1 != null" >
+        EXAMINATION_SELECT_1 = #{record.examinationSelect1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examinationSelect2 != null" >
+        EXAMINATION_SELECT_2 = #{record.examinationSelect2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examinationSelect3 != null" >
+        EXAMINATION_SELECT_3 = #{record.examinationSelect3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.examinationSelect4 != null" >
+        EXAMINATION_SELECT_4 = #{record.examinationSelect4,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -155,7 +200,11 @@
     update T_EXAMINATION_QUESTIONS
     set EXAMINATION_QUESTIONS_ID = #{record.examinationQuestionsId,jdbcType=INTEGER},
       EXAMINATION_QUESTIONS_CONTENT = #{record.examinationQuestionsContent,jdbcType=VARCHAR},
-      EXAMINATION_QUESTIONS_ANSWER = #{record.examinationQuestionsAnswer,jdbcType=VARCHAR}
+      EXAMINATION_QUESTIONS_ANSWER = #{record.examinationQuestionsAnswer,jdbcType=VARCHAR},
+      EXAMINATION_SELECT_1 = #{record.examinationSelect1,jdbcType=VARCHAR},
+      EXAMINATION_SELECT_2 = #{record.examinationSelect2,jdbcType=VARCHAR},
+      EXAMINATION_SELECT_3 = #{record.examinationSelect3,jdbcType=VARCHAR},
+      EXAMINATION_SELECT_4 = #{record.examinationSelect4,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -169,13 +218,29 @@
       <if test="examinationQuestionsAnswer != null" >
         EXAMINATION_QUESTIONS_ANSWER = #{examinationQuestionsAnswer,jdbcType=VARCHAR},
       </if>
+      <if test="examinationSelect1 != null" >
+        EXAMINATION_SELECT_1 = #{examinationSelect1,jdbcType=VARCHAR},
+      </if>
+      <if test="examinationSelect2 != null" >
+        EXAMINATION_SELECT_2 = #{examinationSelect2,jdbcType=VARCHAR},
+      </if>
+      <if test="examinationSelect3 != null" >
+        EXAMINATION_SELECT_3 = #{examinationSelect3,jdbcType=VARCHAR},
+      </if>
+      <if test="examinationSelect4 != null" >
+        EXAMINATION_SELECT_4 = #{examinationSelect4,jdbcType=VARCHAR},
+      </if>
     </set>
     where EXAMINATION_QUESTIONS_ID = #{examinationQuestionsId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.jinqi.exam.entity.ExaminationQuestions" >
     update T_EXAMINATION_QUESTIONS
     set EXAMINATION_QUESTIONS_CONTENT = #{examinationQuestionsContent,jdbcType=VARCHAR},
-      EXAMINATION_QUESTIONS_ANSWER = #{examinationQuestionsAnswer,jdbcType=VARCHAR}
+      EXAMINATION_QUESTIONS_ANSWER = #{examinationQuestionsAnswer,jdbcType=VARCHAR},
+      EXAMINATION_SELECT_1 = #{examinationSelect1,jdbcType=VARCHAR},
+      EXAMINATION_SELECT_2 = #{examinationSelect2,jdbcType=VARCHAR},
+      EXAMINATION_SELECT_3 = #{examinationSelect3,jdbcType=VARCHAR},
+      EXAMINATION_SELECT_4 = #{examinationSelect4,jdbcType=VARCHAR}
     where EXAMINATION_QUESTIONS_ID = #{examinationQuestionsId,jdbcType=INTEGER}
   </update>
   <select resultMap="BaseResultMap" parameterType="com.jinqi.exam.entity.ExaminationQuestionsExample" id="selectByExampleWithRowbounds" >
