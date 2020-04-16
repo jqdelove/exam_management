@@ -7,4 +7,6 @@ import java.util.List;
 public interface ExaminationTestPaperService {
 
     List<ExaminationTestPaper> getAll(int page,int size);
+
+    List<ExaminationTestPaper> getByTestPaperId(Integer testPaperId);
 }

@@ -23,4 +23,9 @@ public class ExaminationTestPaperServiceImpl implements ExaminationTestPaperServ
         PageHelper.startPage(page,size);
         return examinationTestPaperMapper.selectAll();
     }
+
+    @Override
+    public List<ExaminationTestPaper> getByTestPaperId(Integer testPaperId) {
+        return examinationTestPaperMapper.selectByTestPaperId(testPaperId);
+    }
 }

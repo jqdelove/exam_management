@@ -105,7 +105,7 @@
                         <!--表单内容-->
                         <div class="tab-pane active" id="tab-form">
                                 <div class="row data-type">
-                                    <form action="${pageContext.request.contextPath}/teacher/checked/createKnowledge.do?" method="post">
+                                    <form action="${pageContext.request.contextPath}/teacher/checked/createKnowledge.do" method="post">
                                         <div class="col-md-2 title">知识点ID</div>
                                         <div class="col-md-10 data text">
                                             <input type="text" class="form-control" placeholder="由系统生成" readonly>

@@ -98,6 +98,14 @@
     from T_EXAMINATION_TEST_PAPER
   </select>
 
+  <select id="selectByTestPaperId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+      TETP.EXAMINATION_TEST_PAPER_ID, TETP.TEST_PAPER_ID, TETP.EXAMINATION_QUESTIONS_ID
+    from T_EXAMINATION_TEST_PAPER TETP
+        left join T_EXAMINATION_QUESTIONS TEQ on TETP.EXAMINATION_QUESTIONS_ID = TEQ.EXAMINATION_QUESTIONS_ID
+    where TETP.TEST_PAPER_ID = #{testPaperId}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from T_EXAMINATION_TEST_PAPER
     where EXAMINATION_TEST_PAPER_ID = #{examinationTestPaperId,jdbcType=INTEGER}

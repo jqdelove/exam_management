@@ -13,4 +13,6 @@
 
 # 项目预览效果
 
-![项目预览效果](/preview.png)
+![项目预览效果](/preview1.png)
+
+![项目预览效果](/preview2.png)

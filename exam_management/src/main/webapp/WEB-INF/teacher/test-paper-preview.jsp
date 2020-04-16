@@ -14,7 +14,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>新建知识点</title>
+    <title>预览试卷</title>
     <meta name="description" content="AdminLTE2定制版">
     <meta name="keywords" content="AdminLTE2定制版">
 
@@ -72,13 +72,13 @@
         <!-- 内容头部 -->
         <section class="content-header">
             <h1>
-                新建知识点
-                <small>新建知识点表单</small>
+                试卷管理
+                <small>预览试卷</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="${pageContext.request.contextPath}/teacher/checked/showMain.do"><i class="fa fa-dashboard"></i> 首页</a></li>
-                <li><a href="${pageContext.request.contextPath}/teacher/checked/showClazz.do?page=1&size=6">新建知识点</a></li>
-                <li class="active">新建知识点表单</li>
+                <li><a href="${pageContext.request.contextPath}/teacher/checked/showClazz.do?page=1&size=6">试卷管理</a></li>
+                <li class="active">预览试卷</li>
             </ol>
         </section>
         <!-- 内容头部 /-->
@@ -94,7 +94,7 @@
                     <!--tab头-->
                     <ul class="nav nav-tabs">
                         <li class="active">
-                            <a href="#tab-form" data-toggle="tab">知识点信息</a>
+                            <a href="#tab-form" data-toggle="tab">试卷</a>
                         </li>
                     </ul>
                     <!--tab头/-->
@@ -105,30 +105,21 @@
                         <!--表单内容-->
                         <div class="tab-pane active" id="tab-form">
                                 <div class="row data-type">
-                                    <form action="${pageContext.request.contextPath}/teacher/checked/createKnowledge.do" method="post">
-                                        <div class="col-md-2 title">知识点ID</div>
-                                        <div class="col-md-10 data text">
-                                            <input type="text" class="form-control" placeholder="由系统生成" readonly>
-                                        </div>
+                                    <form action="${pageContext.request.contextPath}" method="post">
+                                        <c:forEach items="${examinationTestPapers}" var="examinationTestPaper" varStatus="num">
+                                            ${num.count}、
+                                            ${examinationTestPaper.examinationQuestions.examinationQuestionsContent}<br>
+                                            <input type="radio" name="testPaper1"/>${examinationTestPaper.examinationQuestions.examinationSelect1}&nbsp;&nbsp;
+                                            <input type="radio" name="testPaper2"/>${examinationTestPaper.examinationQuestions.examinationSelect2}&nbsp;&nbsp;
+                                            <input type="radio" name="testPaper3"/>${examinationTestPaper.examinationQuestions.examinationSelect3}&nbsp;&nbsp;
+                                            <input type="radio" name="testPaper4"/>${examinationTestPaper.examinationQuestions.examinationSelect4}<br>
+                                            <br>
 
-                                        <div class="col-md-2 title">课程ID</div>
-                                        <div class="col-md-10 data">
-                                            <select class="form-control" id="clazzAll" name="courseId" style="width: 100px">
-
-                                            </select>
-                                        </div>
-
-                                        <div class="col-md-2 title">知识点内容</div>
-                                        <div class="col-md-10 data">
-                                                <textarea class="form-control" rows="1" placeholder="知识点内容" name="knowledgePointsContent"></textarea>
-                                        </div>
-
-                                        <div class="col-md-2 title"></div>
-                                        <div class="col-md-10 data text-center">
-                                            <button type="submit" class="btn bg-maroon" onclick="">保存</button>
-                                            <button type="button" class="btn bg-default" onclick="location.href='${pageContext.request.contextPath}/teacher/checked/showKnowledge.do?page=1&size=6'">返回</button>
-                                        </div>
+                                        </c:forEach>
                                     </form>
+                                    <div class="col-md-15 data text-center">
+                                        <button type="button" class="btn bg-orange-active bg-default" onclick="location.href='${pageContext.request.contextPath}/teacher/checked/showTestPaper.do?page=1&size=6'">返回</button>
+                                    </div>
                                 </div>
                         </div>
                         <!--表单内容/-->
@@ -214,26 +205,7 @@
 <script src="${pageContext.request.contextPath}/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.js"></script>
 <script src="${pageContext.request.contextPath}/plugins/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 <script>
-    $(function(){
-        $.ajax({
-            url:"${pageContext.request.contextPath}/teacher/checked/showSelectCourse.do",
-            type:"post",
-            dataType:"json",
-            success:function (teacherCourses) {
-                //遍历传过来的List<Clazz>，然后new option，往每一个option中添加
-                $(teacherCourses).each(function(index,teacherCourse){
-                    var option = new Option(teacherCourse.courseId,teacherCourse.courseId);
-                    var $option = $(option);
-                    var select = $("#clazzAll");
-                    select.append($option);
 
-                });
-            },
-            error:function(){
-                console.log("出错了");
-            }
-        });
-    });
 
     $(document).ready(function() {
         // 选择框

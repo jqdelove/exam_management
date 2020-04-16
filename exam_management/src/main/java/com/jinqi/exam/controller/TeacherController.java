@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -454,4 +453,18 @@ public class TeacherController {
         testPaperService.deleteTestPaper(testPaperId);
         return "redirect:/teacher/checked/showTestPaper.do?page=1&size=6";
     }
+
+    /**
+     * 预览试卷
+     * @param testPaperId
+     * @param map
+     * @return
+     */
+    @RequestMapping("/checked/showTestPaperDtl.do")
+    public String showTestPaperDtl(Integer testPaperId,Map map){
+        List<ExaminationTestPaper> examinationTestPapers = examinationTestPaperService.getByTestPaperId(testPaperId);
+        map.put("examinationTestPapers",examinationTestPapers);
+        return "teacher/test-paper-preview";
+    }
+
 }
