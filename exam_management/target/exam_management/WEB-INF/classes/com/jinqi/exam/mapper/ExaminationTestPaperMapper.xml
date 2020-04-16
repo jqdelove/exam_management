@@ -5,6 +5,10 @@
     <id column="EXAMINATION_TEST_PAPER_ID" property="examinationTestPaperId" jdbcType="INTEGER" />
     <result column="TEST_PAPER_ID" property="testPaperId" jdbcType="INTEGER" />
     <result column="EXAMINATION_QUESTIONS_ID" property="examinationQuestionsId" jdbcType="INTEGER" />
+    <association property="testPaper" column="TEST_PAPER_ID"
+                 select="com.jinqi.exam.dao.TestPaperMapper.selectByPrimaryKey"/>
+    <association property="examinationQuestions" column="EXAMINATION_QUESTIONS_ID"
+                 select="com.jinqi.exam.dao.ExaminationQuestionsMapper.selectByPrimaryKey"/>
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -87,6 +91,13 @@
     from T_EXAMINATION_TEST_PAPER
     where EXAMINATION_TEST_PAPER_ID = #{examinationTestPaperId,jdbcType=INTEGER}
   </select>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from T_EXAMINATION_TEST_PAPER
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from T_EXAMINATION_TEST_PAPER
     where EXAMINATION_TEST_PAPER_ID = #{examinationTestPaperId,jdbcType=INTEGER}
@@ -192,4 +203,5 @@
       order by ${orderByClause}
     </if>
   </select>
+
 </mapper>

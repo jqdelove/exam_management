@@ -9,6 +9,26 @@ public class ExaminationTestPaper implements Serializable {
 
     private Integer examinationQuestionsId;
 
+    private TestPaper testPaper;
+
+    private ExaminationQuestions examinationQuestions;
+
+    public TestPaper getTestPaper() {
+        return testPaper;
+    }
+
+    public void setTestPaper(TestPaper testPaper) {
+        this.testPaper = testPaper;
+    }
+
+    public ExaminationQuestions getExaminationQuestions() {
+        return examinationQuestions;
+    }
+
+    public void setExaminationQuestions(ExaminationQuestions examinationQuestions) {
+        this.examinationQuestions = examinationQuestions;
+    }
+
     private static final long serialVersionUID = 1L;
 
     public Integer getExaminationTestPaperId() {

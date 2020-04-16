@@ -27,6 +27,8 @@ public interface ClazzTeacherMapper {
 
     List<ClazzTeacher> selectByTeacherId(Integer teacherId);
 
+    List<ClazzTeacher> selectByClazzId(@Param("classId") Integer classId);
+
     int updateByExampleSelective(@Param("record") ClazzTeacher record, @Param("example") ClazzTeacherExample example);
 
     int updateByExample(@Param("record") ClazzTeacher record, @Param("example") ClazzTeacherExample example);

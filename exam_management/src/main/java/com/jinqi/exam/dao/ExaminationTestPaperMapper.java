@@ -23,6 +23,8 @@ public interface ExaminationTestPaperMapper {
 
     ExaminationTestPaper selectByPrimaryKey(Integer examinationTestPaperId);
 
+    List<ExaminationTestPaper> selectAll();
+
     int updateByExampleSelective(@Param("record") ExaminationTestPaper record, @Param("example") ExaminationTestPaperExample example);
 
     int updateByExample(@Param("record") ExaminationTestPaper record, @Param("example") ExaminationTestPaperExample example);

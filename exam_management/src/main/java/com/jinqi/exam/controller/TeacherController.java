@@ -49,6 +49,12 @@ public class TeacherController {
     @Autowired
     private SyllabusKnowledgeService syllabusKnowledgeService;
 
+    @Autowired
+    private ExaminationTestPaperService examinationTestPaperService;
+
+    @Autowired
+    private TestPaperService testPaperService;
+
     /**
      * 跳转注册页面
      * @return
@@ -421,5 +427,31 @@ public class TeacherController {
 //        }
 
         return "redirect:/teacher/checked/showExaminationSyllabus.do?page=1&size=6";
+    }
+
+    /**
+     * 教师查看试卷列表
+     * @param map
+     * @param page
+     * @param size
+     * @return
+     */
+    @RequestMapping("/checked/showTestPaper.do")
+    public String showTestPaper(Map map, @RequestParam(name = "page",required = true,defaultValue = "1")int page, @RequestParam(name = "size",required = true,defaultValue = "6")int size){
+        List<TestPaper> testPapers = testPaperService.getAll(page, size);
+        PageInfo pageInfo = new PageInfo(testPapers);
+        map.put("testPapers",pageInfo);
+        return "teacher/test-paper";
+    }
+
+    /**
+     * 删除试卷
+     * @param testPaperId
+     * @return
+     */
+    @RequestMapping("/checked/deleteTestPaper.do")
+    public String deleteTestPaper(Integer testPaperId){
+        testPaperService.deleteTestPaper(testPaperId);
+        return "redirect:/teacher/checked/showTestPaper.do?page=1&size=6";
     }
 }

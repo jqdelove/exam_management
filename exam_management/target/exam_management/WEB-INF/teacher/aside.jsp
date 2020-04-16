@@ -55,7 +55,7 @@
                         </a>
                     </li>
                     <li id="system-setting">
-                        <a href="${pageContext.request.contextPath}">
+                        <a href="${pageContext.request.contextPath}/teacher/checked/showTestPaper.do?page=1&size=6">
                             <i class="fa fa-circle-o"></i> 试卷管理
                         </a>
                     </li>
