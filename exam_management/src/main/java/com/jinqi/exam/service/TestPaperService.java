@@ -9,4 +9,6 @@ public interface TestPaperService {
     List<TestPaper> getAll(int page,int size);
 
     Integer deleteTestPaper(Integer testPaperId);
+
+    Integer createTestPaper(TestPaper testPaper);
 }

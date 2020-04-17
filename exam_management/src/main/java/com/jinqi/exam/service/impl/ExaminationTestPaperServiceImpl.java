@@ -28,4 +28,11 @@ public class ExaminationTestPaperServiceImpl implements ExaminationTestPaperServ
     public List<ExaminationTestPaper> getByTestPaperId(Integer testPaperId) {
         return examinationTestPaperMapper.selectByTestPaperId(testPaperId);
     }
+
+    @Override
+    public void createExaminationTestPaper(List<ExaminationTestPaper> examinationTestPapers) {
+        for (ExaminationTestPaper examinationTestPaper : examinationTestPapers) {
+            examinationTestPaperMapper.insertSelective(examinationTestPaper);
+        }
+    }
 }

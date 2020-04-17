@@ -92,6 +92,13 @@
     from T_EXAMINATION_QUESTIONS
     where EXAMINATION_QUESTIONS_ID = #{examinationQuestionsId,jdbcType=INTEGER}
   </select>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from T_EXAMINATION_QUESTIONS
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from T_EXAMINATION_QUESTIONS
     where EXAMINATION_QUESTIONS_ID = #{examinationQuestionsId,jdbcType=INTEGER}

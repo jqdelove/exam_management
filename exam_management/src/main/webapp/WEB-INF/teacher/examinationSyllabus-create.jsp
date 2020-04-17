@@ -241,7 +241,7 @@
             dataType:"json",
             success:function (knowledgePoints) {
                 for(var i=0 ;i<knowledgePoints.length;i++){
-                    $("#classCheckbox").append("<input type='checkbox' value='"+knowledgePoints[i].knowledgePointsId+"' name='knowledgePointsId'/>"+knowledgePoints[i].knowledgePointsContent+" ");
+                    $("#classCheckbox").append("<input type='checkbox' value='"+knowledgePoints[i].knowledgePointsId+"' name='knowledgePointsId'/>"+knowledgePoints[i].knowledgePointsContent+"&nbsp;&nbsp;");
                 }
             },
             error:function(){

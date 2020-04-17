@@ -4,13 +4,16 @@ import com.github.pagehelper.PageInfo;
 import com.jinqi.exam.entity.*;
 import com.jinqi.exam.exception.*;
 import com.jinqi.exam.service.*;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -53,6 +56,9 @@ public class TeacherController {
 
     @Autowired
     private TestPaperService testPaperService;
+
+    @Autowired
+    private ExaminationQuestionsService examinationQuestionsService;
 
     /**
      * 跳转注册页面
@@ -244,7 +250,7 @@ public class TeacherController {
      * @return
      */
     @RequestMapping("/checked/showCourseDtl.do")
-    public String showCourseDtl(Integer courseId,Map map){
+    public String showCourseDtl(Integer courseId, Map<String, List<ClazzCourse>> map){
         List<ClazzCourse> clazzCourses = clazzCourseService.getClazzCourse(courseId);
         map.put("clazzCourses",clazzCourses);
         return "teacher/course-edit";
@@ -256,7 +262,7 @@ public class TeacherController {
      * @return
      */
     @RequestMapping("/checked/showClazzScore.do")
-    public String showClazzScore(Integer classId,Integer courseId,Map map){
+    public String showClazzScore(Integer classId, Integer courseId, Map<String, List<ClazzStudent>> map){
         List<ClazzStudent> clazzStudents = clazzStudentService.getClazzStudent(classId, courseId);
         map.put("clazzStudents",clazzStudents);
         return "teacher/course-edit2";
@@ -267,10 +273,10 @@ public class TeacherController {
      * @return
      */
     @RequestMapping("/checked/showKnowledge.do")
-    public String showKnowledge(HttpSession session, Map map, @RequestParam(name = "page",required = true,defaultValue = "1")int page, @RequestParam(name = "size",required = true,defaultValue = "6")int size){
+    public String showKnowledge(HttpSession session, Map<String, PageInfo<KnowledgePoints>> map, @RequestParam(name = "page",required = true,defaultValue = "1")int page, @RequestParam(name = "size",required = true,defaultValue = "6")int size){
         Teacher tea1 = (Teacher) session.getAttribute("tea");
         List<KnowledgePoints> knowledgePoints = knowledgePointsService.getAll(tea1.getTeacherId(), page, size);
-        PageInfo pageInfo =  new PageInfo(knowledgePoints);
+        PageInfo<KnowledgePoints> pageInfo =  new PageInfo<>(knowledgePoints);
         map.put("knowledgePoints",pageInfo);
         return "teacher/knowledge";
     }
@@ -281,7 +287,7 @@ public class TeacherController {
      * @return
      */
     @RequestMapping("/checked/showKnowledgeDtl.do")
-    public String showKnowledgeDtl(Integer knowledgePointsId,Map map){
+    public String showKnowledgeDtl(Integer knowledgePointsId, Map<String, KnowledgePoints> map){
         KnowledgePoints knowledge = knowledgePointsService.getKnowledge(knowledgePointsId);
         map.put("knowledge",knowledge);
         return "teacher/knowledge-edit";
@@ -338,10 +344,10 @@ public class TeacherController {
      * @return
      */
     @RequestMapping("/checked/showExaminationSyllabus.do")
-    public String showExaminationSyllabus(HttpSession session,Map map, @RequestParam(name = "page",required = true,defaultValue = "1")int page, @RequestParam(name = "size",required = true,defaultValue = "6")int size){
+    public String showExaminationSyllabus(HttpSession session, Map<String, PageInfo<ExaminationSyllabus>> map, @RequestParam(name = "page",required = true,defaultValue = "1")int page, @RequestParam(name = "size",required = true,defaultValue = "6")int size){
         Teacher tea1 = (Teacher) session.getAttribute("tea");
         List<ExaminationSyllabus> examinationSyllabusList = examinationSyllabusService.getAll(tea1.getTeacherId(), page, size);
-        PageInfo pageInfo = new PageInfo(examinationSyllabusList);
+        PageInfo<ExaminationSyllabus> pageInfo = new PageInfo<>(examinationSyllabusList);
         map.put("examinationSyllabusList",pageInfo);
         return "teacher/examinationSyllabus";
     }
@@ -362,7 +368,7 @@ public class TeacherController {
      * @return
      */
     @RequestMapping("/checked/showExaminationSyllabusDtl.do")
-    public String showExaminationSyllabusDtl(Integer examinationSyllabusId,Map map){
+    public String showExaminationSyllabusDtl(Integer examinationSyllabusId, Map<String, ExaminationSyllabus> map){
 
         List<ExaminationSyllabus> examinationSyllabus =
                 examinationSyllabusService.getExaminationSyllabus(examinationSyllabusId);
@@ -411,19 +417,21 @@ public class TeacherController {
      * @return
      */
     @RequestMapping("/checked/createExaminationSyllabus.do")
-    public String createExaminationSyllabus(Integer courseId,Integer knowledgePointsIds){
+    public String createExaminationSyllabus(Integer courseId,HttpServletRequest request){
         ExaminationSyllabus examinationSyllabus = new ExaminationSyllabus();
         examinationSyllabus.setCourseId(courseId);
-
         examinationSyllabusService.createExaminationSyllabus(examinationSyllabus);
 
-        SyllabusKnowledge syllabusKnowledge = null;
-//        for (Integer knowledgePointsId : knowledgePointsIds) {
-            syllabusKnowledge = new SyllabusKnowledge();
+        String[] knowledgePointsIds = request.getParameterValues("knowledgePointsId");
+
+        List<SyllabusKnowledge> syllabusKnowledges = new ArrayList<>();
+        for (String knowledgePointsId : knowledgePointsIds) {
+            SyllabusKnowledge syllabusKnowledge = new SyllabusKnowledge();
             syllabusKnowledge.setExaminationSyllabusId(examinationSyllabus.getExaminationSyllabusId());
-            syllabusKnowledge.setKnowledgePointsId(knowledgePointsIds);
-            syllabusKnowledgeService.createSyllabusKnowledge(syllabusKnowledge);
-//        }
+            syllabusKnowledge.setKnowledgePointsId(Integer.parseInt(knowledgePointsId));
+            syllabusKnowledges.add(syllabusKnowledge);
+        }
+        syllabusKnowledgeService.createSyllabusKnowledge(syllabusKnowledges);
 
         return "redirect:/teacher/checked/showExaminationSyllabus.do?page=1&size=6";
     }
@@ -436,9 +444,9 @@ public class TeacherController {
      * @return
      */
     @RequestMapping("/checked/showTestPaper.do")
-    public String showTestPaper(Map map, @RequestParam(name = "page",required = true,defaultValue = "1")int page, @RequestParam(name = "size",required = true,defaultValue = "6")int size){
+    public String showTestPaper(Map<String, PageInfo<TestPaper>> map, @RequestParam(name = "page",required = true,defaultValue = "1")int page, @RequestParam(name = "size",required = true,defaultValue = "6")int size){
         List<TestPaper> testPapers = testPaperService.getAll(page, size);
-        PageInfo pageInfo = new PageInfo(testPapers);
+        PageInfo<TestPaper> pageInfo = new PageInfo<>(testPapers);
         map.put("testPapers",pageInfo);
         return "teacher/test-paper";
     }
@@ -461,10 +469,62 @@ public class TeacherController {
      * @return
      */
     @RequestMapping("/checked/showTestPaperDtl.do")
-    public String showTestPaperDtl(Integer testPaperId,Map map){
+    public String showTestPaperDtl(Integer testPaperId, Map<String, List<ExaminationTestPaper>> map){
         List<ExaminationTestPaper> examinationTestPapers = examinationTestPaperService.getByTestPaperId(testPaperId);
         map.put("examinationTestPapers",examinationTestPapers);
         return "teacher/test-paper-preview";
     }
 
+    /**
+     * 跳转新建试卷页面
+     * @return
+     */
+    @RequestMapping("/checked/showCreateTestPaper.do")
+    public String showCreateTestPaper(){
+        return "teacher/test-paper-create";
+    }
+
+    /**
+     * 返回所有当前教师的大纲
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "/checked/showAllExaminationSyllabus.do",produces="application/json;charset=utf-8")
+    public @ResponseBody List<ExaminationSyllabus> showExaminationSyllabus(HttpSession session){
+        Teacher tea1 = (Teacher) session.getAttribute("tea");
+        List<ExaminationSyllabus> examinationSyllabusList = examinationSyllabusService.getAll(tea1.getTeacherId());
+        return examinationSyllabusList;
+    }
+
+    /**
+     * 返回所有试题（简化版）
+     * @return
+     */
+    @RequestMapping(value = "/checked/showExaminationQuestions.do",produces="application/json;charset=utf-8")
+    public @ResponseBody List<ExaminationQuestions> showExaminationQuestions(){
+        List<ExaminationQuestions> examinationQuestionsList = examinationQuestionsService.getAll();
+        return examinationQuestionsList;
+    }
+
+    /**
+     * 创建试卷
+     * @param testPaper
+     * @param request
+     * @return
+     */
+    @RequestMapping("/checked/createTestPaper.do")
+    public String createTestPaper(@ModelAttribute TestPaper testPaper, HttpServletRequest request){
+        testPaperService.createTestPaper(testPaper);
+        //前台页面checkbox传过来的参数为数组
+        String[] examinationQuestionsIds = request.getParameterValues("examinationQuestionsId");
+        List<ExaminationTestPaper> examinationTestPapers = new ArrayList<>();
+        for (String examinationQuestionsId : examinationQuestionsIds) {
+            ExaminationTestPaper examinationTestPaper = new ExaminationTestPaper();
+            examinationTestPaper.setTestPaperId(testPaper.getTestPaperId());
+            examinationTestPaper.setExaminationQuestionsId(Integer.parseInt(examinationQuestionsId));
+            examinationTestPapers.add(examinationTestPaper);
+        }
+        examinationTestPaperService.createExaminationTestPaper(examinationTestPapers);
+        return "redirect:/teacher/checked/showTestPaper.do?page=1&size=6";
+    }
 }

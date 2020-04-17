@@ -25,6 +25,11 @@ public class ExaminationSyllabusServiceImpl implements ExaminationSyllabusServic
     }
 
     @Override
+    public List<ExaminationSyllabus> getAll(Integer teacherId) {
+        return examinationSyllabusMapper.selectAll(teacherId);
+    }
+
+    @Override
     public Integer deleteExaminationSyllabus(Integer examinationSyllabusId) {
         return examinationSyllabusMapper.deleteByPrimaryKey(examinationSyllabusId);
     }

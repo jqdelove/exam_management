@@ -28,4 +28,9 @@ public class TestPaperServiceImpl implements TestPaperService {
     public Integer deleteTestPaper(Integer testPaperId) {
         return testPaperMapper.deleteByPrimaryKey(testPaperId);
     }
+
+    @Override
+    public Integer createTestPaper(TestPaper testPaper) {
+        return testPaperMapper.insertSelective(testPaper);
+    }
 }

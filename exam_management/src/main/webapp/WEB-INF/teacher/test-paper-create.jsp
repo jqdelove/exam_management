@@ -14,7 +14,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>新建大纲</title>
+    <title>生成试卷</title>
     <meta name="description" content="AdminLTE2定制版">
     <meta name="keywords" content="AdminLTE2定制版">
 
@@ -72,13 +72,13 @@
         <!-- 内容头部 -->
         <section class="content-header">
             <h1>
-                新建大纲
-                <small>新建大纲表单</small>
+                生成试卷
+                <small>生成试卷表单</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="${pageContext.request.contextPath}/teacher/checked/showMain.do"><i class="fa fa-dashboard"></i> 首页</a></li>
-                <li><a href="${pageContext.request.contextPath}/teacher/checked/showClazz.do?page=1&size=6">新建大纲</a></li>
-                <li class="active">新建大纲表单</li>
+                <li><a href="${pageContext.request.contextPath}/teacher/checked/showClazz.do?page=1&size=6">生成试卷</a></li>
+                <li class="active">生成试卷表单</li>
             </ol>
         </section>
         <!-- 内容头部 /-->
@@ -94,7 +94,7 @@
                     <!--tab头-->
                     <ul class="nav nav-tabs">
                         <li class="active">
-                            <a href="#tab-form" data-toggle="tab">大纲信息</a>
+                            <a href="#tab-form" data-toggle="tab">试卷信息</a>
                         </li>
                     </ul>
                     <!--tab头/-->
@@ -105,28 +105,53 @@
                         <!--表单内容-->
                         <div class="tab-pane active" id="tab-form">
                                 <div class="row data-type">
-                                    <form action="${pageContext.request.contextPath}/teacher/checked/createExaminationSyllabus.do" method="post">
-                                        <div class="col-md-2 title">大纲编号</div>
+                                    <form action="${pageContext.request.contextPath}/teacher/checked/createTestPaper.do" method="post">
+                                        <div class="col-md-2 title">试卷编号</div>
                                         <div class="col-md-10 data text">
                                             <input type="text" class="form-control" placeholder="由系统生成" readonly>
                                         </div>
 
-                                        <div class="col-md-2 title">课程ID</div>
+                                        <div class="col-md-2 title">试卷标题</div>
                                         <div class="col-md-10 data">
-                                            <select class="form-control" id="clazzAll" name="courseId" style="width: 100px">
+                                            <input type="text" class="form-control" placeholder="试卷标题" name="examinationSyllabusTitle">
+                                        </div>
+
+                                        <div class="col-md-2 title">大纲ID</div>
+                                        <div class="col-md-10 data">
+                                            <select class="form-control" id="clazzAll" name="examinationSyllabusId" style="width: 100px">
 
                                             </select>
                                         </div>
 
-                                        <div class="col-md-2 title">知识点编号</div>
+                                        <div class="col-md-2 title">试题明细</div>
                                         <div class="col-md-10 data" id="classCheckbox">
 
+                                        </div>
+
+                                        <div class="col-md-2 title">考试开始时间</div>
+                                        <div class="col-md-10 data">
+                                            <div class="input-group date">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
+                                                <input type="text" class="form-control pull-right" id="dateTimePicker" name="">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-2 title">考试结束时间</div>
+                                        <div class="col-md-10 data">
+                                            <div class="input-group date">
+                                                <div class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                                </div>
+                                                <input type="text" class="form-control pull-right" id="datepicker-a4" name="">
+                                            </div>
                                         </div>
 
                                         <div class="col-md-2 title"></div>
                                         <div class="col-md-10 data text-center">
                                             <button type="submit" class="btn bg-maroon" onclick="">保存</button>
-                                            <button type="button" class="btn bg-default" onclick="location.href='${pageContext.request.contextPath}/teacher/checked/showExaminationSyllabus.do?page=1&size=6'">返回</button>
+                                            <button type="button" class="btn bg-default" onclick="location.href='${pageContext.request.contextPath}/teacher/checked/showTestPaper.do?page=1&size=6'">返回</button>
                                         </div>
                                     </form>
                                 </div>
@@ -216,12 +241,12 @@
 <script>
     $(function(){
         $.ajax({
-            url:"${pageContext.request.contextPath}/teacher/checked/showSelectCourse.do",
+            url:"${pageContext.request.contextPath}/teacher/checked/showAllExaminationSyllabus.do",
             type:"post",
             dataType:"json",
-            success:function (teacherCourses) {
-                $(teacherCourses).each(function(index,teacherCourse){
-                    var option = new Option(teacherCourse.courseId,teacherCourse.courseId);
+            success:function (examinationSyllabusList) {
+                $(examinationSyllabusList).each(function(index,examinationSyllabus){
+                    var option = new Option(examinationSyllabus.examinationSyllabusId,examinationSyllabus.examinationSyllabusId);
                     var $option = $(option);
                     var select = $("#clazzAll");
                     select.append($option);
@@ -236,12 +261,12 @@
 
     $(function(){
         $.ajax({
-            url:"${pageContext.request.contextPath}/teacher/checked/showAllKnowledge.do",
+            url:"${pageContext.request.contextPath}/teacher/checked/showExaminationQuestions.do",
             type:"post",
             dataType:"json",
-            success:function (knowledgePoints) {
-                for(var i=0 ;i<knowledgePoints.length;i++){
-                    $("#classCheckbox").append("<input type='checkbox' value='"+knowledgePoints[i].knowledgePointsId+"' name='knowledgePointsId'/>"+knowledgePoints[i].knowledgePointsContent+"&nbsp;&nbsp;");
+            success:function (examinationQuestionsList) {
+                for(var i=0 ;i<examinationQuestionsList.length;i++){
+                    $("#classCheckbox").append("<input type='checkbox' value='"+examinationQuestionsList[i].examinationQuestionsId+"' name='examinationQuestionsId'/>"+examinationQuestionsList[i].examinationQuestionsId+"、"+examinationQuestionsList[i].examinationQuestionsContent+"&nbsp;&nbsp;");
                 }
             },
             error:function(){

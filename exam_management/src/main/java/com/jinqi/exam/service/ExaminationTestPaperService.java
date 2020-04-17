@@ -9,4 +9,6 @@ public interface ExaminationTestPaperService {
     List<ExaminationTestPaper> getAll(int page,int size);
 
     List<ExaminationTestPaper> getByTestPaperId(Integer testPaperId);
+
+    void createExaminationTestPaper(List<ExaminationTestPaper> examinationTestPapers);
 }

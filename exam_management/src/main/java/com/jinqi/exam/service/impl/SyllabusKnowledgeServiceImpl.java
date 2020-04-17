@@ -8,15 +8,20 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service("syllabusKnowledgeService")
 @Transactional(propagation= Propagation.REQUIRED,rollbackFor=Exception.class)
 public class SyllabusKnowledgeServiceImpl implements SyllabusKnowledgeService {
 
-    @Autowired
-    private SyllabusKnowledgeMapper syllabusKnowledgeMapper;
+        @Autowired
+        private SyllabusKnowledgeMapper syllabusKnowledgeMapper;
 
-    @Override
-    public Integer createSyllabusKnowledge(SyllabusKnowledge syllabusKnowledge) {
-        return syllabusKnowledgeMapper.insertSelective(syllabusKnowledge);
+        @Override
+        public Integer createSyllabusKnowledge(List<SyllabusKnowledge> syllabusKnowledges) {
+            for (SyllabusKnowledge syllabusKnowledge : syllabusKnowledges) {
+                syllabusKnowledgeMapper.insertSelective(syllabusKnowledge);
+            }
+        return 1;
     }
 }

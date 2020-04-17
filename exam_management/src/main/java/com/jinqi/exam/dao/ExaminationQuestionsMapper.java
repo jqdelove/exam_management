@@ -23,6 +23,8 @@ public interface ExaminationQuestionsMapper {
 
     ExaminationQuestions selectByPrimaryKey(Integer examinationQuestionsId);
 
+    List<ExaminationQuestions> selectAll();
+
     int updateByExampleSelective(@Param("record") ExaminationQuestions record, @Param("example") ExaminationQuestionsExample example);
 
     int updateByExample(@Param("record") ExaminationQuestions record, @Param("example") ExaminationQuestionsExample example);

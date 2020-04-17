@@ -114,7 +114,7 @@
       #{examinationSyllabusBeginTime,jdbcType=DATE}, #{examinationSyllabusEndTime,jdbcType=DATE}, 
       #{examinationSyllabusTitle,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.jinqi.exam.entity.TestPaper" >
+  <insert id="insertSelective" parameterType="com.jinqi.exam.entity.TestPaper" useGeneratedKeys="true" keyProperty="testPaperId">
     insert into T_TEST_PAPER
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="testPaperId != null" >
