@@ -25,6 +25,8 @@ public interface TestPaperMapper {
 
     List<TestPaper> selectAll();
 
+    List<TestPaper> selectAllAvailable();
+
     int updateByExampleSelective(@Param("record") TestPaper record, @Param("example") TestPaperExample example);
 
     int updateByExample(@Param("record") TestPaper record, @Param("example") TestPaperExample example);

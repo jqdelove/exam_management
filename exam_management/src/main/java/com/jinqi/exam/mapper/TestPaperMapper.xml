@@ -7,6 +7,7 @@
     <result column="EXAMINATION_SYLLABUS_BEGIN_TIME" property="examinationSyllabusBeginTime" jdbcType="DATE" />
     <result column="EXAMINATION_SYLLABUS_END_TIME" property="examinationSyllabusEndTime" jdbcType="DATE" />
     <result column="EXAMINATION_SYLLABUS_TITLE" property="examinationSyllabusTitle" jdbcType="VARCHAR" />
+    <result column="STATUSES" property="status" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -68,7 +69,7 @@
   </sql>
   <sql id="Base_Column_List" >
     TEST_PAPER_ID, EXAMINATION_SYLLABUS_ID, EXAMINATION_SYLLABUS_BEGIN_TIME, EXAMINATION_SYLLABUS_END_TIME, 
-    EXAMINATION_SYLLABUS_TITLE
+    EXAMINATION_SYLLABUS_TITLE, STATUSES
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.jinqi.exam.entity.TestPaperExample" >
     select
@@ -96,6 +97,14 @@
     <include refid="Base_Column_List" />
     from T_TEST_PAPER
   </select>
+
+  <select id="selectAllAvailable" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from T_TEST_PAPER
+    where STATUSES = 1
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from T_TEST_PAPER
     where TEST_PAPER_ID = #{testPaperId,jdbcType=INTEGER}
@@ -132,6 +141,9 @@
       <if test="examinationSyllabusTitle != null" >
         EXAMINATION_SYLLABUS_TITLE,
       </if>
+      <if test="status != null" >
+        STATUSES,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="testPaperId != null" >
@@ -148,6 +160,9 @@
       </if>
       <if test="examinationSyllabusTitle != null" >
         #{examinationSyllabusTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status},
       </if>
     </trim>
   </insert>
@@ -205,6 +220,9 @@
       </if>
       <if test="examinationSyllabusTitle != null" >
         EXAMINATION_SYLLABUS_TITLE = #{examinationSyllabusTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUSES = #{status},
       </if>
     </set>
     where TEST_PAPER_ID = #{testPaperId,jdbcType=INTEGER}

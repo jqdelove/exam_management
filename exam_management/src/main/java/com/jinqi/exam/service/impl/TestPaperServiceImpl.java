@@ -25,6 +25,11 @@ public class TestPaperServiceImpl implements TestPaperService {
     }
 
     @Override
+    public List<TestPaper> getAllAvailable(int page, int size) {
+        return testPaperMapper.selectAllAvailable();
+    }
+
+    @Override
     public Integer deleteTestPaper(Integer testPaperId) {
         return testPaperMapper.deleteByPrimaryKey(testPaperId);
     }
@@ -32,5 +37,15 @@ public class TestPaperServiceImpl implements TestPaperService {
     @Override
     public Integer createTestPaper(TestPaper testPaper) {
         return testPaperMapper.insertSelective(testPaper);
+    }
+
+    @Override
+    public Integer modify(TestPaper testPaper) {
+        return testPaperMapper.updateByPrimaryKeySelective(testPaper);
+    }
+
+    @Override
+    public TestPaper getTestPaper(Integer testPaperId) {
+        return testPaperMapper.selectByPrimaryKey(testPaperId);
     }
 }

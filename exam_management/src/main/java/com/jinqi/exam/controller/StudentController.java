@@ -3,11 +3,13 @@ package com.jinqi.exam.controller;
 import com.github.pagehelper.PageInfo;
 import com.jinqi.exam.entity.Score;
 import com.jinqi.exam.entity.Student;
+import com.jinqi.exam.entity.TestPaper;
 import com.jinqi.exam.exception.DuplicateEmailException;
 import com.jinqi.exam.exception.StudentDisableException;
 import com.jinqi.exam.exception.StudentNotFoundException;
 import com.jinqi.exam.service.ScoreService;
 import com.jinqi.exam.service.StudentService;
+import com.jinqi.exam.service.TestPaperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +32,9 @@ public class StudentController {
 
     @Autowired
     private ScoreService scoreService;
+
+    @Autowired
+    private TestPaperService testPaperService;
 
     /**
      * 跳转注册页面
@@ -171,5 +176,20 @@ public class StudentController {
         mv.addObject("scores",pageInfo);
         mv.setViewName("student/score");
         return mv;
+    }
+
+    /**
+     * 学生查看考试列表
+     * @param map
+     * @param page
+     * @param size
+     * @return
+     */
+    @RequestMapping("/checked/showTestPaper.do")
+    public String showTestPaper(Map map,@RequestParam(name = "page",required = true,defaultValue = "1")int page, @RequestParam(name = "size",required = true,defaultValue = "6")int size){
+        List<TestPaper> testPaperList = testPaperService.getAllAvailable(page, size);
+        PageInfo pageInfo = new PageInfo(testPaperList);
+        map.put("testPapers",pageInfo);
+        return "student/test-paper";
     }
 }

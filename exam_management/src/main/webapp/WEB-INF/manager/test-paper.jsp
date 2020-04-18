@@ -15,7 +15,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>课程管理</title>
+    <title>考试管理</title>
     <meta name="description" content="AdminLTE2定制版">
     <meta name="keywords" content="AdminLTE2定制版">
 
@@ -64,11 +64,11 @@
 <div class="wrapper">
 
     <!-- 页面头部 -->
-    <jsp:include page="/WEB-INF/student/header.jsp"></jsp:include>
+    <jsp:include page="/WEB-INF/manager/header.jsp"></jsp:include>
     <!-- 页面头部 /-->
 
     <!-- 导航侧栏 -->
-    <jsp:include page="/WEB-INF/student/aside.jsp"></jsp:include>
+    <jsp:include page="/WEB-INF/manager/aside.jsp"></jsp:include>
     <!-- 导航侧栏 /-->
 
     <!-- 内容区域 -->
@@ -77,13 +77,13 @@
         <!-- 内容头部 -->
         <section class="content-header">
             <h1>
-                课程管理
-                <small>全部课程</small>
+                考试管理
+                <small>全部试卷</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="all-admin-index.html"><i class="fa fa-dashboard"></i> 首页</a></li>
-                <li><a href="all-order-manage-list.html">考务管理</a></li>
-                <li class="active">课程管理</li>
+                <li><a href="all-order-manage-list.html">考试管理</a></li>
+                <li class="active">全部试卷</li>
             </ol>
         </section>
         <!-- 内容头部 /-->
@@ -107,11 +107,12 @@
                             <div class="form-group form-inline">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-default" title="新建"
-                                            onclick='location.href="#"'><i
-                                            class="fa fa-file-o"></i> 新建
+                                            onclick='location.href="${pageContext.request.contextPath}"'>
+                                        <i class="fa fa-file-o"></i> 新建
                                     </button>
                                     <button type="button" class="btn btn-default" title="删除"
-                                            onclick='confirm("你确认要删除吗？")'><i class="fa fa-trash-o"></i> 删除
+                                            onclick='deleteTestPaper()'>
+                                        <i class="fa fa-trash-o"></i> 删除
                                     </button>
                                     <button type="button" class="btn btn-default" title="开启"
                                             onclick='confirm("你确认要开启吗？")'><i class="fa fa-check"></i> 开启
@@ -141,36 +142,34 @@
                                     <input id="selall" type="checkbox" class="icheckbox_square-blue">
                                 </th>
                                 <th class="sorting_asc">ID</th>
-                                <th class="sorting">课程编号</th>
-                                <th class="sorting">课程名称</th>
-                                <th class="sorting">开课日期</th>
-                                <th class="sorting">结课日期</th>
-                                <th class="sorting">课程所属专业</th>
+                                <th class="sorting">试卷编号</th>
+                                <th class="sorting">试卷标题</th>
+                                <th class="sorting">大纲编号</th>
+                                <th class="sorting">考试开始时间</th>
+                                <th class="sorting">考试结束时间</th>
+
                                 <th class="text-center">操作</th>
                             </tr>
                             </thead>
-
                             <tbody>
-                            <c:forEach items="${scores.list}" var="score" varStatus="num">
+                            <c:forEach items="${testPapers.list}" var="testPaper" varStatus="num">
                                 <tr>
-                                    <td><input name="ids" type="checkbox"></td>
+                                    <td><input name="ids" id="ids" type="checkbox" value="${testPaper.testPaperId}"></td>
                                     <td>
-                                            ${num.count}
+                                        ${num.count}
                                     </td>
-                                    <td>${score.course.courseId}</td>
-                                    <td>${score.course.courseName}</td>
-                                    <td><fmt:formatDate value="${score.course.courseBeginTime}"
+                                    <td>${testPaper.testPaperId}</td>
+                                    <td>${testPaper.examinationSyllabusTitle}</td>
+                                    <td>${testPaper.examinationSyllabusId}</td>
+                                    <td><fmt:formatDate value="${testPaper.examinationSyllabusBeginTime}"
                                                         pattern="yyyy年MM月dd日 "/></td>
-                                    <td><fmt:formatDate value="${score.course.courseEndTime}"
+                                    <td><fmt:formatDate value="${testPaper.examinationSyllabusEndTime}"
                                                         pattern="yyyy年MM月dd日 "/></td>
-                                    <td>${score.course.courseMajor}</td>
-
                                     <td class="text-center">
+                                        <c:if test="${testPaper.status eq 2}"><button type="button" class="btn bg-olive btn-xs" onclick='location.href="${pageContext.request.contextPath}/manager/checked/enableTestPaper.do?testPaperId=${testPaper.testPaperId}"'>启用</button></c:if>
+                                        <c:if test="${testPaper.status eq 1}"><button type="button" class="btn bg-red-active btn-xs" onclick='location.href="${pageContext.request.contextPath}/manager/checked/disableTestPaper.do?testPaperId=${testPaper.testPaperId}"'>禁用</button></c:if>
                                         <button type="button" class="btn bg-olive btn-xs"
-                                                onclick='location.href="${pageContext.request.contextPath}"'>详情
-                                        </button>
-                                        <button type="button" class="btn bg-purple-active btn-xs"
-                                                onclick='location.href="${pageContext.request.contextPath}"'>编辑
+                                                onclick='location.href="${pageContext.request.contextPath}/manager/checked/showTestPaperDtl.do?testPaperId=${testPaper.testPaperId}"'>编辑考试信息
                                         </button>
                                     </td>
                                 </tr>
@@ -200,7 +199,7 @@
                 <div class="box-footer">
                     <div class="pull-left">
                         <div class="form-group form-inline">
-                            当前第${scores.pageNum} 页，总共${scores.pages} 页，共${scores.total} 条数据。 每页
+                            当前第${testPapers.pageNum} 页，总共${testPapers.pages} 页，共${testPapers.total} 条数据。 每页
                             <select class="form-control" id="changePageSize" onchange="changePageSize()">
                                 <option>1</option>
                                 <option>2</option>
@@ -215,22 +214,22 @@
                     <div class="box-tools pull-right">
                         <ul class="pagination">
                             <li>
-                                <a href="${pageContext.request.contextPath}/student/checked/showCourse.do?page=1&size=${scores.pageSize}"
+                                <a href="${pageContext.request.contextPath}/manager/checked/showTestPaper.do?page=1&size=${testPapers.pageSize}"
                                    aria-label="Previous">首页</a>
                             </li>
                             <li>
-                                <a href="${pageContext.request.contextPath}/student/checked/showCourse.do?page=${scores.pageNum-1}&size=${scores.pageSize}">上一页</a>
+                                <a href="${pageContext.request.contextPath}/manager/checked/showTestPaper.do?page=${testPapers.pageNum-1}&size=${testPapers.pageSize}">上一页</a>
                             </li>
-                            <c:forEach begin="1" end="${scores.pages}" var="pageNum">
+                            <c:forEach begin="1" end="${testPapers.pages}" var="pageNum">
                                 <li>
-                                    <a href="${pageContext.request.contextPath}/student/checked/showCourse.do?page=${pageNum}&size=${scores.pageSize}">${pageNum}</a>
+                                    <a href="${pageContext.request.contextPath}/manager/checked/showTestPaper.do?page=${pageNum}&size=${testPapers.pageSize}">${pageNum}</a>
                                 </li>
                             </c:forEach>
                             <li>
-                                <a href="${pageContext.request.contextPath}/student/checked/showCourse.do?page=${scores.pageNum+1}&size=${scores.pageSize}">下一页</a>
+                                <a href="${pageContext.request.contextPath}/manager/checked/showTestPaper.do?page=${testPapers.pageNum+1}&size=${testPapers.pageSize}">下一页</a>
                             </li>
                             <li>
-                                <a href="${pageContext.request.contextPath}/student/checked/showCourse.do?page=${scores.pages}&size=${scores.pageSize}"
+                                <a href="${pageContext.request.contextPath}/manager/checked/showTestPaper.do?page=${testPapers.pages}&size=${testPapers.pageSize}"
                                    aria-label="Next">尾页</a>
                             </li>
                         </ul>
@@ -312,9 +311,15 @@
         //获取下拉框的值
         var pageSize = $("#changePageSize").val();
 
-        //向服务器发送请求，改变没页显示条数
-        location.href = "${pageContext.request.contextPath}/student/checked/showCourse.do?page=${scores.pageNum}&size="
+        //向服务器发送请求，改变每页显示条数
+        location.href = "${pageContext.request.contextPath}/manager/checked/showTestPaper.do?page=${testPapers.pageNum}&size="
             + pageSize;
+    }
+
+    function deleteTestPaper() {
+        var testPaperId = $("#ids").val();
+
+        location.href = "${pageContext.request.contextPath}/manager/checked/deleteTestPaper.do?testPaperId=" + testPaperId;
     }
 
     $(document).ready(function () {
@@ -336,6 +341,7 @@
             liObj.addClass("active");
         }
     }
+
 
     $(document).ready(function () {
 

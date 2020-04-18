@@ -514,6 +514,8 @@ public class TeacherController {
      */
     @RequestMapping("/checked/createTestPaper.do")
     public String createTestPaper(@ModelAttribute TestPaper testPaper, HttpServletRequest request){
+        //设置试卷未启用
+        testPaper.setStatus(2);
         testPaperService.createTestPaper(testPaper);
         //前台页面checkbox传过来的参数为数组
         String[] examinationQuestionsIds = request.getParameterValues("examinationQuestionsId");

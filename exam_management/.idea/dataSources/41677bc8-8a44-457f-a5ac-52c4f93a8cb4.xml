@@ -1632,35 +1632,41 @@
       <DataType>varchar(100)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="361" parent="255" name="PRIMARY">
+    <column id="361" parent="255" name="STATUSES">
+      <Position>6</Position>
+      <Comment>试卷状态</Comment>
+      <DataType>int(11)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="362" parent="255" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>TEST_PAPER_ID</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="362" parent="256" name="admin_id">
+    <column id="363" parent="256" name="admin_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="363" parent="256" name="admin_name">
+    <column id="364" parent="256" name="admin_name">
       <Position>2</Position>
       <DataType>varchar(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
       <Collation>latin1_swedish_ci</Collation>
     </column>
-    <column id="364" parent="256" name="admin_pwd">
+    <column id="365" parent="256" name="admin_pwd">
       <Position>3</Position>
       <DataType>varchar(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
       <Collation>latin1_swedish_ci</Collation>
     </column>
-    <key id="365" parent="256" name="PRIMARY">
+    <key id="366" parent="256" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>admin_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="366" parent="257" name="syllabus_knowledge_id">
+    <column id="367" parent="257" name="syllabus_knowledge_id">
       <Position>1</Position>
       <Comment>大纲知识点关系编号</Comment>
       <DataType>int(11)|0s</DataType>
@@ -1668,19 +1674,19 @@
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="367" parent="257" name="examination_syllabus_id">
+    <column id="368" parent="257" name="examination_syllabus_id">
       <Position>2</Position>
       <Comment>大纲编号</Comment>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="368" parent="257" name="knowledge_points_id">
+    <column id="369" parent="257" name="knowledge_points_id">
       <Position>3</Position>
       <Comment>知识点编号</Comment>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="369" parent="257" name="PRIMARY">
+    <key id="370" parent="257" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>syllabus_knowledge_id</ColNames>
       <Primary>1</Primary>

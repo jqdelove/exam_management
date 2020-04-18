@@ -14,6 +14,16 @@ public class TestPaper implements Serializable {
 
     private String examinationSyllabusTitle;
 
+    private Integer status;
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     private static final long serialVersionUID = 1L;
 
     public Integer getTestPaperId() {

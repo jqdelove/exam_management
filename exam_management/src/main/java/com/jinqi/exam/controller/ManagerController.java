@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.jinqi.exam.entity.*;
 import com.jinqi.exam.exception.ManagerNotFoundException;
 import com.jinqi.exam.service.*;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +12,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -36,6 +40,9 @@ public class ManagerController {
 
     @Autowired
     private CourseService courseService;
+
+    @Autowired
+    private TestPaperService testPaperService;
 
     /**
      * 跳转登录页面
@@ -180,7 +187,7 @@ public class ManagerController {
         tmp.setTeacherId(teacherId);
         tmp.setTeacherStatus(1);
         teacherService.updateInfo(tmp);
-        return "redirect:/manager/checked/showTeacher.do";
+        return "redirect:/manager/checked/showTeacher.do?page=1&size=6";
     }
 
     /**
@@ -194,7 +201,7 @@ public class ManagerController {
         tmp.setTeacherId(teacherId);
         tmp.setTeacherStatus(2);
         teacherService.updateInfo(tmp);
-        return "redirect:/manager/checked/showTeacher.do";
+        return "redirect:/manager/checked/showTeacher.do?page=1&size=6";
     }
 
     /**
@@ -353,5 +360,100 @@ public class ManagerController {
         course.setCourseId(courseId);
         courseService.updateInfo(course);
         return "redirect:/manager/checked/showCourseDtl.do?courseId=" + courseId;
+    }
+
+    /**
+     * 管理员查看试卷列表
+     * @param map
+     * @param page
+     * @param size
+     * @return
+     */
+    @RequestMapping("/checked/showTestPaper.do")
+    public String showTestPaper(Map<String, PageInfo<TestPaper>> map, @RequestParam(name = "page",required = true,defaultValue = "1")int page, @RequestParam(name = "size",required = true,defaultValue = "6")int size){
+        List<TestPaper> testPapers = testPaperService.getAll(page, size);
+        PageInfo<TestPaper> pageInfo = new PageInfo<>(testPapers);
+        map.put("testPapers",pageInfo);
+        return "manager/test-paper";
+    }
+
+    /**
+     * 删除试卷
+     * @param testPaperId
+     * @return
+     */
+    @RequestMapping("/checked/deleteTestPaper.do")
+    public String deleteTestPaper(Integer testPaperId){
+        testPaperService.deleteTestPaper(testPaperId);
+        return "redirect:/manager/checked/showTestPaper.do?page=1&size=6";
+    }
+
+    /**
+     * 启用试卷
+     * @param testPaperId
+     * @return
+     */
+    @RequestMapping("/checked/enableTestPaper.do")
+    public String enableTestPaper(Integer testPaperId){
+        TestPaper testPaper = new TestPaper();
+        testPaper.setTestPaperId(testPaperId);
+        testPaper.setStatus(1);
+        testPaperService.modify(testPaper);
+        return "redirect:/manager/checked/showTestPaper.do?page=1&size=6";
+    }
+
+    /**
+     * 禁用试卷
+     * @param testPaperId
+     * @return
+     */
+    @RequestMapping("/checked/disableTestPaper.do")
+    public String disableTestPaper(Integer testPaperId){
+        TestPaper testPaper = new TestPaper();
+        testPaper.setTestPaperId(testPaperId);
+        testPaper.setStatus(2);
+        testPaperService.modify(testPaper);
+        return "redirect:/manager/checked/showTestPaper.do?page=1&size=6";
+    }
+
+    /**
+     * 显示考试信息
+     * @param testPaperId
+     * @return
+     */
+    @RequestMapping("/checked/showTestPaperDtl.do")
+    public String showTestPaperDtl(Integer testPaperId,Map map){
+        TestPaper testPaper = testPaperService.getTestPaper(testPaperId);
+        map.put("testPaper",testPaper);
+        return "manager/test-paper-edit";
+    }
+
+    /**
+     * 编辑考试信息
+     * @param testPaperId
+     * @param examinationSyllabusTitle
+     * @param examinationSyllabusBeginTime
+     * @param examinationSyllabusEndTime
+     * @return
+     */
+    @RequestMapping("/checked/editTestPaper.do")
+    public String editTestPaper(Integer testPaperId,@Param("examinationSyllabusTitle") String examinationSyllabusTitle, @Param("examinationSyllabusBeginTime") String examinationSyllabusBeginTime,@Param("examinationSyllabusEndTime") String examinationSyllabusEndTime) throws ParseException {
+        //前台页面提交的日期参数格式为yyyy年MM月dd日，因此转为Date类型需要相同的格式
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
+        TestPaper testPaper = new TestPaper();
+        testPaper.setTestPaperId(testPaperId);
+        testPaper.setExaminationSyllabusTitle(examinationSyllabusTitle);
+        Date beginTime = null;
+        Date endTime = null;
+        if (!"".equals(examinationSyllabusBeginTime)) {
+            beginTime = sdf.parse(examinationSyllabusBeginTime);
+        }
+        if (!"".equals(examinationSyllabusEndTime)) {
+            endTime= sdf.parse(examinationSyllabusEndTime);
+        }
+        testPaper.setExaminationSyllabusBeginTime(beginTime);
+        testPaper.setExaminationSyllabusEndTime(endTime);
+        testPaperService.modify(testPaper);
+        return "redirect:/manager/checked/showTestPaperDtl.do?testPaperId=" + testPaperId;
     }
 }

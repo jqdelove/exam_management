@@ -42,7 +42,7 @@
                         </a>
                     </li>
                     <li id="system-setting">
-                        <a href="${pageContext.request.contextPath}/sysLog/findAll.do">
+                        <a href="${pageContext.request.contextPath}/student/checked/showTestPaper.do?page=1&size=6">
                             <i class="fa fa-circle-o"></i> 考试管理
                         </a>
                     </li>
