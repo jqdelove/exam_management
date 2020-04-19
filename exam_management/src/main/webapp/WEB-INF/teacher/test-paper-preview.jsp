@@ -77,7 +77,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="${pageContext.request.contextPath}/teacher/checked/showMain.do"><i class="fa fa-dashboard"></i> 首页</a></li>
-                <li><a href="${pageContext.request.contextPath}/teacher/checked/showClazz.do?page=1&size=6">试卷管理</a></li>
+                <li><a href="${pageContext.request.contextPath}/teacher/checked/showTestPaper.do?page=1&size=6">试卷管理</a></li>
                 <li class="active">预览试卷</li>
             </ol>
         </section>

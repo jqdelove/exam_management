@@ -92,19 +92,19 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/webapp" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.jinqi.exam.filter" />
-      <recent name="com.jinqi.exam.exception" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/webapp/WEB-INF/student" />
       <recent name="$PROJECT_DIR$/src/main/webapp/WEB-INF/manager" />
       <recent name="$PROJECT_DIR$/src/main/webapp/WEB-INF/teacher" />
       <recent name="$PROJECT_DIR$/src/main/webapp/img" />
       <recent name="$PROJECT_DIR$/src/main/resources" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.jinqi.exam.filter" />
+      <recent name="com.jinqi.exam.exception" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/webapp" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -263,6 +263,7 @@
       <workItem from="1587086321151" duration="5694000" />
       <workItem from="1587111591350" duration="5740000" />
       <workItem from="1587178160580" duration="9946000" />
+      <workItem from="1587278837235" duration="8856000" />
     </task>
     <servers />
   </component>

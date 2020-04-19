@@ -7,4 +7,6 @@ import java.util.List;
 public interface ExaminationQuestionsService {
 
     List<ExaminationQuestions> getAll();
+
+    Integer checkAnswer(Integer examinationQuestionsId,String examinationQuestionAnswer);
 }

@@ -1,15 +1,11 @@
 package com.jinqi.exam.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.jinqi.exam.entity.Score;
-import com.jinqi.exam.entity.Student;
-import com.jinqi.exam.entity.TestPaper;
+import com.jinqi.exam.entity.*;
 import com.jinqi.exam.exception.DuplicateEmailException;
 import com.jinqi.exam.exception.StudentDisableException;
 import com.jinqi.exam.exception.StudentNotFoundException;
-import com.jinqi.exam.service.ScoreService;
-import com.jinqi.exam.service.StudentService;
-import com.jinqi.exam.service.TestPaperService;
+import com.jinqi.exam.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
@@ -35,6 +32,15 @@ public class StudentController {
 
     @Autowired
     private TestPaperService testPaperService;
+
+    @Autowired
+    private ExaminationTestPaperService examinationTestPaperService;
+
+    @Autowired
+    private ExaminationQuestionsService examinationQuestionsService;
+
+    @Autowired
+    private ExaminationSyllabusService examinationSyllabusService;
 
     /**
      * 跳转注册页面
@@ -191,5 +197,62 @@ public class StudentController {
         PageInfo pageInfo = new PageInfo(testPaperList);
         map.put("testPapers",pageInfo);
         return "student/test-paper";
+    }
+
+    /**
+     * 学生进入考试
+     * @param testPaperId
+     * @return
+     */
+    @RequestMapping("/checked/showTestPaperDtl.do")
+    public String showTestPaperDtl(Integer testPaperId,Map map,Integer examinationSyllabusId,HttpSession session){
+        List<ExaminationTestPaper> examinationTestPapers = examinationTestPaperService.getByTestPaperId(testPaperId);
+        map.put("examinationTestPapers",examinationTestPapers);
+        session.setAttribute("examinationSyllabusId",examinationSyllabusId);
+        return "student/test-paper-process";
+    }
+
+    /**
+     * 学生提交试卷
+     * @return
+     */
+    @RequestMapping("/checked/checkAnswer.do")
+    public String checkAnswer(HttpServletRequest request,HttpSession session) {
+        //暂时为三题
+        String examinationSelect1 = request.getParameter("examinationSelect1");
+        String[] split1 = examinationSelect1.split("");
+        String examinationSelect2 = request.getParameter("examinationSelect2");
+        String[] split2 = examinationSelect2.split("");
+        String examinationSelect3 = request.getParameter("examinationSelect3");
+        String[] split3 = examinationSelect3.split("");
+        //初始化分数，一题答对加10分
+        Integer score = 0;
+        Integer result1 = examinationQuestionsService.checkAnswer(Integer.parseInt(split1[0]), split1[2]);
+        if (result1 == 1){
+            score+=10;
+        }
+        Integer result2 = examinationQuestionsService.checkAnswer(Integer.parseInt(split2[0]), split2[2]);
+        if (result2 == 1){
+            score+=10;
+        }
+        Integer result3 = examinationQuestionsService.checkAnswer(Integer.parseInt(split3[0]), split3[2]);
+        if (result3 == 1){
+            score+=10;
+        }
+        //获得session中存放的大纲id
+        Integer examinationSyllabusId = (Integer) session.getAttribute("examinationSyllabusId");
+        //利用大纲id查询对应的课程id
+        List<ExaminationSyllabus> examinationSyllabus =
+                examinationSyllabusService.getExaminationSyllabus(examinationSyllabusId);
+        ExaminationSyllabus examinationSyllabus1 = examinationSyllabus.get(0);
+        Student stu = (Student) session.getAttribute("stu");
+        Score scoreReal = new Score();
+        scoreReal.setCourseId(examinationSyllabus1.getCourseId());
+        scoreReal.setScoreNumber(score);
+        scoreReal.setStudentId(stu.getStudentId());
+        scoreService.createScore(scoreReal);
+        //移除session中存放的大纲id
+        session.removeAttribute("examinationSyllabusId");
+        return "redirect:/student/checked/showTestPaper.do?page=1&size=6";
     }
 }

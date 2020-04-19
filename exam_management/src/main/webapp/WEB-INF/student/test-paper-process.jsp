@@ -14,7 +14,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>预览试卷</title>
+    <title>开始考试</title>
     <meta name="description" content="AdminLTE2定制版">
     <meta name="keywords" content="AdminLTE2定制版">
 
@@ -59,11 +59,11 @@
 <div class="wrapper">
 
     <!-- 页面头部 -->
-    <jsp:include page="/WEB-INF/teacher/header.jsp"></jsp:include>
+    <jsp:include page="/WEB-INF/student/header.jsp"></jsp:include>
     <!-- 页面头部 /-->
 
     <!-- 导航侧栏 -->
-    <jsp:include page="/WEB-INF/teacher/aside.jsp"></jsp:include>
+    <jsp:include page="/WEB-INF/student/aside.jsp"></jsp:include>
     <!-- 导航侧栏 /-->
 
     <!-- 内容区域 -->
@@ -72,13 +72,13 @@
         <!-- 内容头部 -->
         <section class="content-header">
             <h1>
-                试卷管理
-                <small>预览试卷</small>
+                考试管理
+                <small>开始考试</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="${pageContext.request.contextPath}/teacher/checked/showMain.do"><i class="fa fa-dashboard"></i> 首页</a></li>
-                <li><a href="${pageContext.request.contextPath}/teacher/checked/showTestPaper.do?page=1&size=6">试卷管理</a></li>
-                <li class="active">预览试卷</li>
+                <li><a href="${pageContext.request.contextPath}/student/checked/showMain.do"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li><a href="${pageContext.request.contextPath}/student/checked/showTestPaper.do?page=1&size=6">考试管理</a></li>
+                <li class="active">开始考试</li>
             </ol>
         </section>
         <!-- 内容头部 /-->
@@ -105,21 +105,21 @@
                         <!--表单内容-->
                         <div class="tab-pane active" id="tab-form">
                                 <div class="row data-type">
-                                    <form action="${pageContext.request.contextPath}" method="post">
+                                    <form action="${pageContext.request.contextPath}/student/checked/checkAnswer.do" method="post">
                                         <c:forEach items="${examinationTestPapers}" var="examinationTestPaper" varStatus="num">
                                             ${num.count}、
                                             ${examinationTestPaper.examinationQuestions.examinationQuestionsContent}<br>
-                                            <input type="radio" name="testPaper1"/>${examinationTestPaper.examinationQuestions.examinationSelect1}&nbsp;&nbsp;
-                                            <input type="radio" name="testPaper2"/>${examinationTestPaper.examinationQuestions.examinationSelect2}&nbsp;&nbsp;
-                                            <input type="radio" name="testPaper3"/>${examinationTestPaper.examinationQuestions.examinationSelect3}&nbsp;&nbsp;
-                                            <input type="radio" name="testPaper4"/>${examinationTestPaper.examinationQuestions.examinationSelect4}<br>
+                                            <input type="radio" name="examinationSelect${num.count}" value="${examinationTestPaper.examinationQuestionsId} ${examinationTestPaper.examinationQuestions.examinationSelect1}"/>${examinationTestPaper.examinationQuestions.examinationSelect1}&nbsp;&nbsp;
+                                            <input type="radio" name="examinationSelect${num.count}" value="${examinationTestPaper.examinationQuestionsId} ${examinationTestPaper.examinationQuestions.examinationSelect2}"/>${examinationTestPaper.examinationQuestions.examinationSelect2}&nbsp;&nbsp;
+                                            <input type="radio" name="examinationSelect${num.count}" value="${examinationTestPaper.examinationQuestionsId} ${examinationTestPaper.examinationQuestions.examinationSelect3}"/>${examinationTestPaper.examinationQuestions.examinationSelect3}&nbsp;&nbsp;
+                                            <input type="radio" name="examinationSelect${num.count}" value="${examinationTestPaper.examinationQuestionsId} ${examinationTestPaper.examinationQuestions.examinationSelect4}"/>${examinationTestPaper.examinationQuestions.examinationSelect4}<br>
                                             <br>
-
                                         </c:forEach>
-                                    </form>
                                     <div class="col-md-15 data text-center">
-                                        <button type="button" class="btn bg-orange-active bg-default" onclick="location.href='${pageContext.request.contextPath}/teacher/checked/showTestPaper.do?page=1&size=6'">返回</button>
+                                        <button type="submit" class="btn bg-green">提交答案</button>
+                                        <button type="button" class="btn bg-orange-active bg-default" onclick="location.href='${pageContext.request.contextPath}/student/checked/showTestPaper.do?page=1&size=6'">返回</button>
                                     </div>
+                                    </form>
                                 </div>
                         </div>
                         <!--表单内容/-->

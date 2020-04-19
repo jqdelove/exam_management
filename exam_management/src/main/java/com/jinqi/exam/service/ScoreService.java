@@ -13,4 +13,6 @@ public interface ScoreService {
     List<Score> getScore(Integer studentId);
 
     List<Score> getScores(Integer courseId);
+
+    Integer createScore(Score score);
 }

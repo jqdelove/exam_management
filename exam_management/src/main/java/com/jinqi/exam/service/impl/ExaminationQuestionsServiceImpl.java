@@ -21,4 +21,15 @@ public class ExaminationQuestionsServiceImpl implements ExaminationQuestionsServ
     public List<ExaminationQuestions> getAll() {
         return examinationQuestionsMapper.selectAll();
     }
+
+    @Override
+    public Integer checkAnswer(Integer examinationQuestionsId,String examinationQuestionAnswer) {
+        ExaminationQuestions examinationQuestions =
+                examinationQuestionsMapper.selectByPrimaryKey(examinationQuestionsId);
+        if (examinationQuestionAnswer.equals(examinationQuestions.getExaminationQuestionsAnswer())){
+            return 1;
+        }else {
+            return 2;
+        }
+    }
 }

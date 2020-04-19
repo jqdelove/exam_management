@@ -34,4 +34,9 @@ public class ScoreServiceImpl implements ScoreService {
     public List<Score> getScores(Integer courseId) {
         return scoreMapper.selectByCourseId(courseId);
     }
+
+    @Override
+    public Integer createScore(Score score) {
+        return scoreMapper.insertSelective(score);
+    }
 }

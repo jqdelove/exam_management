@@ -167,7 +167,7 @@
                                                         pattern="yyyy年MM月dd日 "/></td>
                                     <td class="text-center">
                                         <button type="button" class="btn bg-olive btn-xs"
-                                                onclick='location.href="${pageContext.request.contextPath}/student/checked/showTestPaperDtl.do?testPaperId=${testPaper.testPaperId}"'>进入考试
+                                                onclick='location.href="${pageContext.request.contextPath}/student/checked/showTestPaperDtl.do?testPaperId=${testPaper.testPaperId}&examinationSyllabusId=${testPaper.examinationSyllabusId}"'>进入考试
                                         </button>
                                     </td>
                                 </tr>
