@@ -217,7 +217,7 @@ public class StudentController {
      * @return
      */
     @RequestMapping("/checked/checkAnswer.do")
-    public String checkAnswer(HttpServletRequest request,HttpSession session) {
+    public String checkAnswer(@org.jetbrains.annotations.NotNull HttpServletRequest request, HttpSession session) {
         //暂时为三题
         String examinationSelect1 = request.getParameter("examinationSelect1");
         String[] split1 = examinationSelect1.split("");
@@ -225,6 +225,41 @@ public class StudentController {
         String[] split2 = examinationSelect2.split("");
         String examinationSelect3 = request.getParameter("examinationSelect3");
         String[] split3 = examinationSelect3.split("");
+        String[] split4 = null;
+        if (null != request.getParameter("examinationSelect4")){
+            String examinationSelect4 = request.getParameter("examinationSelect4");
+            split4 = examinationSelect4.split("");
+        }
+        String[] split5 = null;
+        if (null != request.getParameter("examinationSelect5")){
+            String examinationSelect5 = request.getParameter("examinationSelect5");
+            split5 = examinationSelect5.split("");
+        }
+        String[] split6 = null;
+        if (null != request.getParameter("examinationSelect6")){
+            String examinationSelect6 = request.getParameter("examinationSelect6");
+            split6 = examinationSelect6.split("");
+        }
+        String[] split7 = null;
+        if (null != request.getParameter("examinationSelect7")){
+            String examinationSelect7 = request.getParameter("examinationSelect7");
+            split7 = examinationSelect7.split("");
+        }
+        String[] split8 = null;
+        if (null != request.getParameter("examinationSelect8")){
+            String examinationSelect8 = request.getParameter("examinationSelect8");
+            split8 = examinationSelect8.split("");
+        }
+        String[] split9 = null;
+        if (null != request.getParameter("examinationSelect9")){
+            String examinationSelect9 = request.getParameter("examinationSelect9");
+            split9 = examinationSelect9.split("");
+        }
+        String[] split10 = null;
+        if (null != request.getParameter("examinationSelect10")){
+            String examinationSelect10 = request.getParameter("examinationSelect10");
+            split10 = examinationSelect10.split("");
+        }
         //初始化分数，一题答对加10分
         Integer score = 0;
         Integer result1 = examinationQuestionsService.checkAnswer(Integer.parseInt(split1[0]), split1[2]);
@@ -237,6 +272,38 @@ public class StudentController {
         }
         Integer result3 = examinationQuestionsService.checkAnswer(Integer.parseInt(split3[0]), split3[2]);
         if (result3 == 1){
+            score+=10;
+        }
+        assert split4 != null;
+        Integer result4 = examinationQuestionsService.checkAnswer(Integer.parseInt(split4[0]), split3[2]);
+        if (result4 == 1){
+            score+=10;
+        }
+        Integer result5 = examinationQuestionsService.checkAnswer(Integer.parseInt(split5[0]), split5[2]);
+        if (result5 == 1){
+            score+=10;
+        }
+        Integer result6 = examinationQuestionsService.checkAnswer(Integer.parseInt(split6[0]), split6[2]);
+        if (result6 == 1){
+            score+=10;
+        }
+        Integer result7 = examinationQuestionsService.checkAnswer(Integer.parseInt(split7[0]), split7[2]);
+        if (result7 == 1){
+            score+=10;
+        }
+        assert split8 != null;
+        Integer result8 = examinationQuestionsService.checkAnswer(Integer.parseInt(split8[0]), split8[2]);
+        if (result8 == 1){
+            score+=10;
+        }
+        assert split9 != null;
+        Integer result9 = examinationQuestionsService.checkAnswer(Integer.parseInt(split9[0]), split9[2]);
+        if (result9 == 1){
+            score+=10;
+        }
+        assert split10 != null;
+        Integer result10 = examinationQuestionsService.checkAnswer(Integer.parseInt(split10[0]), split10[2]);
+        if (result10 == 1){
             score+=10;
         }
         //获得session中存放的大纲id
