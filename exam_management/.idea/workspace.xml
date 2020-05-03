@@ -65,9 +65,9 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="localRepository" value="/opt/apache-maven-3.6.0/repository" />
-        <option name="mavenHome" value="/opt/apache-maven-3.6.0" />
-        <option name="userSettingsFile" value="/opt/apache-maven-3.6.0/conf/settings.xml" />
+        <option name="localRepository" value="$USER_HOME$/Downloads/apache-maven-3.6.3/repository" />
+        <option name="mavenHome" value="$USER_HOME$/Downloads/apache-maven-3.6.3" />
+        <option name="userSettingsFile" value="$USER_HOME$/Downloads/apache-maven-3.6.3/conf/settings.xml" />
       </MavenGeneralSettings>
     </option>
     <option name="importingSettings">
@@ -85,7 +85,14 @@
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/webapp/WEB-INF/student" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.24367817" />
@@ -121,7 +128,6 @@
   </component>
   <component name="RunManager">
     <configuration name="Tomcat 8.5.27" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.5.27" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
-      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/exam_management/" />
       <option name="UPDATE_ON_FRAME_DEACTIVATION" value="true" />
       <option name="UPDATE_CLASSES_ON_FRAME_DEACTIVATION" value="true" />
       <deployment>
@@ -265,7 +271,12 @@
       <workItem from="1587178160580" duration="9946000" />
       <workItem from="1587278837235" duration="8856000" />
       <workItem from="1587292974383" duration="615000" />
-      <workItem from="1587540954250" duration="1516000" />
+      <workItem from="1587540954250" duration="2766000" />
+      <workItem from="1588130273534" duration="749000" />
+      <workItem from="1588397995302" duration="6067000" />
+      <workItem from="1588493418596" duration="487000" />
+      <workItem from="1588493937681" duration="537000" />
+      <workItem from="1588494815761" duration="682000" />
     </task>
     <servers />
   </component>

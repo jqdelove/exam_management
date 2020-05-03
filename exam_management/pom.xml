@@ -201,6 +201,13 @@
       <version>1.0</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.16.14</version>
+      <scope>provided</scope>
+    </dependency>
+
     <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
     <!--  使用fastjson对普通对象进行json转化    -->
     <dependency>
