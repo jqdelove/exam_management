@@ -41,22 +41,26 @@
     <div class="register-box-body">
         <p class="login-box-msg">学生注册</p>
 
-        <form action="${pageContext.request.contextPath}/student/register.do" method="post">
+        <form action="${pageContext.request.contextPath}/student/register.do" onsubmit="valForm()" method="post">
             <div class="form-group has-feedback">
                 <input type="text" class="form-control" placeholder="全名" name="studentName" id="studentName">
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                <span id="studentNameMessage" class="s1"></span>
             </div>
             <div class="form-group has-feedback">
                 <input type="email" class="form-control" placeholder="Email" name="studentEmail" id="studentEmail">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                <span id="studentEmailMessage" class="s1"></span>
             </div>
             <div class="form-group has-feedback">
                 <input type="password" class="form-control" placeholder="密码" name="studentPwd" id="studentPwd">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                <span id="studentPwdMessage" class="s1"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder="确认密码" id="studentRePwd">
+                <input type="password" class="form-control" placeholder="确认密码" id="studentRePwd" onblur="valRepassword()">
                 <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+                <span id="repasswordMessage" class="s1"></span>
             </div>
             <c:if test="${!empty e.message}"><div style="color: #cb2027">${e.message}</div></c:if>
             <div class="row">
@@ -93,7 +97,60 @@
 <script src="${pageContext.request.contextPath}/plugins/jQuery/jquery-2.2.3.min.js"></script>
 <script src="${pageContext.request.contextPath}/plugins/bootstrap/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/plugins/iCheck/icheck.min.js"></script>
+
+<style type="text/css">
+    .s1{
+        color: #cb2027;
+    }
+</style>
 <script>
+    function valRepassword(){
+        var obj = document.getElementById("studentRePwd");
+        if(obj.value != document.getElementById("studentPwd").value){
+            document.getElementById("repasswordMessage").innerHTML="两次输入的密码不一致";
+            return false;
+        }
+        return true;
+    }
+
+    function valStudentName(){
+        var obj = document.getElementById("studentName");
+        if (obj.value==""){
+            document.getElementById("studentNameMessage").innerHTML="姓名不能为空";
+            return false;
+        }
+        return true;
+    }
+
+    function valEmail(){
+        var obj = document.getElementById("studentEmail");
+        if (obj.value==""){
+            document.getElementById("studentEmailMessage").innerHTML="邮箱不能为空";
+            return false;
+        }
+        return true;
+    }
+
+    function valPassword() {
+        var obj = document.getElementById("studentPwd");
+        if (obj.value==""){
+            document.getElementById("studentPwdMessage").innerHTML="密码不能为空";
+            return false;
+        }
+        return true;
+    }
+
+    function valForm(){
+        return valRepassword();
+    }
+
+    function foc(s){
+        var obj = document.getElementById(s);
+        var message = document.getElementById(s+"Message");
+        message.innerHTML="";
+        obj.className="";
+    }
+
     $(function () {
         $('input').iCheck({
             checkboxClass: 'icheckbox_square-blue',

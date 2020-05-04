@@ -1,3 +1,4 @@
+<%--@elvariable id="testPapers" type="com.github.pagehelper.Page"--%>
 <%--
   Created by IntelliJ IDEA.
   User: jinqi
@@ -81,8 +82,8 @@
                 <small>全部考试</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="all-admin-index.html"><i class="fa fa-dashboard"></i> 首页</a></li>
-                <li><a href="all-order-manage-list.html">考试管理</a></li>
+                <li><a href="${pageContext.request.contextPath}/student/checked/showMain.do"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li><a href="${pageContext.request.contextPath}/student/checked/showTestPaper.do?page=1&size=6">考试管理</a></li>
                 <li class="active">全部考试</li>
             </ol>
         </section>

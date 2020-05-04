@@ -81,8 +81,8 @@
                 <small>全部课程</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="all-admin-index.html"><i class="fa fa-dashboard"></i> 首页</a></li>
-                <li><a href="all-order-manage-list.html">考务管理</a></li>
+                <li><a href="${pageContext.request.contextPath}/student/checked/showMain.do"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li><a href="${pageContext.request.contextPath}/student/checked/showCourse.do?page=1&size=6">考务管理</a></li>
                 <li class="active">课程管理</li>
             </ol>
         </section>
@@ -167,10 +167,10 @@
 
                                     <td class="text-center">
                                         <button type="button" class="btn bg-olive btn-xs"
-                                                onclick='location.href="${pageContext.request.contextPath}"'>详情
+                                                >详情
                                         </button>
                                         <button type="button" class="btn bg-purple-active btn-xs"
-                                                onclick='location.href="${pageContext.request.contextPath}"'>编辑
+                                                >编辑
                                         </button>
                                     </td>
                                 </tr>

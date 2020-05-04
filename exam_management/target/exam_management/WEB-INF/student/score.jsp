@@ -81,8 +81,8 @@
                 <small>成绩列表</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
-                <li><a href="#">考务管理</a></li>
+                <li><a href="${pageContext.request.contextPath}/student/checked/showMain.do"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li><a href="${pageContext.request.contextPath}/student/checked/showScore.do?page=1&size=6">考务管理</a></li>
                 <li class="active">成绩管理</li>
             </ol>
         </section>

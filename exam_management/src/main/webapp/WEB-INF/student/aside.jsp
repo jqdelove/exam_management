@@ -31,17 +31,17 @@
             </a>
                 <ul class="treeview-menu">
 
-                    <li id="system-setting">
+                    <li id="system-setting1">
                         <a href="${pageContext.request.contextPath}/student/checked/showCourse.do?page=1&size=6">
                             <i class="fa fa-circle-o"></i> 课程管理
                         </a>
                     </li>
-                    <li id="system-setting">
+                    <li id="system-setting2">
                         <a href="${pageContext.request.contextPath}/student/checked/showScore.do?page=1&size=6">
                             <i class="fa fa-circle-o"></i> 成绩管理
                         </a>
                     </li>
-                    <li id="system-setting">
+                    <li id="system-setting3">
                         <a href="${pageContext.request.contextPath}/student/checked/showTestPaper.do?page=1&size=6">
                             <i class="fa fa-circle-o"></i> 考试管理
                         </a>

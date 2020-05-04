@@ -21,19 +21,16 @@
 				<li class="dropdown messages-menu">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						<i class="fa fa-envelope-o"></i>
-						<span class="label label-success">4</span>
+						<span class="label label-success">2</span>
 					</a>
 					<ul class="dropdown-menu">
-						<li class="header">你有4个邮件</li>
+						<li class="header">你有2个通知</li>
 						<li>
 							<!-- inner menu: contains the actual data -->
 							<ul class="menu">
 								<li>
 									<!-- start message -->
 									<a href="#">
-										<div class="pull-left">
-											<img src="${pageContext.request.contextPath}/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-										</div>
 										<h4>
 											系统消息
 											<small><i class="fa fa-clock-o"></i> 5 分钟前</small>
@@ -44,26 +41,23 @@
 								<!-- end message -->
 								<li>
 									<a href="#">
-										<div class="pull-left">
-											<img src="${pageContext.request.contextPath}/img/user3-128x128.jpg" class="img-circle" alt="User Image">
-										</div>
 										<h4>
-											团队消息
+											考试消息
 											<small><i class="fa fa-clock-o"></i> 2 小时前</small>
 										</h4>
-										<p>你有新的任务了</p>
+										<p>你有新的考试了</p>
 									</a>
 								</li>
 							</ul>
 						</li>
-						<li class="footer"><a href="#">See All Messages</a></li>
+						<li class="footer"><a href="#">查看所有通知</a></li>
 					</ul>
 				</li>
 				<!-- Notifications: style can be found in dropdown.less -->
 				<li class="dropdown notifications-menu">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						<i class="fa fa-bell-o"></i>
-						<span class="label label-warning">10</span>
+						<span class="label label-warning">1</span>
 					</a>
 					<ul class="dropdown-menu">
 						<li class="header">你有10个新消息</li>
@@ -72,43 +66,22 @@
 							<ul class="menu">
 								<li>
 									<a href="#">
-										<i class="fa fa-users text-aqua"></i> 5 new members joined today
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<i class="fa fa-warning text-yellow"></i> Very long description here that may not
-										fit into the page and may cause design problems
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<i class="fa fa-users text-red"></i> 5 new members joined
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<i class="fa fa-shopping-cart text-green"></i> 25 sales made
-									</a>
-								</li>
-								<li>
-									<a href="#">
-										<i class="fa fa-user text-red"></i> You changed your username
+										<i class="fa fa-users text-aqua"></i> 新的课程安排
 									</a>
 								</li>
 							</ul>
 						</li>
-						<li class="footer"><a href="#">View all</a></li>
+						<li class="footer"><a href="#">查看所有消息</a></li>
 					</ul>
 				</li>
 				<!-- Tasks: style can be found in dropdown.less -->
 				<li class="dropdown tasks-menu">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						<i class="fa fa-flag-o"></i>
-						<span class="label label-danger">9</span>
+						<span class="label label-danger">1</span>
 					</a>
 					<ul class="dropdown-menu">
-						<li class="header">你有9个新任务</li>
+						<li class="header">你有1个新任务</li>
 						<li>
 							<!-- inner menu: contains the actual data -->
 							<ul class="menu">
@@ -116,66 +89,22 @@
 									<!-- Task item -->
 									<a href="#">
 										<h3>
-											Design some buttons
+											学习新的课程
 											<small class="pull-right">20%</small>
 										</h3>
 										<div class="progress xs">
 											<div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-												<span class="sr-only">20% Complete</span>
+												<span class="sr-only">完成20%</span>
 											</div>
 										</div>
 									</a>
 								</li>
 								<!-- end task item -->
-								<li>
-									<!-- Task item -->
-									<a href="#">
-										<h3>
-											Create a nice theme
-											<small class="pull-right">40%</small>
-										</h3>
-										<div class="progress xs">
-											<div class="progress-bar progress-bar-green" style="width: 40%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-												<span class="sr-only">40% Complete</span>
-											</div>
-										</div>
-									</a>
-								</li>
-								<!-- end task item -->
-								<li>
-									<!-- Task item -->
-									<a href="#">
-										<h3>
-											Some task I need to do
-											<small class="pull-right">60%</small>
-										</h3>
-										<div class="progress xs">
-											<div class="progress-bar progress-bar-red" style="width: 60%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-												<span class="sr-only">60% Complete</span>
-											</div>
-										</div>
-									</a>
-								</li>
-								<!-- end task item -->
-								<li>
-									<!-- Task item -->
-									<a href="#">
-										<h3>
-											Make beautiful transitions
-											<small class="pull-right">80%</small>
-										</h3>
-										<div class="progress xs">
-											<div class="progress-bar progress-bar-yellow" style="width: 80%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-												<span class="sr-only">80% Complete</span>
-											</div>
-										</div>
-									</a>
-								</li>
 								<!-- end task item -->
 							</ul>
 						</li>
 						<li class="footer">
-							<a href="#">View all tasks</a>
+							<a href="#">查看所有任务</a>
 						</li>
 					</ul>
 				</li>
