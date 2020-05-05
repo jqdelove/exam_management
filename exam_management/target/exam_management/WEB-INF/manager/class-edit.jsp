@@ -75,8 +75,8 @@
                 <small>班级管理表单</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="all-admin-index.html"><i class="fa fa-dashboard"></i> 首页</a></li>
-                <li><a href="all-travellog-review-list.html">班级管理</a></li>
+                <li><a href="${pageContext.request.contextPath}/manager/checked/showMain.do"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li><a href="${pageContext.request.contextPath}/manager/checked/showAllClazzes.do">班级管理</a></li>
                 <li class="active">班级管理表单</li>
             </ol>
         </section>
@@ -122,9 +122,9 @@
 
                                     <div class="col-md-2 title">负责老师</div>
                                     <div class="col-md-10 data" id="teacherBox">
-                                        <c:forEach items="${teacherNames}" var="teacherName">
-                                            ${teacherName}
-                                        </c:forEach>
+<%--                                        <c:forEach items="${teacherNames}" var="teacherName">--%>
+<%--                                            ${teacherName}--%>
+<%--                                        </c:forEach>--%>
                                     </div>
 
                                     <div class="col-md-2 title"></div>

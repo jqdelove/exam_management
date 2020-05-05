@@ -79,8 +79,8 @@
                 <small>考试信息表单</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="all-admin-index.html"><i class="fa fa-dashboard"></i> 首页</a></li>
-                <li><a href="all-order-manage-list.html">考试信息编辑</a></li>
+                <li><a href="${pageContext.request.contextPath}/manager/checked/showMain.do"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li><a href="${pageContext.request.contextPath}/manager/checked/showTestPaper.do">考试信息编辑</a></li>
                 <li class="active">考试信息表单</li>
             </ol>
         </section>

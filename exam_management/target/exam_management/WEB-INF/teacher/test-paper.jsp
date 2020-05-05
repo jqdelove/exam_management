@@ -81,8 +81,8 @@
                 <small>全部试卷</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="all-admin-index.html"><i class="fa fa-dashboard"></i> 首页</a></li>
-                <li><a href="all-order-manage-list.html">试卷管理</a></li>
+                <li><a href="${pageContext.request.contextPath}/teacher/checked/showMain.do"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li><a href="${pageContext.request.contextPath}/teacher/checked/deleteTestPaper.do">试卷管理</a></li>
                 <li class="active">全部试卷</li>
             </ol>
         </section>

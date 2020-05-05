@@ -77,7 +77,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="${pageContext.request.contextPath}/teacher/checked/showMain.do"><i class="fa fa-dashboard"></i> 首页</a></li>
-                <li><a href="${pageContext.request.contextPath}/teacher/checked/showClazz.do?page=1&size=6">大纲录入管理</a></li>
+                <li><a href="${pageContext.request.contextPath}/teacher/checked/showExaminationSyllabus.do">大纲录入管理</a></li>
                 <li class="active">大纲录入管理表单</li>
             </ol>
         </section>
@@ -105,7 +105,7 @@
                         <!--表单内容-->
                         <div class="tab-pane active" id="tab-form">
                                 <div class="row data-type">
-                                    <form action="${pageContext.request.contextPath}" method="post">
+                                    <form method="post">
                                         <div class="col-md-2 title">大纲编号</div>
                                         <div class="col-md-10 data text">
                                             ${examinationSyllabus.examinationSyllabusId}

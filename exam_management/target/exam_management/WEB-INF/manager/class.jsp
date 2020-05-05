@@ -75,8 +75,8 @@
                 <small>班级列表</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="all-admin-index.html"><i class="fa fa-dashboard"></i> 首页</a></li>
-                <li><a href="all-travellog-manage-list.html">班级管理</a></li>
+                <li><a href="${pageContext.request.contextPath}/manager/checked/showMain.do"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li><a href="#">班级管理</a></li>
                 <li class="active">班级列表</li>
             </ol>
         </section>
@@ -100,7 +100,7 @@
                         <div class="pull-left">
                             <div class="form-group form-inline">
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-default" title="新建" onclick='location.href="all-travellog-manage-edit.html"'><i class="fa fa-file-o"></i> 新建</button>
+                                    <button type="button" class="btn btn-default" title="新建" ><i class="fa fa-file-o"></i> 新建</button>
                                     <button type="button" class="btn btn-default" title="删除" onclick='confirm("你确认要删除吗？")'><i class="fa fa-trash-o"></i> 删除</button>
                                     <button type="button" class="btn btn-default" title="开启" onclick='confirm("你确认要开启吗？")'><i class="fa fa-check"></i> 开启</button>
                                     <button type="button" class="btn btn-default" title="屏蔽" onclick='confirm("你确认要屏蔽吗？")'><i class="fa fa-ban"></i> 屏蔽</button>

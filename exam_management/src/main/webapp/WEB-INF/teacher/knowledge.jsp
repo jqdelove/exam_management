@@ -81,8 +81,8 @@
                 <small>全部知识点</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="all-admin-index.html"><i class="fa fa-dashboard"></i> 首页</a></li>
-                <li><a href="all-order-manage-list.html">知识点管理</a></li>
+                <li><a href="${pageContext.request.contextPath}/teacher/checked/showMain.do.do"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li><a href="${pageContext.request.contextPath}/teacher/checked/showKnowledge.do">知识点管理</a></li>
                 <li class="active">全部知识点</li>
             </ol>
         </section>

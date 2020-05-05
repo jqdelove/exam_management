@@ -31,16 +31,22 @@
 								<li>
 									<!-- start message -->
 									<a href="#">
+										<div class="pull-left">
+											<img src="${pageContext.request.contextPath}/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+										</div>
 										<h4>
 											系统消息
-											<small><i class="fa fa-clock-o"></i> 5 分钟前</small>
+											<small><i class="fa fa-clock-o"></i> 1 分钟前</small>
 										</h4>
-										<p>欢迎登录系统?</p>
+										<p>欢迎登录系统</p>
 									</a>
 								</li>
 								<!-- end message -->
 								<li>
 									<a href="#">
+										<div class="pull-left">
+											<img src="${pageContext.request.contextPath}/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+										</div>
 										<h4>
 											考试消息
 											<small><i class="fa fa-clock-o"></i> 2 小时前</small>
@@ -60,7 +66,7 @@
 						<span class="label label-warning">1</span>
 					</a>
 					<ul class="dropdown-menu">
-						<li class="header">你有10个新消息</li>
+						<li class="header">你有1个新消息</li>
 						<li>
 							<!-- inner menu: contains the actual data -->
 							<ul class="menu">

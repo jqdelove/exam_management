@@ -75,8 +75,8 @@
                 <small>课程表单</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="all-admin-index.html"><i class="fa fa-dashboard"></i> 首页</a></li>
-                <li><a href="all-order-manage-list.html">课程管理</a></li>
+                <li><a href="${pageContext.request.contextPath}/teacher/checked/showMain.do"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li><a href="${pageContext.request.contextPath}/teacher/checked/showCourse.do">课程管理</a></li>
                 <li class="active">课程表单</li>
             </ol>
         </section>
@@ -85,67 +85,7 @@
         <!-- 正文区域 -->
         <section class="content">
 
-            <!--订单信息-->
-<%--            <div class="panel panel-default">--%>
-<%--                <div class="panel-heading">订单信息</div>--%>
-<%--                <div class="row data-type">--%>
-
-<%--                    <div class="col-md-2 title">订单编号</div>--%>
-<%--                    <div class="col-md-4 data">--%>
-<%--                        <input type="text" class="form-control" placeholder="订单编号" value="">--%>
-<%--                    </div>--%>
-
-<%--                    <div class="col-md-2 title">下单时间</div>--%>
-<%--                    <div class="col-md-4 data">--%>
-<%--                        <div class="input-group date">--%>
-<%--                            <div class="input-group-addon">--%>
-<%--                                <i class="fa fa-calendar"></i>--%>
-<%--                            </div>--%>
-<%--                            <input type="text" class="form-control pull-right" id="datepicker-a3">--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                    <div class="col-md-2 title">路线名称</div>--%>
-<%--                    <div class="col-md-4 data">--%>
-<%--                        <input type="text" class="form-control" placeholder="路线名称" value="">--%>
-<%--                    </div>--%>
-
-<%--                    <div class="col-md-2 title">出发城市</div>--%>
-<%--                    <div class="col-md-4 data">--%>
-<%--                        <select class="form-control select2" style="width: 100%;">--%>
-<%--                            <option value="" selected="selected">Alabama</option>--%>
-<%--                            <option value="">Alaska</option>--%>
-<%--                            <option value="">California</option>--%>
-<%--                            <option value="">Delaware</option>--%>
-<%--                            <option value="">Tennessee</option>--%>
-<%--                            <option value="">Texas</option>--%>
-<%--                            <option value="">Washington</option>--%>
-<%--                        </select>--%>
-<%--                    </div>--%>
-
-<%--                    <div class="col-md-2 title">出发时间</div>--%>
-<%--                    <div class="col-md-4 data">--%>
-<%--                        <div class="input-group date">--%>
-<%--                            <div class="input-group-addon">--%>
-<%--                                <i class="fa fa-calendar"></i>--%>
-<%--                            </div>--%>
-<%--                            <input type="text" class="form-control pull-right" id="datepicker-a6">--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                    <div class="col-md-2 title">出游人数</div>--%>
-<%--                    <div class="col-md-4 data">--%>
-<%--                        <input type="text" class="form-control" placeholder="出游人数" value="">--%>
-<%--                    </div>--%>
-
-<%--                    <div class="col-md-2 title rowHeight2x">其他信息</div>--%>
-<%--                    <div class="col-md-10 data rowHeight2x">--%>
-<%--                        <textarea class="form-control" rows="3" placeholder="其他信息"></textarea>--%>
-<%--                    </div>--%>
-
-<%--                </div>--%>
-<%--            </div>--%>
-            <!--订单信息/-->
-
-            <!--游客信息-->
+            <!--班级信息-->
             <div class="panel panel-default">
                 <div class="panel-heading">班级信息</div>
                 <!--数据列表-->

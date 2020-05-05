@@ -72,7 +72,7 @@
                 个人信息
             </h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li><a href="${pageContext.request.contextPath}/manager/checked/showMain.do"><i class="fa fa-dashboard"></i> 首页</a></li>
                 <li><a href="#">个人管理</a></li>
                 <li class="active">个人信息</li>
             </ol>
@@ -87,7 +87,7 @@
                     <!-- Profile Image -->
                     <div class="box box-primary">
                         <div class="box-body box-profile">
-                            <img class="profile-user-img img-responsive img-circle" src="${pageContext.request.contextPath}/img/user4-128x128.jpg" alt="User profile picture">
+                            <img class="profile-user-img img-responsive img-circle" src="${pageContext.request.contextPath}/img/user2-160x160.jpg" alt="User profile picture">
 
                             <h3 class="profile-username text-center">${manager.managerName}</h3>
 

@@ -77,7 +77,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="${pageContext.request.contextPath}/teacher/checked/showMain.do"><i class="fa fa-dashboard"></i> 首页</a></li>
-                <li><a href="${pageContext.request.contextPath}/teacher/checked/showClazz.do?page=1&size=6">知识点管理</a></li>
+                <li><a href="${pageContext.request.contextPath}/teacher/checked/showKnowledge.do?page=1&size=6">知识点管理</a></li>
                 <li class="active">知识点管理表单</li>
             </ol>
         </section>

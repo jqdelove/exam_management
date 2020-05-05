@@ -134,7 +134,7 @@
                                 <th class="sorting_asc sorting_asc_disabled">课程名</th>
                                 <th class="sorting_desc sorting_desc_disabled">分数</th>
                                 <th class="sorting">课程专业方向</th>
-                                <th class="text-center">操作</th>
+<%--                                <th class="text-center">操作</th>--%>
                             </tr>
                             </thead>
 
@@ -151,10 +151,10 @@
                                             <c:if test="${empty score.scoreNumber}">未出成绩</c:if>
                                         </td>
                                         <td>${score.course.courseMajor}</td>
-                                        <td class="text-center">
-                                            <button type="button" class="btn bg-olive btn-xs">详情</button>
-                                            <button type="button" class="btn bg-purple-active btn-xs">编辑</button>
-                                        </td>
+<%--                                        <td class="text-center">--%>
+<%--                                            <button type="button" class="btn bg-olive btn-xs">详情</button>--%>
+<%--                                            <button type="button" class="btn bg-purple-active btn-xs">编辑</button>--%>
+<%--                                        </td>--%>
                                     </tr>
                                 </c:forEach>
                             </tbody>

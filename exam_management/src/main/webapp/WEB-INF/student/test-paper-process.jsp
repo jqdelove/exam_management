@@ -13,6 +13,8 @@
     <!-- 页面meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <%--  设置页面刷新时间为6000秒，防止此页面session超时  --%>
+    <meta http-equiv="refresh" content="6000"/>
 
     <title>开始考试</title>
     <meta name="description" content="AdminLTE2定制版">

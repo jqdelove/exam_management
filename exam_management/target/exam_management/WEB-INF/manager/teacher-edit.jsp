@@ -75,8 +75,8 @@
                 <small>教师详情表单</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="all-admin-index.html"><i class="fa fa-dashboard"></i> 首页</a></li>
-                <li><a href="all-travellog-review-list.html">教师详情</a></li>
+                <li><a href="${pageContext.request.contextPath}/manager/checked/showMain.do"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li><a href="#">教师详情</a></li>
                 <li class="active">教师详情表单</li>
             </ol>
         </section>

@@ -146,7 +146,7 @@
                                 <th class="sorting">开课日期</th>
                                 <th class="sorting">结课日期</th>
                                 <th class="sorting">课程所属专业</th>
-                                <th class="text-center">操作</th>
+<%--                                <th class="text-center">操作</th>--%>
                             </tr>
                             </thead>
 
@@ -165,14 +165,14 @@
                                                         pattern="yyyy年MM月dd日 "/></td>
                                     <td>${score.course.courseMajor}</td>
 
-                                    <td class="text-center">
-                                        <button type="button" class="btn bg-olive btn-xs"
-                                                >详情
-                                        </button>
-                                        <button type="button" class="btn bg-purple-active btn-xs"
-                                                >编辑
-                                        </button>
-                                    </td>
+<%--                                    <td class="text-center">--%>
+<%--                                        <button type="button" class="btn bg-olive btn-xs"--%>
+<%--                                                >详情--%>
+<%--                                        </button>--%>
+<%--                                        <button type="button" class="btn bg-purple-active btn-xs"--%>
+<%--                                                >编辑--%>
+<%--                                        </button>--%>
+<%--                                    </td>--%>
                                 </tr>
                             </c:forEach>
                             </tbody>

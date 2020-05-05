@@ -78,8 +78,8 @@
                 <small>课程表单</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="all-admin-index.html"><i class="fa fa-dashboard"></i> 首页</a></li>
-                <li><a href="all-order-manage-list.html">课程管理</a></li>
+                <li><a href="${pageContext.request.contextPath}/manager/checked/showMain.do"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li><a href="${pageContext.request.contextPath}/manager/checked/showAllCourses.do">课程管理</a></li>
                 <li class="active">课程表单</li>
             </ol>
         </section>

@@ -81,8 +81,8 @@
                 <small>全部课程</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="all-admin-index.html"><i class="fa fa-dashboard"></i> 首页</a></li>
-                <li><a href="all-order-manage-list.html">课程管理</a></li>
+                <li><a href="${pageContext.request.contextPath}/teacher/checked/showMain.do"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li><a href="${pageContext.request.contextPath}/teacher/checked/showCourse.do">课程管理</a></li>
                 <li class="active">全部课程</li>
             </ol>
         </section>
@@ -107,7 +107,7 @@
                             <div class="form-group form-inline">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-default" title="新建"
-                                            onclick='location.href="all-order-manage-edit.html"'><i
+                                            ><i
                                             class="fa fa-file-o"></i> 新建
                                     </button>
                                     <button type="button" class="btn btn-default" title="删除"
