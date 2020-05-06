@@ -128,6 +128,7 @@
   </component>
   <component name="RunManager">
     <configuration name="Tomcat 8.5.27" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.5.27" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
+      <option name="COMMON_VM_ARGUMENTS" value="-Xms2g -Xmx2g -XX:ReservedCodeCacheSize=1024m -XX:+UseCompressedOops" />
       <option name="UPDATE_ON_FRAME_DEACTIVATION" value="true" />
       <option name="UPDATE_CLASSES_ON_FRAME_DEACTIVATION" value="true" />
       <deployment>
@@ -281,6 +282,12 @@
       <workItem from="1588666476333" duration="3380000" />
       <workItem from="1588670206695" duration="2750000" />
       <workItem from="1588673452228" duration="71000" />
+      <workItem from="1588673754312" duration="80000" />
+      <workItem from="1588684474726" duration="120000" />
+      <workItem from="1588684599348" duration="64000" />
+      <workItem from="1588684708605" duration="34000" />
+      <workItem from="1588730270506" duration="4360000" />
+      <workItem from="1588747953273" duration="3273000" />
     </task>
     <servers />
   </component>

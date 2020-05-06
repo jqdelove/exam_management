@@ -197,6 +197,19 @@ public class StudentController {
         List<TestPaper> testPaperList = testPaperService.getAllAvailable(page, size);
         PageInfo pageInfo = new PageInfo(testPaperList);
         map.put("testPapers",pageInfo);
+        //查询是否已有这场考试的成绩
+        for (TestPaper testPaper : testPaperList) {
+            Integer examinationSyllabusId = testPaper.getExaminationSyllabusId();
+            List<ExaminationSyllabus> examinationSyllabus = examinationSyllabusService.getExaminationSyllabus(examinationSyllabusId);
+            for (ExaminationSyllabus syllabus : examinationSyllabus) {
+                List<Score> scores = scoreService.getScores(syllabus.getCourseId());
+                for (Score score : scores) {
+                    if (null != score.getScoreNumber()){
+                        map.put("scoreNumber",score.getScoreNumber());
+                    }
+                }
+            }
+        }
         return "student/test-paper";
     }
 

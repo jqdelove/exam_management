@@ -167,9 +167,16 @@
                                     <td><fmt:formatDate value="${testPaper.examinationSyllabusEndTime}"
                                                         pattern="yyyy年MM月dd日 "/></td>
                                     <td class="text-center">
-                                        <button type="button" class="btn bg-olive btn-xs"
-                                                onclick='location.href="${pageContext.request.contextPath}/student/checked/showTestPaperDtl.do?testPaperId=${testPaper.testPaperId}&examinationSyllabusId=${testPaper.examinationSyllabusId}"'>进入考试
-                                        </button>
+                                        <c:if test="${empty scoreNumber}">
+                                            <button type="button" class="btn bg-olive btn-xs"
+                                                    onclick='location.href="${pageContext.request.contextPath}/student/checked/showTestPaperDtl.do?testPaperId=${testPaper.testPaperId}&examinationSyllabusId=${testPaper.examinationSyllabusId}"'>进入考试
+                                            </button>
+                                        </c:if>
+                                        <c:if test="${!empty scoreNumber}">
+                                            <button type="button" class="btn bg-aqua btn-xs"
+                                                    >考试结束
+                                            </button>
+                                        </c:if>
                                     </td>
                                 </tr>
                             </c:forEach>
