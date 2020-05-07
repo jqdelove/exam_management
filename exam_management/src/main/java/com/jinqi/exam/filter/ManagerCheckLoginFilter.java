@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * 管理员登录检查过滤器
+ */
 public class ManagerCheckLoginFilter implements Filter {
 
 	public void destroy() {

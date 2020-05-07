@@ -93,7 +93,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.24367817" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
@@ -287,7 +287,9 @@
       <workItem from="1588684599348" duration="64000" />
       <workItem from="1588684708605" duration="34000" />
       <workItem from="1588730270506" duration="4360000" />
-      <workItem from="1588747953273" duration="3273000" />
+      <workItem from="1588747953273" duration="4385000" />
+      <workItem from="1588819764717" duration="2818000" />
+      <workItem from="1588837670593" duration="101000" />
     </task>
     <servers />
   </component>

@@ -47,9 +47,6 @@
     <mvc:resources location="/plugins/" mapping="/plugins/**" />
 <!--    <mvc:resources location="/js/" mapping="/js/**" />-->
     
-    <!-- 查看jsp页面效果，后面删除即可   -->
-    <mvc:view-controller path="/showTeacherCourse.do" view-name="teacher/course-edit"/>
-
     <!--
         支持AOP的注解支持，AOP底层使用代理技术
         JDK动态代理，要求必须有接口

@@ -105,17 +105,24 @@
                         <!--表单内容-->
                         <div class="tab-pane active" id="tab-form">
                                 <div class="row data-type">
-                                    <form action="${pageContext.request.contextPath}" method="post">
-                                        <c:forEach items="${examinationTestPapers}" var="examinationTestPaper" varStatus="num">
-                                            ${num.count}、
-                                            ${examinationTestPaper.examinationQuestions.examinationQuestionsContent}<br>
-                                            <input type="radio" name="testPaper1"/>${examinationTestPaper.examinationQuestions.examinationSelect1}&nbsp;&nbsp;
-                                            <input type="radio" name="testPaper2"/>${examinationTestPaper.examinationQuestions.examinationSelect2}&nbsp;&nbsp;
-                                            <input type="radio" name="testPaper3"/>${examinationTestPaper.examinationQuestions.examinationSelect3}&nbsp;&nbsp;
-                                            <input type="radio" name="testPaper4"/>${examinationTestPaper.examinationQuestions.examinationSelect4}<br>
-                                            <br>
-
-                                        </c:forEach>
+                                    <form method="post">
+                                        <table border="2" style="border: 1px">
+                                            <tbody>
+                                                <c:forEach items="${examinationTestPapers}" var="examinationTestPaper" varStatus="num">
+                                                    <tr>
+                                                        <td>
+                                                            ${num.count}、
+                                                            ${examinationTestPaper.examinationQuestions.examinationQuestionsContent}<br>
+                                                            <input type="radio" name="testPaper1"/>${examinationTestPaper.examinationQuestions.examinationSelect1}&nbsp;&nbsp;
+                                                            <input type="radio" name="testPaper2"/>${examinationTestPaper.examinationQuestions.examinationSelect2}&nbsp;&nbsp;
+                                                            <input type="radio" name="testPaper3"/>${examinationTestPaper.examinationQuestions.examinationSelect3}&nbsp;&nbsp;
+                                                            <input type="radio" name="testPaper4"/>${examinationTestPaper.examinationQuestions.examinationSelect4}<br>
+                                                            <br>
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
+                                            </tbody>
+                                        </table>
                                     </form>
                                     <div class="col-md-15 data text-center">
                                         <button type="button" class="btn bg-orange-active bg-default" onclick="location.href='${pageContext.request.contextPath}/teacher/checked/showTestPaper.do?page=1&size=6'">返回</button>

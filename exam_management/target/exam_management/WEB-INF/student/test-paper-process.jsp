@@ -108,15 +108,23 @@
                         <div class="tab-pane active" id="tab-form">
                                 <div class="row data-type">
                                     <form action="${pageContext.request.contextPath}/student/checked/checkAnswer.do" method="post">
-                                        <c:forEach items="${examinationTestPapers}" var="examinationTestPaper" varStatus="num">
-                                            ${num.count}、
-                                            ${examinationTestPaper.examinationQuestions.examinationQuestionsContent}<br>
-                                            <input type="radio" name="examinationSelect${num.count}" value="${examinationTestPaper.examinationQuestionsId} ${examinationTestPaper.examinationQuestions.examinationSelect1}"/>${examinationTestPaper.examinationQuestions.examinationSelect1}&nbsp;&nbsp;
-                                            <input type="radio" name="examinationSelect${num.count}" value="${examinationTestPaper.examinationQuestionsId} ${examinationTestPaper.examinationQuestions.examinationSelect2}"/>${examinationTestPaper.examinationQuestions.examinationSelect2}&nbsp;&nbsp;
-                                            <input type="radio" name="examinationSelect${num.count}" value="${examinationTestPaper.examinationQuestionsId} ${examinationTestPaper.examinationQuestions.examinationSelect3}"/>${examinationTestPaper.examinationQuestions.examinationSelect3}&nbsp;&nbsp;
-                                            <input type="radio" name="examinationSelect${num.count}" value="${examinationTestPaper.examinationQuestionsId} ${examinationTestPaper.examinationQuestions.examinationSelect4}"/>${examinationTestPaper.examinationQuestions.examinationSelect4}<br>
-                                            <br>
-                                        </c:forEach>
+                                        <table border="1" style="border: 1px">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <c:forEach items="${examinationTestPapers}" var="examinationTestPaper" varStatus="num">
+                                                            ${num.count}、
+                                                            ${examinationTestPaper.examinationQuestions.examinationQuestionsContent}<br>
+                                                            <input type="radio" name="examinationSelect${num.count}" value="${examinationTestPaper.examinationQuestionsId} ${examinationTestPaper.examinationQuestions.examinationSelect1}"/>${examinationTestPaper.examinationQuestions.examinationSelect1}&nbsp;&nbsp;
+                                                            <input type="radio" name="examinationSelect${num.count}" value="${examinationTestPaper.examinationQuestionsId} ${examinationTestPaper.examinationQuestions.examinationSelect2}"/>${examinationTestPaper.examinationQuestions.examinationSelect2}&nbsp;&nbsp;
+                                                            <input type="radio" name="examinationSelect${num.count}" value="${examinationTestPaper.examinationQuestionsId} ${examinationTestPaper.examinationQuestions.examinationSelect3}"/>${examinationTestPaper.examinationQuestions.examinationSelect3}&nbsp;&nbsp;
+                                                            <input type="radio" name="examinationSelect${num.count}" value="${examinationTestPaper.examinationQuestionsId} ${examinationTestPaper.examinationQuestions.examinationSelect4}"/>${examinationTestPaper.examinationQuestions.examinationSelect4}<br>
+                                                            <br>
+                                                        </c:forEach>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     <div class="col-md-15 data text-center">
                                         <button type="submit" class="btn bg-green">提交答案</button>
                                         <button type="button" class="btn bg-orange-active bg-default" onclick="location.href='${pageContext.request.contextPath}/student/checked/showTestPaper.do?page=1&size=6'">返回</button>
